@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Component } from "react";
 import Slider from "react-slick";
@@ -74,12 +75,14 @@ const Navbar = () => {
         align={'center'}>
         
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
           </Text>
             <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' />
+
           
 
         </Flex>
@@ -96,7 +99,9 @@ const Navbar = () => {
             <InputRightElement
             
               pointerEvents='none'
+
               children={<Search2Icon color='gray.300' />}
+
             />
           </InputGroup>
           <svg fill='gray' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 20.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.304-17l-3.431 14h-2.102l2.541-11h-16.812l4.615 13h13.239l3.474-14h2.178l.494-2h-4.196z"/></svg>
@@ -185,7 +190,9 @@ const DesktopNav = ({NAV_ITEMS}) => {
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
                 </Stack>
+
               </PopoverContent>
+
             )}
           </Popover>
         </Box>
@@ -368,6 +375,7 @@ export class SimpleSlider extends Component {
 
 
 function BasicUsage() {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [domLoaded, setDomLoaded] = useState(false);
   useEffect(() => {
@@ -409,6 +417,7 @@ function BasicUsage() {
         <ModalContent>
           <ModalHeader>Sign In</ModalHeader>
           <ModalCloseButton />
+
           <Text w={"90%"} m='auto' fontSize={"11px"}>
             Sign in so you can save items to your wishlists, track your orders,
             and check out faster!
@@ -451,12 +460,14 @@ function BasicUsage() {
               <Button mt='15px' variant='outline'>
                 CREATE AN ACCOUNT
               </Button>
+
             </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
   );
+
 }
 
 
