@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
@@ -74,11 +74,11 @@ const Navbar = () => {
         align={'center'}>
         
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          {/* <Text
+          <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-          </Text> */}
+          </Text>
             <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' />
           
 
@@ -368,58 +368,95 @@ export class SimpleSlider extends Component {
 
 
 function BasicUsage() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [domLoaded, setDomLoaded] = useState(false);
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
   return (
     <>
-      <Button as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'#'}
-            _hover={{
-              bg: 'pink.300',
-            }} onClick={onOpen}>
-
-              <Flex 
-            justifyContent='space-around' alignItems={'center'} w='100%'>
-              <svg  fill='white' xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"/></svg>
-              <Text pl={'7px'} >Sign In/Sign Up</Text>
-              </Flex>
-              </Button>
+      {domLoaded && (
+        <Button
+          as={"a"}
+          display={{ base: "none", md: "inline-flex" }}
+          fontSize={"sm"}
+          fontWeight={600}
+          color={"white"}
+          bg={"pink.400"}
+          href={"#"}
+          _hover={{
+            bg: "pink.300",
+          }}
+          onClick={onOpen}
+        >
+          <Flex justifyContent='space-around' alignItems={"center"} w='100%'>
+            <svg
+              fill='white'
+              xmlns='http://www.w3.org/2000/svg'
+              width='16'
+              height='16'
+              viewBox='0 0 24 24'
+            >
+              <path d='M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z' />
+            </svg>
+            <Text pl={"7px"}>Sign In/Sign Up</Text>
+          </Flex>
+        </Button>
+      )}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Sign In</ModalHeader>
           <ModalCloseButton />
-          <Text w={'90%'} m='auto' fontSize={'11px'}>Sign in so you can save items to your wishlists, track your orders, and check out faster!</Text>
+          <Text w={"90%"} m='auto' fontSize={"11px"}>
+            Sign in so you can save items to your wishlists, track your orders,
+            and check out faster!
+          </Text>
           <ModalBody>
-            <Text mt={'10px'}>Email*</Text>
-            <Input  placeholder='Email' size='md' />
-            <Checkbox  mt='10px' defaultChecked><Text fontSize={'14px'} >Keep me signed in</Text>
-</Checkbox>
-            <br/>
-            <Button mt='22px'  colorScheme='blue'width={'100%'} onClick={onClose}>
+            <Text mt={"10px"}>Email*</Text>
+            <Input placeholder='Email' size='md' />
+            <Checkbox mt='10px' defaultChecked>
+              <Text fontSize={"14px"}>Keep me signed in</Text>
+            </Checkbox>
+            <br />
+            <Button
+              mt='22px'
+              colorScheme='blue'
+              width={"100%"}
+              onClick={onClose}
+            >
               Next
             </Button>
-            <br/>
-            <Button mt='15px' colorScheme='blue' width={'100%'} variant='outline'>USE MOBILE NUMBER INSTEAD</Button>
+            <br />
+            <Button
+              mt='15px'
+              colorScheme='blue'
+              width={"100%"}
+              variant='outline'
+            >
+              USE MOBILE NUMBER INSTEAD
+            </Button>
           </ModalBody>
 
           <ModalFooter>
-            <hr/>
-            <Flex w={'100%'} direction='column'>
-            <Text fontSize={'19px'}  fontWeight='semibold' >Sign Up</Text>
-            <Text fontSize={'11px'} mt='9px'>Welcome! It's quick and easy to set up an account</Text>
-            <Button mt='15px' variant='outline'>CREATE AN ACCOUNT</Button>
+            <hr />
+            <Flex w={"100%"} direction='column'>
+              <Text fontSize={"19px"} fontWeight='semibold'>
+                Sign Up
+              </Text>
+              <Text fontSize={"11px"} mt='9px'>
+                Welcome! It's quick and easy to set up an account
+              </Text>
+              <Button mt='15px' variant='outline'>
+                CREATE AN ACCOUNT
+              </Button>
             </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
-  )
+  );
 }
 
 
