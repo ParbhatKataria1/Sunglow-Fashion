@@ -1,0 +1,671 @@
+import { StarIcon } from '@chakra-ui/icons';
+import { Button, Flex,Box,Grid,  SimpleGrid, Stack, Heading, Text } from '@chakra-ui/react';
+import Image from 'next/image';
+import SlindingCard from './SlindingCard';
+export const Line=()=>{
+        for(let i=0;i<26;i++){
+          return <div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
+    }
+}
+
+export const youMayALsoLike = [
+    {
+      img1: "https://images.urbndata.com/is/image/Anthropologie/49170905_097_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+      img2: "https://images.urbndata.com/is/image/Anthropologie/49170905_097_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+      name:"Capri Blue Diffuser Oil"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/45362452AN_000_b?$a15-pdp-detail-shot$&fit=constrain&qlt=80&wid=100",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/45362452AN_000_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Matte Latte Bowls, Set of 6"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/79759627_027_b10?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/79759627_027_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Wiggle Switch Plate"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/45549696AA_066_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/45549696AA_066_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Calle Vase"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"On Cloud 5 Terry Sneakers"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/48097422_070_a10?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/48097422_070_b10?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Grecian Bust Pot"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Butterfly Basket"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/4112210690147_066_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/4112210690147_066_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Eva Franco Lace Floral Blouse"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/78930120_010_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/78930120_010_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"New Balance 327 Sneakers"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/48548598_060_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/48548598_060_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Grecian Bust Pot"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"On Cloud 5 Terry Sneakers"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Butterfly Basket"
+    },
+  ];
+
+  export const RecentlyViewed = [
+    {
+      img1: "https://images.urbndata.com/is/image/Anthropologie/81591992_030_b15?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+      img2: "https://images.urbndata.com/is/image/Anthropologie/49170905_097_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+      name:"Super Mini Slouchy Bag"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/4123650590131_001_b16?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/45362452AN_000_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"The Colette Cropped Wide-Leg Pants"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/58028085_001_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/79759627_027_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Capri Blue Volcano Matte Black Jar Candle"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/4111916210042_015_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/45549696AA_066_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"New Balance 327 Sea Salt Sneakers"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/64784432_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Pilcro Spliced Henley Top"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/76124932_266_a?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/48097422_070_b10?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Capri Blue Pink Shimmer Jar Candle"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/52733375_011_b2?$an-category$&qlt=80&fit=constrain",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Capri Blue Capiz Jar Candle"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/4130578570023_041_b2?$an-category$&qlt=80&fit=constrain",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/4112210690147_066_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"The Somerset Maxi Dress: Embroidered Edition"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/D48088652_901_b20?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/78930120_010_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Tiled Margot Monogram Mug"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/60456498_040_b10?$an-category$&qlt=80&fit=constrain",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/48548598_060_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Capri Blue Reed Diffuser Oil"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/64865355_006_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"On Cloud 5 Terry Sneakers"
+    },
+    {
+        img1: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
+        img2: "https://images.urbndata.com/is/image/Anthropologie/65276503_000_b2?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",     
+        name:"Butterfly Basket"
+    },
+  ];
+
+export default function LandingPage() {
+  return (
+    <>
+    <Flex 
+        gap={7} 
+        margin ={"auto"} 
+        width={"90%"} 
+        marginTop={10} 
+        fontFamily={"Times New Roman"}
+    >
+        <Box border={"1px solid #DBAC07"} >
+            <Button
+                flex={1}
+                fontWeight={"400"}
+                px={"100px"}
+                py={"25px"}
+                fontSize={'lg'}
+                borderRadius={"15px"}
+                bg={'#f7f6f2'}
+                color={'black'}
+                border={"1px solid #DBAC07"}
+            >
+                to the <span style={{fontWeight:"900", marginLeft:"5px"}}> TOP(s)</span>
+            </Button>
+        </Box>
+        <Box border={"1px solid #DBAC07"} cursor={'pointer'}>
+            <Button
+                flex={2}
+                fontWeight={"400"}
+                px={"100px"}
+                py={"25px"}
+                fontSize={'lg'}
+                borderRadius={"15px"}
+                bg={'#f7f6f2'}
+                color={'black'}
+                border={"1px solid #DBAC07"}
+            >
+            <span style={{fontWeight:"900", marginRight:"5px"}}>JEANS,</span> please
+            </Button>
+        </Box>
+        <Box border={"1px solid #DBAC07"}>
+            <Button
+                flex={3}
+                fontWeight={"400"}
+                px={"100px"}
+                py={"25px"}
+                fontSize={'lg'}
+                borderRadius={"15px"}
+                bg={'#f7f6f2'}
+                color={'black'}
+                border={"1px solid #DBAC07"}
+            >
+            <span style={{fontWeight:"900", marginRight:"5px"}}>PANTS</span> preferred
+            </Button>
+        </Box>
+        <Box border={"1px solid #DBAC07"}>
+            <Button
+                flex={4}
+                fontWeight={"400"}
+                px={"100px"}
+                py={"25px"}
+                fontSize={'lg'}
+                borderRadius={"15px"}
+                bg={'#f7f6f2'}
+                color={'black'}
+                border={"1px solid #DBAC07"}
+            >
+            the <span style={{fontWeight:"900", marginLeft:"5px"}} >DECOR</span> edit
+            </Button>
+        </Box>
+    </Flex>
+
+    <Box width={"90%"} margin={"auto"} marginTop={"40px"} position={"relative"}>
+        <Image src='https://images.ctfassets.net/5de70he6op10/3eri4S7CUYNA223W694QUo/890cffce3e1cc21308f3051be0a76baa/473929293-ls_m1.jpg?w=2694&q=80&fm=webp' alt='Dan Abramov'
+        width={1357} height={1200} />
+        <Button
+            size='md'
+            height='38px'
+            width='150px'
+            borderColor='white'
+            position={"absolute"}
+            top={"92%"}
+            left={"48%"}
+            transform="translate(-50%, -50%)"
+            fontSize={"12px"}
+            padding={"10px 20px"}
+            curson={"pointer"}
+            textAlign={"center"}
+            _hover={
+                {
+                    textDecoration: "underline"
+                }
+            }
+
+        >
+        shop dresses
+        </Button>
+    </Box>
+    <Box marginTop={"40px"} position={"relative"}>
+        <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
+            <Box w='433px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/24XjZK35JsGCP4fmCO8580/6d8469a59dd0fea277acaa832dac4786/473929297-ls_m2a.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
+            width={700} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"absolute"}
+                top={"560px"}
+                left={"15%"}
+                // transform="translate(-50%, -50%)"
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                zIndex={1}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            shop new clothing
+            </Button>
+            </Box>
+            <Box w='435px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/3i7R768ERr5ciI56znod56/151bbbbe9b52ff4c5fca01f76720fcbe/473929303-ls_m2b.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
+            width={700} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"relative"}
+                top={"-75px"}
+                left={"35%"}
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            the gataway shop
+            </Button>
+            </Box>
+            <Box w='435px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/EO7OfU3ZWf8n7njPYNrCo/097740c34d53fbad8d6bbae669514b4a/473929312-ls_m2c.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
+            width={500} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"relative"}
+                top={"-80px"}
+                left={"35%"}
+                // transform="translate(-50%, -50%)"
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            shop swimwear
+            </Button>
+            </Box>
+        </Grid>
+    </Box>
+    
+    <Line/>
+    
+    <Box marginTop={"40px"} position={"relative"}>
+        <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
+            <Box w='670px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/5SpSw7RKfexkiiBBqnTSz0/020ab583c49d60f3053868bbaf0ed2e8/473929316-ls_m3a.jpg?w=1302&q=80&fm=webp' alt='Dan Abramov'
+            width={700} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"absolute"}
+                top={"540px"}
+                left={"23%"}
+                // transform="translate(-50%, -50%)"
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                zIndex={1}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            shop new clothing
+            </Button>
+            </Box>
+            <Box w='663px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/6VLdLozl8tBTMYC7Bjy39f/29875f9e1e26ad89cd2a502f70dc9eba/473929321-ls_m3b.jpg?w=1302&q=80&fm=webp' alt='Dan Abramov'
+            width={700} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"relative"}
+                top={"-70px"}
+                left={"40%"}
+                // transform="translate(-50%, -50%)"
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            the gataway shop
+            </Button>
+            </Box>
+        </Grid>
+    </Box>
+
+    <Line/>
+
+    <Box marginTop={"40px"} position={"relative"}>
+        <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
+            <Box w='433px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/wH3s9ULThzua1X1ZTzDMx/3a9607dc9e8636eb96ca159919afa542/473929336-ls_m4a.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
+            width={700} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"absolute"}
+                top={"560px"}
+                left={"15%"}
+                // transform="translate(-50%, -50%)"
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                zIndex={1}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            shop spring entertaining essentials
+            </Button>
+            </Box>
+            <Box w='435px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/2ABHGD0yJQ3NHq6iiJWTUw/194b56bf722572e79d65a9ed6293bb46/473929340-ls_m4b.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
+            width={700} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"relative"}
+                top={"-75px"}
+                left={"35%"}
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            shop tops
+            </Button>
+            </Box>
+            <Box w='435px' h='10'>
+            <Image src='https://images.ctfassets.net/5de70he6op10/7yrEmAMeP6Kx7XthafpP8b/cb1869eb48809f1b667c1b1262cc8085/473929343-ls_m4c.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
+            width={500} height={200} />
+            <Button
+                size='md'
+                height='38px'
+                width='150px'
+                borderColor='white'
+                position={"relative"}
+                top={"-80px"}
+                left={"35%"}
+                // transform="translate(-50%, -50%)"
+                fontSize={"12px"}
+                padding={"10px 20px"}
+                curson={"pointer"}
+                textAlign={"center"}
+                _hover={
+                    {
+                        textDecoration: "underline"
+                    }
+                }
+
+            >
+            shop dresses
+            </Button>
+            </Box>
+        </Grid>
+    </Box>
+
+    <Line/>
+
+    <Box width={"90%"} margin={"auto"} marginTop={"40px"} position={"relative"}>
+        <Image src='https://images.ctfassets.net/5de70he6op10/BYqngT4RGr1qC07s5Stvm/45ac7c1b8ee7fc4ba75a71c5bae96223/473929345-ls_m5_bhldn.jpg?w=2694&q=80&fm=webp' alt='Dan Abramov'
+        width={1357} height={1200} />
+        <Button
+            size='md'
+            height='38px'
+            width='150px'
+            borderColor='white'
+            position={"absolute"}
+            top={"92%"}
+            left={"48%"}
+            transform="translate(-50%, -50%)"
+            fontSize={"12px"}
+            padding={"10px 20px"}
+            curson={"pointer"}
+            textAlign={"center"}
+            _hover={
+                {
+                    textDecoration: "underline"
+                }
+            }
+
+        >
+        shop weddings
+        </Button>
+    </Box>
+
+    <Box width={"90%"} margin={"auto"} px={4} marginTop={"40px"}>
+    <Flex h={16} alignItems={'center'} justifyContent={'space-between'} fontSize={"20px"}>
+      <Box>Top-Rated Picks</Box>
+      <Button
+        size='md'
+        bg="white"
+        border='none'
+        fontSize={"16px"}
+        curson={"pointer"}
+        textDecoration="underline"
+        color={"blue.300"}
+        _hover={
+            {
+                textDecoration: "none"
+            }
+        }
+      >
+        Shop All
+    </Button>
+
+      
+    </Flex>
+  </Box>
+ <Box width={"90%"} margin={"auto"}><hr/></Box>
+  
+
+  <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))' width={"90%"} margin={"auto"} marginTop={"20px"}>
+    <Box maxW='sm'>
+        
+            <Image src='https://images.ctfassets.net/5de70he6op10/5220J2azPPq7SXD1BDgrSK/b3df5920fe962072daaab2576ac9b307/473936185-ss_customerfave_a.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            width={357} height={200} />
+            <Stack mt='6' spacing='3'>
+            <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
+                CUSTOMER FAVORITE
+            </Text>
+            <Heading fontSize='22px' fontWeight={400} fontFamily={"times romer"}>The Marais Chiffon Maxi Dress</Heading>
+            <Grid gridTemplateColumns={"repeat(5,13px)"} fontSize={"10px"}>
+            <StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></Grid>
+            <Text>
+                Love - I have this in three colors. Why? Because you can throw it on, and the fit is seamless, it’s comfy it’s breezy.
+            </Text>
+            <Button 
+                textDecoration={"underline"} 
+                color={"blue.300"} 
+                bg={"white"} 
+                textAlign="left"
+                justifyContent={"left"} 
+                fontSize={"13px"} 
+                _hover={{
+                    textDecoration:"none"
+                }}
+            >
+                shop now
+            </Button>
+            </Stack>
+        
+    </Box>
+    <Box maxW='sm'>
+            
+            <Image src='https://images.ctfassets.net/5de70he6op10/5GzS0IbMOhqHHlJkPKBUYp/f8a78694f66cc5c772c3250b06a70669/473933663-ss_customerfave_b.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            width={1357} height={1200} />
+            <Stack mt='6' spacing='3'>
+            <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
+                CUSTOMER FAVORITE
+            </Text>
+            <Heading fontSize='22px' fontWeight={400} fontFamily={"times romer"}>The Super Mini Slouchy Bag</Heading>
+            <Grid gridTemplateColumns={"repeat(5,13px)"} fontSize={"10px"}>
+            <StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></Grid>
+            <Text>
+            Super cute, perfect little crossbody. Holds your phone, money, lipstick and keys.
+            </Text>
+            <Button 
+                textDecoration={"underline"} 
+                color={"blue.300"} 
+                bg={"white"} 
+                textAlign="left"
+                justifyContent={"left"} 
+                fontSize={"13px"} 
+                _hover={{
+                    textDecoration:"none"
+                }}
+            >
+                shop now
+            </Button>
+            </Stack>
+        
+    </Box>
+    <Box maxW='sm'>
+        
+            <Image src='https://images.ctfassets.net/5de70he6op10/67PQoYb8ta2cO451X3c5kq/98e63aa5c463782a049cb9e8b1fe50f7/473933667-ss_customerfave_c.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            width={1357} height={1200} />
+            <Stack mt='6' spacing='3'>
+            <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
+                CUSTOMER FAVORITE
+            </Text>
+            <Heading fontSize='22px' fontWeight={400} fontFamily={"times romer"}>The Bennet Buttondown Shirt</Heading>
+            <Grid gridTemplateColumns={"repeat(5,13px)"} fontSize={"10px"}>
+            <StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></Grid>
+            <Text>
+            Oversized in the best way...its a perfect cotton shirt.
+            </Text>
+            <Button 
+                textDecoration={"underline"} 
+                color={"blue.300"} 
+                bg={"white"} 
+                textAlign="left"
+                justifyContent={"left"} 
+                fontSize={"13px"} 
+                _hover={{
+                    textDecoration:"none"
+                }}
+            >
+                shop now
+            </Button>
+            </Stack>
+        
+    </Box>
+    <Box maxW='sm'>
+        
+            <Image src='https://images.ctfassets.net/5de70he6op10/2xvhd5NTbXfBCfqEP1WGOD/712cc70e4349bd2591a2b8cc99f580c2/473933669-ss_customerfave_d.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            width={1357} height={1200} />
+            <Stack mt='6' spacing='3'>
+            <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
+                CUSTOMER FAVORITE
+            </Text>
+            <Heading fontSize='22px' fontWeight={400} fontFamily={"times romer"}>The Colette Wide-Leg Pants</Heading>
+            <Grid gridTemplateColumns={"repeat(5,13px)"} fontSize={"10px"}>
+            <StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></Grid>
+            <Text>
+            I LOVE THESE PANTS! They feel good on, whether I`m standing, sitting, or walking. Overall 10/10 would recommend!
+            </Text>
+            <Button 
+                textDecoration={"underline"} 
+                color={"blue.300"} 
+                bg={"white"} 
+                textAlign="left"
+                justifyContent={"left"} 
+                fontSize={"13px"} 
+                _hover={{
+                    textDecoration:"none"
+                }}
+            >
+                shop now
+            </Button>
+            </Stack>
+        
+    </Box>
+  </SimpleGrid>
+  <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          px="2rem"
+          mb="0.5rem"
+        >
+          <Text fontWeight={"700"} fontSize={"22px"} >
+            You May Also Like
+          </Text>
+        </Box>
+        <SlindingCard something={youMayALsoLike} />
+    </Box>
+
+    <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      px="2rem"
+      mb="0.5rem"
+    >
+      <Text fontWeight={"700"} fontSize={"22px"} >
+        Recently Viewed
+      </Text>
+    </Box>
+    <SlindingCard something={RecentlyViewed} />
+</Box>
+
+    
+    </>
+  );
+}
