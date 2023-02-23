@@ -2,6 +2,78 @@ import { StarIcon } from '@chakra-ui/icons';
 import { Button, Flex,Box,Grid,  SimpleGrid, Stack, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import SlindingCard from './SlindingCard';
+
+// ---------------------------- NavbarTwo ------------------------------
+import {
+  HStack,
+  Link,
+  IconButton,
+  useDisclosure,
+  useColorModeValue
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon} from '@chakra-ui/icons';
+
+const Links = ['New!', 'Furniture', 'Decor', 'Kitchen & Dining', 'Candles', 'Bedding', 'Bath', 'Outdoor', 'Stationery', 'Kids', 'Gifts', 'Sale'];
+
+const NavLink = ({ children }) => (
+  <Link
+    px={2}
+    py={1}
+    rounded={'md'}
+    _hover={{
+        color:"teal",
+        textDecoration: "underline"
+    }}
+    href={'#'}>
+    {children}
+  </Link>
+);
+
+export function NavbarTwo() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <Box bg={"#f4f4f4"} px={4} width={"90%"} margin={"auto"} fontFamily={"sans-serif"} fontSize={"13px"}>
+        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={'center'}>
+            <HStack
+              as={'nav'}
+              spacing={4}
+              display={{ base: 'none', md: 'flex' }}
+             >
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </HStack>
+          </HStack>
+        </Flex>
+        <hr/>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
+      </Box>
+    </>
+  );
+}
+
+
+{/*-------------------------------------Anthropologie ---------------------------------*/}
+
 export const Line=()=>{
         for(let i=0;i<26;i++){
           return <div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
@@ -136,19 +208,21 @@ export const youMayALsoLike = [
 
 export default function LandingPage() {
   return (
-    <>
-    <Flex 
+    <Box bg={"#f4f4f4"}>
+    <NavbarTwo/>
+    <Grid 
         gap={7} 
+        gridTemplateColumns={"repeat(5,1fr)"}
         margin ={"auto"} 
         width={"90%"} 
-        marginTop={10} 
+        marginTop={5} 
         fontFamily={"Times New Roman"}
     >
         <Box border={"1px solid #DBAC07"} >
             <Button
                 flex={1}
                 fontWeight={"400"}
-                px={"100px"}
+                px={"92px"}
                 py={"25px"}
                 fontSize={'lg'}
                 borderRadius={"15px"}
@@ -163,7 +237,7 @@ export default function LandingPage() {
             <Button
                 flex={2}
                 fontWeight={"400"}
-                px={"100px"}
+                px={"92px"}
                 py={"25px"}
                 fontSize={'lg'}
                 borderRadius={"15px"}
@@ -178,7 +252,7 @@ export default function LandingPage() {
             <Button
                 flex={3}
                 fontWeight={"400"}
-                px={"100px"}
+                px={"92px"}
                 py={"25px"}
                 fontSize={'lg'}
                 borderRadius={"15px"}
@@ -193,7 +267,7 @@ export default function LandingPage() {
             <Button
                 flex={4}
                 fontWeight={"400"}
-                px={"100px"}
+                px={"92px"}
                 py={"25px"}
                 fontSize={'lg'}
                 borderRadius={"15px"}
@@ -204,7 +278,7 @@ export default function LandingPage() {
             the <span style={{fontWeight:"900", marginLeft:"5px"}} >DECOR</span> edit
             </Button>
         </Box>
-    </Flex>
+    </Grid>
 
     <Box width={"90%"} margin={"auto"} marginTop={"40px"} position={"relative"}>
         <Image src='https://images.ctfassets.net/5de70he6op10/3eri4S7CUYNA223W694QUo/890cffce3e1cc21308f3051be0a76baa/473929293-ls_m1.jpg?w=2694&q=80&fm=webp' alt='Dan Abramov'
@@ -232,6 +306,7 @@ export default function LandingPage() {
         shop dresses
         </Button>
     </Box>
+
     <Box marginTop={"40px"} position={"relative"}>
         <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
             <Box w='433px' h='10'>
@@ -330,7 +405,6 @@ export default function LandingPage() {
                 position={"absolute"}
                 top={"540px"}
                 left={"23%"}
-                // transform="translate(-50%, -50%)"
                 fontSize={"12px"}
                 padding={"10px 20px"}
                 curson={"pointer"}
@@ -357,7 +431,6 @@ export default function LandingPage() {
                 position={"relative"}
                 top={"-70px"}
                 left={"40%"}
-                // transform="translate(-50%, -50%)"
                 fontSize={"12px"}
                 padding={"10px 20px"}
                 curson={"pointer"}
@@ -390,7 +463,6 @@ export default function LandingPage() {
                 position={"absolute"}
                 top={"560px"}
                 left={"15%"}
-                // transform="translate(-50%, -50%)"
                 fontSize={"12px"}
                 padding={"10px 20px"}
                 curson={"pointer"}
@@ -442,7 +514,6 @@ export default function LandingPage() {
                 position={"relative"}
                 top={"-80px"}
                 left={"35%"}
-                // transform="translate(-50%, -50%)"
                 fontSize={"12px"}
                 padding={"10px 20px"}
                 curson={"pointer"}
@@ -494,7 +565,7 @@ export default function LandingPage() {
       <Box>Top-Rated Picks</Box>
       <Button
         size='md'
-        bg="white"
+        bg="#f4f4f4"
         border='none'
         fontSize={"16px"}
         curson={"pointer"}
@@ -518,7 +589,7 @@ export default function LandingPage() {
   <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))' width={"90%"} margin={"auto"} marginTop={"20px"}>
     <Box maxW='sm'>
         
-            <Image src='https://images.ctfassets.net/5de70he6op10/5220J2azPPq7SXD1BDgrSK/b3df5920fe962072daaab2576ac9b307/473936185-ss_customerfave_a.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            <Image src='https://images.ctfassets.net/5de70he6op10/1h9gkbrJB6rfKMEsrQsrlE/75fdaefe631d2d0e38d24b5e5d68ec10/473929238-ls_customerfave_a.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={357} height={200} />
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
@@ -548,7 +619,7 @@ export default function LandingPage() {
     </Box>
     <Box maxW='sm'>
             
-            <Image src='https://images.ctfassets.net/5de70he6op10/5GzS0IbMOhqHHlJkPKBUYp/f8a78694f66cc5c772c3250b06a70669/473933663-ss_customerfave_b.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            <Image src='https://images.ctfassets.net/5de70he6op10/2bvup8dYlhV23fJF8JWtBi/f007eb7c84134bfe87c3dd3669ffd06f/473929242-ls_customerfave_b.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={1357} height={1200} />
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
@@ -578,7 +649,7 @@ export default function LandingPage() {
     </Box>
     <Box maxW='sm'>
         
-            <Image src='https://images.ctfassets.net/5de70he6op10/67PQoYb8ta2cO451X3c5kq/98e63aa5c463782a049cb9e8b1fe50f7/473933667-ss_customerfave_c.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            <Image src='https://images.ctfassets.net/5de70he6op10/7e6CTKkxyvEGN65qcfAD6e/833ca12cd46657912e24e81a42fc086a/473929246-ls_customerfave_c.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={1357} height={1200} />
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
@@ -608,7 +679,7 @@ export default function LandingPage() {
     </Box>
     <Box maxW='sm'>
         
-            <Image src='https://images.ctfassets.net/5de70he6op10/2xvhd5NTbXfBCfqEP1WGOD/712cc70e4349bd2591a2b8cc99f580c2/473933669-ss_customerfave_d.jpg?w=1125&q=80&fm=webp' alt='Dan Abramov'
+            <Image src='https://images.ctfassets.net/5de70he6op10/IRIRM5boIBRZTPtM9RGo2/d5a954acdea330f877f48ee00b9dd9e7/473929254-ls_customerfave_d.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={1357} height={1200} />
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
@@ -637,6 +708,7 @@ export default function LandingPage() {
         
     </Box>
   </SimpleGrid>
+
   <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
         <Box
           display="flex"
@@ -650,7 +722,6 @@ export default function LandingPage() {
         </Box>
         <SlindingCard something={youMayALsoLike} />
     </Box>
-
     <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
     <Box
       display="flex"
@@ -665,7 +736,18 @@ export default function LandingPage() {
     <SlindingCard something={RecentlyViewed} />
 </Box>
 
+<Box width={"90%"} margin={"auto"}><hr/></Box>
+
+<Box width={"90%"} margin={"auto"} fontFamily={"sans-serif"} marginTop={"30px"}>
+   <Heading fontSize={"25px"}>About Us</Heading>
+        <Text noOfLines={[1,2]} marginTop={"20px"}>
+        Our mission at Anthropologie has always been to surprise and delight you with unexpected, distinctive finds for your closet and home. We source and craft all of our products with care, ensuring that any treasure you find at Anthropologie is unique, just like you. Explore our dresses shop to find styles and fits perfect for any occasion, from cocktail party dresses to wedding guest dresses to casual daytime silhouettes. Shop BHLDN and take a look at our selection of wedding dresses and bridesmaids dresses. Browse party skirts, wide-leg pants and jeans, and blouses that will turn heads. Complete your look with uncommon accessories—think only-here slides and head-turning totes. Discover our expansive home collections, from furniture to curtains, decorative pillows to duvets, wall art to Moroccan-inspired rugs. Looking for a housewarming gift? Try a coffee table book, original glassware or a set of coasters.
+        </Text>
+        <Button textDecoration={"underline"} color={"blue.300"} border={"none"} bg={"#f4f4f4"} marginLeft={0}>Read More...</Button>
+    </Box>
+
+
     
-    </>
+    </Box>
   );
 }
