@@ -1,10 +1,8 @@
+import Footer from '@/components/Footer'
 import Navbar from '@/components/navbar'
 import '@/styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
-
-import Navbar from '@/components/navbar'
-import LandingPage from './Home/LandingPage'
-import ArticleList from './Article'
+import LandingPage from '../components/Anthropologie'
 
 
 export default function App({ Component, pageProps }) {
@@ -12,6 +10,7 @@ export default function App({ Component, pageProps }) {
   <ChakraProvider>
     <Navbar/>
     <LandingPage/>
+    <Footer/>
     <Component {...pageProps} />
   </ChakraProvider>
   )

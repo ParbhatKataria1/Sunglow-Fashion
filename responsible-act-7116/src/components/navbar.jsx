@@ -81,7 +81,7 @@ const Navbar = () => {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
           </Text>
-            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' />
+            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' alt=""/>
 
           
 
