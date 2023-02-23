@@ -6,9 +6,9 @@ import LandingPage from '../components/Anthropologie'
 export default function App({ Component, pageProps }) {
   return(
   <ChakraProvider>
-    <LandingPage/>
-    <Footer/>
+    <Navbar/>
     <Component {...pageProps} />
+    <Footer/>
   </ChakraProvider>
   )
 }

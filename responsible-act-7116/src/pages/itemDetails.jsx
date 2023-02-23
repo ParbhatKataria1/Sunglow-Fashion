@@ -7,8 +7,7 @@ import ReactImageMagnify from 'react-image-magnify';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ImageItem from '@/components/ImageItem'
-import SlindingCard from './Home/SlindingCard'
-import { RecentlyViewed } from './Home/LandingPage'
+// import SlindingCard from './Home/SlindingCard'
 import { Component } from "react";
 import Slider from "react-slick";
 
@@ -193,7 +192,7 @@ export class VerticalSwipeToSlide extends Component {
             {
                 Array(4).fill('').map((el, ind)=>{
                     const v = 'v'+(ind+1);
-                    return <div w={'200px'} zIndex='100' >
+                    return <div w={'200px'} zIndex='100' key={el.id}>
                     <ReactImageMagnify {...{
                             smallImage: {
                                 alt: 'Wristwatch by Ted Baker London',

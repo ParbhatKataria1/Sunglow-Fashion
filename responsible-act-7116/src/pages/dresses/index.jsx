@@ -1,10 +1,5 @@
-// import ProductCard from '@/components/ProductCard'
 import { Box, Divider, Flex, Grid, Spacer, Text } from '@chakra-ui/react'
-import axios from 'axios'
-import Image from 'next/image'
 import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
 
 const Dresses = () => {
   const [data,setData]=useState([])
