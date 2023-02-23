@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import './index.module.css'
 
 const Dresses = () => {
   const [data,setData]=useState([])
@@ -97,9 +98,11 @@ const Dresses = () => {
                 {
                   data.map((ele)=>(
                     // console.log(ele)
-                      <Flex flexDir={'column'} >
-                          <Image onMouseOver={e=>e.currentTarget.src=`${ele.image.furl+ele.image.version.v3+ele.image.burl}`} width={450} height={300} src={ele.image.furl+ele.image.version.v1+ele.image.burl} alt={'img1'}/>
+                      <Flex flexDir={'column'} key={ele.id}>
+                        {/* <Flex flexDir={'column'}> */}
+                          <Image id='hoverimg' onMouseOver={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v3+ele.image.burl}`} onMouseOut={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v1+ele.image.burl}`} src={ele.image.furl+ele.image.version.v1+ele.image.burl} style={{cursor:'pointer',}} width={450} height={300} alt={'img1'}/>
                           <Text fontSize={'small'} >{ele.title}</Text>
+                        {/* </Flex> */}
                           <Text>${ele.price}</Text>
                           <Flex gap={'10px'} h={'20px'} alignItems={'center'} >
                           {
