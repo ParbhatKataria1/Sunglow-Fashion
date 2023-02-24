@@ -51,7 +51,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
 
    useEffect(() => {
      const id = setInterval(() => {
-       console.log(imageState);
+      //  console.log(imageState);
        if (imageState == something.length - 1) {
          setImageState(0);
        } else {
@@ -69,7 +69,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
           setCrauserDesignation(something[imageState].designation);
     },[{imageState}])
 
-  console.log(imageState)
+  // console.log(imageState)
 
   return (
     <Box bg="white" p="1rem" id="main_Client"

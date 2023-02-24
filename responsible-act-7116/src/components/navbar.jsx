@@ -57,6 +57,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 
 
 
+
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   return (
@@ -81,7 +82,7 @@ const Navbar = () => {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
           </Text>
-            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' />
+            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' alt=""/>
 
           
 
@@ -162,6 +163,7 @@ const DesktopNav = ({NAV_ITEMS}) => {
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
+            {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
             <PopoverTrigger>
               <Link
                 p={2}
@@ -176,7 +178,7 @@ const DesktopNav = ({NAV_ITEMS}) => {
                 {navItem.label}
               </Link>
             </PopoverTrigger>
-
+                {/* this is causing poping effect */}
             {navItem.children && (
               <PopoverContent
                 border={0}
@@ -200,7 +202,10 @@ const DesktopNav = ({NAV_ITEMS}) => {
     </Stack>
   );
 };
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
+  const linkColor = useColorModeValue('gray.600', 'gray.200');
+  const linkHoverColor = useColorModeValue('gray.800', 'white');
+  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   return (
     <Link
       href={href}
@@ -209,7 +214,18 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       p={2}
       rounded={'md'}
       _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-      <Stack direction={'row'} align={'center'}>
+
+
+{/* here is the starting */}
+
+
+
+<Box>
+          <Popover trigger={'hover'} placement={'bottom-start'}>
+            {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
+            <PopoverTrigger>
+
+            <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
@@ -230,9 +246,129 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
+
+            </PopoverTrigger>
+                {/* this is causing poping effect */}
+            {subOption && (
+              <PopoverContent
+                border={0}
+                boxShadow={'xl'}
+                bg={popoverContentBgColor}
+                p={4}
+                rounded={'xl'}
+                minW={'sm'}>
+                <Stack>
+                  {subOption.length && subOption.map((child, ind) => (
+                    // <h1>this is me</h1>
+                    <DesktopSubOption key={ind} option={child} />
+                    // <DesktopSubNav key={child.label} {...child} />
+                  ))}
+                </Stack>
+
+              </PopoverContent>
+
+            )}
+          </Popover>
+</Box>
+
+
+
+{/* here is the ending */}
+
+
+      {/* <Stack direction={'row'} align={'center'}>
+        <Box>
+          <Text
+            transition={'all .3s ease'}
+            _groupHover={{ color: 'pink.400' }}
+            fontWeight={500}>
+            {label}
+          </Text>
+          <Text fontSize={'sm'}>{subLabel}</Text>
+        </Box>
+        <Flex
+          transition={'all .3s ease'}
+          transform={'translateX(-10px)'}
+          opacity={0}
+          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+          justify={'flex-end'}
+          align={'center'}
+          flex={1}>
+          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+        </Flex>
+      </Stack> */}
     </Link>
   );
 };
+
+
+const DesktopSubOption = ({ option }) => {
+  return (
+    // issue if I wrap this flex around link then there will a hydration problem
+      <Flex alignItems={'center'} role={'group'}
+      display={'block'}
+      p={2}
+      rounded={'md'}
+      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}>
+        <Box>
+          <Text
+            transition={'all .3s ease'}
+            _groupHover={{ color: 'pink.400' }}
+            fontWeight={500}>
+            {option}
+          </Text>
+        </Box>
+      </Flex>
+  );
+};
+
+
+// function SubOptions({value, href}){
+//   const linkColor = useColorModeValue('gray.600', 'gray.200');
+//   const linkHoverColor = useColorModeValue('gray.800', 'white');
+//   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+//   return (
+//     <>
+//       <Box key={navItem.label}>
+//           <Popover trigger={'hover'} placement={'bottom-start'}>
+//             {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
+//             <PopoverTrigger>
+//               <Link
+//                 p={2}
+//                 href={navItem.href ?? '#'}
+//                 fontSize={'sm'}
+//                 fontWeight={500}
+//                 color={linkColor}
+//                 _hover={{
+//                   textDecoration: 'none',
+//                   color: linkHoverColor,
+//                 }}>
+//                 {navItem.label}
+//               </Link>
+//             </PopoverTrigger>
+//                 {/* this is causing poping effect */}
+//             {navItem.children && (
+//               <PopoverContent
+//                 border={0}
+//                 boxShadow={'xl'}
+//                 bg={popoverContentBgColor}
+//                 p={4}
+//                 rounded={'xl'}
+//                 minW={'sm'}>
+//                 <Stack>
+//                   {navItem.children.map((child) => (
+//                     <DesktopSubNav key={child.label} {...child} />
+//                   ))}
+//                 </Stack>
+
+//               </PopoverContent>
+
+//             )}
+//           </Popover>
+//         </Box>
+//     </>
+//   )
+// }
 
 
 
@@ -243,28 +379,50 @@ const NAV_ITEMS1 = [
     label: 'New!',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
+        label: 'Shop by Category',
+        subLabel: 'Accessories, Beauty & Wellness, Clothing',
+        subOption:[
+          'Accessories,Beauty & Wellness','Clothing','Dresses','Home & Furniture','Jewelry','Petites',
+        ],
         href: '#',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
+        label: 'Featured',
+        subLabel: 'Bold & Bright Dresses, Shirt Dresses',
+        subOption:[
+          '{Spring}Time to Celebrate','Trending: Citrus Shades',
+          'Spring 2023: Sculpture + Shape',
+          'Trending: Utility',
+          'Trending: The Bubble',
+          'Denim: Every Way, Every Day',
+        ],
         href: '#',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Dresses',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
+        label: 'Shop by Category',
+        subLabel: 'Shop All Dresses, New! Top Rated Dresses',
+        subOption:[
+          'Shop All Dresses',
+          'New!',
+          'Top Rated Dresses',
+          'Bridesmaid Dresse',
+        ],
         href: '#',
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
+        label: 'Featured Shops',
+        subLabel: 'Bold & Bright Dresses, Shirt Dresses',
+        subOption:[
+          'Bold & Bright Dresses',
+          'Shirt Dresses',
+          'Trending: Tulle',
+          'Little Black Dresses'
+        ],
         href: '#',
       },
     ],
@@ -280,31 +438,57 @@ const NAV_ITEMS1 = [
 ];
 const NAV_ITEMS2 = [
   {
-    label: 'not inspiration',
+    label: 'New!',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
+        label: 'Shop by Category',
+        subLabel: 'Shop All New!, Bath, Bedding, Candles',
+        subOption:[
+          'Shop All New!',
+          'Bath',
+          'Bedding',
+          'Candles',
+          'Décor',
+        ],
         href: '#',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
+        label: 'Featured',
+        subLabel: 'Easter Gifting & Entertaining, Spring 2023:Sculpture + Shape',
+        subOption:[
+          'Easter Gifting & Entertaining',
+          'Spring 2023: Sculpture + Shape',
+          'Spring 2023: Color + Character',
+          'Spring 2023: Pattern + Texture',
+        ],
         href: '#',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Furniture',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
+        label: 'Shop by Category',
+        subLabel: 'Explore All Furniture, Shop All Furniture, Chairs',
+        subOption:[
+          'Explore All Furniture',
+          'Shop All Furniture',
+          'Chairs',
+          'Storage Furniture & Consoles'
+        ],
         href: '#',
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
+        label: 'Featured',
+        subLabel: 'Living Room, Bedroom, Kitchen, Dining Room',
+        subOption:[
+          'Living Room',
+          'Bedroom',
+          'Kitchen & Dining Room',
+          'Modular Seating',
+          'Seating Collections',
+        ],
         href: '#',
       },
     ],
