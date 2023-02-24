@@ -1,5 +1,6 @@
-import { Box, Divider, Flex, Grid, Spacer, Text, Image } from '@chakra-ui/react'
+import { Box, Divider, Flex, Grid, Spacer, Text } from '@chakra-ui/react'
 import axios from 'axios'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 const Dresses = () => {
