@@ -20,6 +20,12 @@ const nextConfig = {
         hostname:'serving.photos.photobox.com',
         port:'',
         pathname:'**',
+      },
+      {
+        protocol:'https',
+        hostname:'th.bing.com',
+        port:'',
+        pathname:'**',
       }
     ]
   }
