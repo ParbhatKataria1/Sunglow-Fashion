@@ -1,5 +1,5 @@
 // import ProductCard from '@/components/ProductCard'
-import { Box, Divider, Flex, Grid, Spacer, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, Grid, Heading, Select, Spacer, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
 import React from 'react'
@@ -28,8 +28,21 @@ const Dresses = () => {
             <Box cursor={'pointer'} pt={'12px'} fontSize={"small"} w={'200px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/3QIqqv5gyl0Fn7LnO3AOw3/89ea89e1fb2fbadf64fa35da2a0ecdd8/Dress_Toppers_Black_Live_Text.jpg?w=630&q=80&fm=webp)'}>VACATION DRESSES</Box>
             <Box cursor={'pointer'} pt={'12px'} fontSize={"small"} w={'200px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/4djTq9S22vqPWjObvUHDCE/2d9f1cc9d091a32a665fc00f52b5ebd2/Dress_Toppers_Formal_Live_Text.jpg?w=630&q=80&fm=webp)'}>FORMAL DRESSES</Box>
           </Flex>
-          <Flex w={'94%'} m={'auto'} mt={'40px'} justifyContent={'space-between'} > 
-            <Flex flexDir={'column'} w={'15%'}>
+              <Flex w={'80%'} m={'40px 0px 20px 250px'}  justifyContent={'space-between'} >
+                    <Heading fontSize={'xl'} display={'flex'} gap={'30px'} alignItems={'center'} > Dresses:<Text fontSize={'small'} fontWeight={'normal'}>{data.length} products</Text> </Heading>
+                    <Flex alignItems={'center'} gap={'7px'}>
+                        <Text>Sort:</Text>
+                        <Select placeholder='Featured'>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest</option>
+                            <option>Best Selling</option>
+                            <option>Ratings: High to Low</option>
+                        </Select>
+                    </Flex>
+              </Flex>
+          <Flex w={'94%'} m={'auto'} mt={'0px'} justifyContent={'space-between'} > 
+            <Flex flexDir={'column'} w={'15%'} mt={'-50px'}>
                 <Text fontSize={'small'} mb={'10px'} borderBottom={'1px solid grey'}>Browse by:</Text>
                 <Flex flexDir={'column'} mb={'40px'}>
                 <Text fontSize={'xx-small'} mb={'10px'}>Cocktail & Party Dresses</Text>
