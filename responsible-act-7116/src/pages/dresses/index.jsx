@@ -21,7 +21,7 @@ const Dresses = () => {
     <>
       <Box w={'98%'} m={'auto'} mt={'40px'} >
           <Flex gap={'10px'} justifyContent={'center'} textAlign={"center"} >
-            <Box cursor={'pointer'} pt={'5px'} fontSize={"small"} w={'200px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/54JigepSuZ2XyUc23wRjO3/b28c3fc1698914dd898dbe7ebcbd88c1/Dress_Toppers_Casual_Live_Text.jpg?w=630&q=80&fm=webp)'}>WEDDING GUEST DRESSES</Box>
+            <Box cursor={'pointer'} pt={'5px'} fontSize={"small"} w={'201px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/54JigepSuZ2XyUc23wRjO3/b28c3fc1698914dd898dbe7ebcbd88c1/Dress_Toppers_Casual_Live_Text.jpg?w=630&q=80&fm=webp)'}>WEDDING GUEST DRESSES</Box>
             <Box cursor={'pointer'} pt={'12px'} fontSize={"small"} w={'200px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/6IfiRiqCR8n6Qtx499wHhk/045c88beb8c368c4ea7fa3c40174b796/Dress_Toppers_Wedding_Live_Text.jpg?w=630&q=80&fm=webp)'}>CASUAL DRESSES</Box>
             <Box cursor={'pointer'} pt={'12px'} fontSize={"small"} w={'200px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/4IFhnhWQZpy0mGYEQeDwyZ/7f5135fc723f65cebb8463a4a2d677b8/Dress_Toppers_Party_Live_Text.jpg?w=630&q=80&fm=webp)'}>PARTY DRESSES</Box>
             <Box cursor={'pointer'} pt={'12px'} fontSize={"small"} w={'200px'} h={'50px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/2ELHKaXeyUADzPjC50Pvwb/f2d5b7b073cbdadb782a81677da28c4f/Dress_Toppers_White_Live_Text.jpg?w=630&q=80&fm=webp)'}>WORK DRESSES</Box>
