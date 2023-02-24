@@ -4,11 +4,12 @@ import React, { useState } from 'react'
 import {Image as ChakraImage} from '@chakra-ui/react'
 import Link from 'next/link'
 import ReactImageMagnify from 'react-image-magnify';
-import Slider from "react-slick";
-import { Component } from "react";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ImageItem from '@/components/ImageItem'
+// import SlindingCard from './Home/SlindingCard'
+import { Component } from "react";
+import Slider from "react-slick";
 
 const ItemDetails = () => {
     const [shopButton, setShopButton] = useState(false);
@@ -107,6 +108,13 @@ const ItemDetails = () => {
             </Box>
         </Flex>
             <Box w='90%' m={'auto'}>
+            <Box  m='auto'>
+                <Box mt={'70px'}>
+                <Text>Others Also Viewed</Text>
+                <Divider/>
+                    <MultipleItems/>
+                </Box>
+            </Box>
                 <HStack mt={'70px'} justifyContent={'space-between'}>
                     <Text>Ratings & Reviews</Text>
                     <Text>Write a Review</Text>
@@ -139,7 +147,19 @@ const ItemDetails = () => {
                 <HStack>
                 </HStack>
                 <Divider/>
+                <Box>
+                <Text>Others Also Viewed</Text>
+                <Box mt={'70px'}>
+                <Text>Trending Now</Text>
+                <Divider/>
+                    <MultipleItems/>
+                </Box>
             </Box>
+                    
+            
+            </Box>
+            
+            
     </Box>
   )
 }
@@ -172,7 +192,7 @@ export class VerticalSwipeToSlide extends Component {
             {
                 Array(4).fill('').map((el, ind)=>{
                     const v = 'v'+(ind+1);
-                    return <div w={'200px'} zIndex='100' >
+                    return <div w={'200px'} zIndex='100' key={el.id}>
                     <ReactImageMagnify {...{
                             smallImage: {
                                 alt: 'Wristwatch by Ted Baker London',
@@ -315,4 +335,44 @@ const dummy =
             "s": "XL"
           }
         ]
-    }
+}
+
+
+export class MultipleItems extends Component {
+  render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 5
+    };
+    return (
+      <div>
+        <Slider {...settings}>
+          <div>
+            <ImageItem/>
+          </div>
+          <div>
+          <ImageItem/>
+          </div>
+          <div>
+          <ImageItem/>
+          </div>
+          <div>
+          <ImageItem/>
+          </div>
+          <div>
+          <ImageItem/>
+          </div>
+          <div>
+          <ImageItem/>
+          </div>
+          <div>
+          <ImageItem/>
+          </div>
+        </Slider>
+      </div>
+    );
+  }
+}

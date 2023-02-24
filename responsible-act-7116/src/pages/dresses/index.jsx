@@ -7,6 +7,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import './index.module.css'
 
+import { Box, Divider, Flex, Grid, Spacer, Text } from '@chakra-ui/react'
+import React from 'react'
+
 const Dresses = () => {
   const [data,setData]=useState([])
   const getData=async()=>{
