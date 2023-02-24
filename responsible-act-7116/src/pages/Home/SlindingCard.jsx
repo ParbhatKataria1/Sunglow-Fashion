@@ -1,8 +1,8 @@
 import { Box, Text,Flex,Button, Link } from "@chakra-ui/react";
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { ChevronLeftIcon,ChevronRightIcon } from "@chakra-ui/icons";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import Image from 'next/image';
 import './SlindindCard.module.css'
 
