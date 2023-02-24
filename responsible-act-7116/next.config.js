@@ -14,6 +14,12 @@ const nextConfig = {
         hostname:'images.ctfassets.net',
         port:'',
         pathname:'**',
+      },
+      {
+        protocol:'https',
+        hostname:'serving.photos.photobox.com',
+        port:'',
+        pathname:'**',
       }
     ]
   }
