@@ -1,3 +1,4 @@
+import LandingPage from '@/components/Anthropologie'
 import Head from 'next/head'
 // import styles from '@/styles/Home.module.css'
 
@@ -12,6 +13,7 @@ export default function Home() {
       </Head>
       <main>
         {/* <h1>this is me</h1> */}
+        <LandingPage/>
       </main>
     </>
   )
