@@ -1,21 +1,42 @@
 import * as types from './cart.actionTypes'
+import { fetchCartData, fetchDeleteCartData, fetchUpdateCartData } from './cart.api';
 
 
-export  const getCartData = async ()=>(dispatch)=>{
+export  const getCartData =  ()=>async(dispatch)=>{
     dispatch({type:types.CART_LOADING});
     try {
         let data = await fetchCartData();
+        if(data){
+            dispatch({type:types.GET_CART_DATA, payload:data})
+        }
     } catch (error) {
-        
+        dispatch({type:types.CART_ERROR})
     }
 }
 
-const cartUrl  = 'https://apiserver-no4z.onrender.com/cart';
-async function fetchCartData(){
+export  const updateCartData =  (id , obj)=>async(dispatch)=>{
+    dispatch({type:types.CART_LOADING});
     try {
-        let data = await axios.get(cartUrl);
-        return data.data;
+        let data = await fetchUpdateCartData(id, obj);
+        if(data){
+            dispatch({type:types.UPDATE_CART_DATA, payload:data})
+        }
     } catch (error) {
-        console.log('error occured while fetching data in the cart redux store while whole getting the data')
+        dispatch({type:types.CART_ERROR})
     }
 }
+
+export  const deleteCartData =  (id)=>async(dispatch)=>{
+    dispatch({type:types.DELETE_CART_DATA});
+    try {
+        let data = await fetchDeleteCartData(id);
+        if(data){
+            dispatch({type:types.DELETE_CART_DATA, payload:id})
+        }
+    } catch (error) {
+        dispatch({type:types.CART_ERROR})
+    }
+}
+
+
+

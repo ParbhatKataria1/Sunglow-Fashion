@@ -4,6 +4,8 @@ import { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import Link from 'next/link';
+
 
 import {
   Box,
@@ -14,7 +16,7 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
+  Link as ChakraLink,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -62,8 +64,10 @@ const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-    <Box>
+    <Box width={'100%'}>
+      <Box >
       <SimpleSlider/>
+      </Box>
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -110,7 +114,7 @@ const Navbar = () => {
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
-            variant={'link'}
+            variant={'ChakraLink'}
             href={'#'}>
              
             <BasicUsage/>
@@ -154,8 +158,8 @@ const Navbar = () => {
 
 
 const DesktopNav = ({NAV_ITEMS}) => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
+  const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+  const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
@@ -165,18 +169,18 @@ const DesktopNav = ({NAV_ITEMS}) => {
           <Popover trigger={'hover'} placement={'bottom-start'}>
             {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
             <PopoverTrigger>
-              <Link
+              <ChakraLink
                 p={2}
                 href={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
-                color={linkColor}
+                color={ChakraLinkColor}
                 _hover={{
                   textDecoration: 'none',
-                  color: linkHoverColor,
+                  color: ChakraLinkHoverColor,
                 }}>
                 {navItem.label}
-              </Link>
+              </ChakraLink>
             </PopoverTrigger>
                 {/* this is causing poping effect */}
             {navItem.children && (
@@ -203,12 +207,11 @@ const DesktopNav = ({NAV_ITEMS}) => {
   );
 };
 const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
+  const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+  const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   return (
-    <Link
-      href={href}
+    <Box
       role={'group'}
       display={'block'}
       p={2}
@@ -260,7 +263,7 @@ const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
                 <Stack>
                   {subOption.length && subOption.map((child, ind) => (
                     // <h1>this is me</h1>
-                    <DesktopSubOption key={ind} option={child} />
+                    <DesktopSubOption key={ind} option={child} href={href} />
                     // <DesktopSubNav key={child.label} {...child} />
                   ))}
                 </Stack>
@@ -276,56 +279,38 @@ const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
 {/* here is the ending */}
 
 
-      {/* <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}>
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack> */}
-    </Link>
+    </Box>
   );
 };
 
 
-const DesktopSubOption = ({ option }) => {
+const DesktopSubOption = ({ option, href }) => {
   return (
-    // issue if I wrap this flex around link then there will a hydration problem
-      <Flex alignItems={'center'} role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}>
+    // issue if I wrap this flex around ChakraLink then there will a hydration problem
+    <Flex alignItems={'center'} role={'group'}
+    display={'block'}
+    p={2}
+    rounded={'md'}
+    _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}>
+        <Link href={href}>
         <Box>
           <Text
             transition={'all .3s ease'}
             _groupHover={{ color: 'pink.400' }}
             fontWeight={500}>
-            {option}
+              {option}
+            
           </Text>
         </Box>
+          </Link>
       </Flex>
   );
 };
 
 
 // function SubOptions({value, href}){
-//   const linkColor = useColorModeValue('gray.600', 'gray.200');
-//   const linkHoverColor = useColorModeValue('gray.800', 'white');
+//   const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+//   const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
 //   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 //   return (
 //     <>
@@ -333,18 +318,18 @@ const DesktopSubOption = ({ option }) => {
 //           <Popover trigger={'hover'} placement={'bottom-start'}>
 //             {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
 //             <PopoverTrigger>
-//               <Link
+//               <ChakraLink
 //                 p={2}
 //                 href={navItem.href ?? '#'}
 //                 fontSize={'sm'}
 //                 fontWeight={500}
-//                 color={linkColor}
+//                 color={ChakraLinkColor}
 //                 _hover={{
 //                   textDecoration: 'none',
-//                   color: linkHoverColor,
+//                   color: ChakraLinkHoverColor,
 //                 }}>
 //                 {navItem.label}
-//               </Link>
+//               </ChakraLink>
 //             </PopoverTrigger>
 //                 {/* this is causing poping effect */}
 //             {navItem.children && (
@@ -384,7 +369,7 @@ const NAV_ITEMS1 = [
         subOption:[
           'Accessories,Beauty & Wellness','Clothing','Dresses','Home & Furniture','Jewelry','Petites',
         ],
-        href: '#',
+        href: '/clothing',
       },
       {
         label: 'Featured',
@@ -396,7 +381,7 @@ const NAV_ITEMS1 = [
           'Trending: The Bubble',
           'Denim: Every Way, Every Day',
         ],
-        href: '#',
+        href: '/clothing',
       },
     ],
   },
@@ -412,7 +397,7 @@ const NAV_ITEMS1 = [
           'Top Rated Dresses',
           'Bridesmaid Dresse',
         ],
-        href: '#',
+        href: '/dresses',
       },
       {
         label: 'Featured Shops',
@@ -423,16 +408,28 @@ const NAV_ITEMS1 = [
           'Trending: Tulle',
           'Little Black Dresses'
         ],
-        href: '#',
+        href: 'dresses',
       },
     ],
   },
   {
-    label: 'Learn Design',
+    label: 'Shoes',
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: 'Accessories',
+    href: '#',
+  },
+  {
+    label: 'Weddings',
+    href: '#',
+  },
+  {
+    label: 'Home & Furniture  ',
+    href: '#',
+  },
+  {
+    label: 'Beauty & Wellness',
     href: '#',
   },
 ];
@@ -453,7 +450,7 @@ const NAV_ITEMS2 = [
         href: '#',
       },
       {
-        label: 'Featured',
+        label: 'Furniture',
         subLabel: 'Easter Gifting & Entertaining, Spring 2023:Sculpture + Shape',
         subOption:[
           'Easter Gifting & Entertaining',
@@ -480,7 +477,7 @@ const NAV_ITEMS2 = [
         href: '#',
       },
       {
-        label: 'Featured',
+        label: 'Decor',
         subLabel: 'Living Room, Bedroom, Kitchen, Dining Room',
         subOption:[
           'Living Room',
@@ -494,24 +491,62 @@ const NAV_ITEMS2 = [
     ],
   },
   {
-    label: 'Learn Design',
+    label: 'Kitchen & Dining',
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: 'Candles',
+    href: '#',
+  },
+  {
+    label: 'Bedding',
+    href: '#',
+  },
+  {
+    label: 'Bath',
+    href: '#',
+  },
+  {
+    label: 'Outdoor',
+    href: '#',
+  },
+  {
+    label: 'Kids',
+    href: '#',
+  },
+  {
+    label: 'Gifts',
     href: '#',
   },
 ];
 
-export class SimpleSlider extends Component {
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div/>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div/>
+  );
+}
+
+export  class SimpleSlider extends Component {
   render() {
-    const settings = {
-      lazyLoad: true,
-      autoplaySpeed: 3000,
+    var settings = {
+      dots: false,
       infinite: true,
-      autoplay: true,
+      speed: 1000,
+      autoplay:true,
       slidesToShow: 1,
       slidesToScroll: 1,
+      initialSlide: 0,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
       responsive: [
         {
           breakpoint: 1024,
@@ -539,17 +574,17 @@ export class SimpleSlider extends Component {
         }
       ]
     };
+
+
     return (
       <div >
         <Slider {...settings}>
-          <Box bg='red.300'>
-            <Center>FROCKS FULL OF SUNSHINE these spring favorites had us at yellow shop the new collection</Center>
+          <Box bg={'red.200'}>
+            <Center>meet our most valuable layers Tees, Please! shop them all</Center>
           </Box>
-          <Box bg='gray.400'>
-            <Center>2</Center>
-          </Box>
-          <Box bg='blue.300'>
-            <Center>3</Center>
+          <Box bg={'red.200'}>
+            <Center>crochet, ruffles, eyelet, lace... White shop little white dresses
+            </Center>
           </Box>
         </Slider>
       </div>
