@@ -1,5 +1,5 @@
 import * as types from './cart.actionTypes'
-import { fetchCartData, fetchDeleteCartData, fetchUpdateCartData } from './cart.api';
+import { fetchCartData, fetchDeleteCartData, fetchPostCartData, fetchUpdateCartData } from './cart.api';
 
 
 export  const getCartData =  ()=>async(dispatch)=>{
@@ -14,11 +14,26 @@ export  const getCartData =  ()=>async(dispatch)=>{
     }
 }
 
+
+export  const postCartData =  (id , obj)=>async(dispatch)=>{
+    dispatch({type:types.CART_LOADING});
+    try {
+        let data = await fetchPostCartData(obj);
+        if(data){
+            
+            dispatch({type:types.POST_CART_DATA, payload:data})
+        }
+    } catch (error) {
+        dispatch({type:types.CART_ERROR})
+    }
+}
+
 export  const updateCartData =  (id , obj)=>async(dispatch)=>{
     dispatch({type:types.CART_LOADING});
     try {
         let data = await fetchUpdateCartData(id, obj);
         if(data){
+            
             dispatch({type:types.UPDATE_CART_DATA, payload:data})
         }
     } catch (error) {
