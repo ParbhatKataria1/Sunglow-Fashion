@@ -69,7 +69,7 @@ const Dresses = () => {
                 <Flex flexDir={'column'}>
                 <Text fontSize={'xx-small'} mb={'10px'}>Filter by:</Text>
                 <Flex flexDir={'column'}>
-                    <Accordion1/>
+                    <Accordion1 data={data} setData={setData}/>
                 </Flex>
                 </Flex>
             </Flex>
