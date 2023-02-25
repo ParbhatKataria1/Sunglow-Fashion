@@ -52,11 +52,6 @@ import {
 import { BsFillCartFill } from 'react-icons/bs';
 import { BsFillPersonFill } from 'react-icons/bs';
 
-
-
-
-
-
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   return (

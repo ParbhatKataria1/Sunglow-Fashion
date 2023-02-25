@@ -10,7 +10,6 @@ const Clothing = () => {
       .then(res=>setData(res.data))
     }
     useEffect(()=>{
-      getData()
     },[])
     // console.log(data)
     return (

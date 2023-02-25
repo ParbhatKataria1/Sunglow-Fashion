@@ -1,37 +1,35 @@
 import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  useToast,
-  Text,
-  useColorModeValue,
-  Stack
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
+    Flex,
+    Box,
+    FormControl,
+    FormLabel,
+    Input,
+    Checkbox,
+    Stack,
+    Link,
+    Button,
+    Heading,
+    Text,
+    useColorModeValue,
+    useToast,
+  } from '@chakra-ui/react';
 
-import { getProduct, patchProduct } from "../../Utils/apiFunction";
-import { base_url } from "../../Utils/url";
+  import React, { useState } from "react";
+import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
 
 
 const intitialData = {
   name: "",
-  brand: "",
-  current_price: "",
-  original_price: "",
-  rating: "",
-  rating_count: "",
-  thumbnail: "",
-  query_url: "",
+  image: "",
+  colour:"",
+  size:"",
+  price: "",
 };
 
-const EditProduct = ({id}) => {
-  const url = `${base_url}/testing/${id}`;
-  const [data, setData] = useState(intitialData);
-  const [loading] = useState(false);
+  
+  export default function AddProduct() {
+    const [data, setData] = useState(intitialData);
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const {
     name,
@@ -40,7 +38,6 @@ const EditProduct = ({id}) => {
     colour,
     size,
   } = data;
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     const val =
@@ -52,56 +49,33 @@ const EditProduct = ({id}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      name === "" ||
-      image === "" ||
-      colour === "" ||
-      price === 0 ||
-      size === "" 
-    ) {
-      toast({
-        position: "top-left",
-        render: () => (
-          <Flex color="red" border="4px solid white" p={"10px"} bgColor="red">
-            <WarningIcon w={30} h={30} />
-            <Text size="lg" ml="15px">
-              Please Add All Details
-            </Text>
-          </Flex>
-        ),
-      });
-      return;
-    }
-    patchProduct(url, data)
-      .then(() =>
-        toast({
-          position: "bottom",
-          render: () => (
-            <Flex
-              color="white"
-              border="4px solid white"
-              p={"10px"}
-              bgColor="green.400"
-            >
-              <CheckCircleIcon w={30} h={30} />
-              <Text size="lg" ml="15px">
-                Product has been updated!!{" "}
-              </Text>
-            </Flex>
-          ),
-        })
-      ).then(setData(intitialData))
-
+    toast({
+      position: "top-left",
+      render: () => (
+        <Flex
+          color="white"
+          border="4px solid white"
+          p={"10px"}
+          bgColor="green.400"
+        >
+          <CheckCircleIcon w={30} h={30} />
+          <Text size="lg" ml="15px">
+            Product has been added!!{" "}
+          </Text>
+        </Flex>
+      ),
+    });
+    await fetch("http://localhost:8080/testing", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(setData(intitialData));
+    // navigate("/")
   };
-  useEffect(() => {
-    if(id){
-
-      getProduct(url).then((res) => setData(res));
-    }
-  }, []);
-
-  return (
-    <Flex
+    return (
+      <Flex
         align={'center'}
         justify={'center'}
         bg={useColorModeValue('gray.50', 'gray.800')} >
@@ -167,7 +141,7 @@ const EditProduct = ({id}) => {
             _hover={{
               bg: 'blue.500',
             }}>
-            UPDATE IT!
+            Add New Product
           </Button>
         </FormControl>
       </form>
@@ -175,7 +149,5 @@ const EditProduct = ({id}) => {
           </Box>
         </Stack>
       </Flex>
-  );
-};
-
-export default EditProduct;
+    );
+  }
