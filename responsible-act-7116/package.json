@@ -23,6 +23,7 @@
     "framer-motion": "^9.0.7",
     "json-server": "^0.17.2",
     "next": "13.1.6",
+    "next-auth": "^4.19.2",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
@@ -30,7 +31,10 @@
     "react-image-magnifiers": "^1.4.0",
     "react-image-magnify": "^2.7.4",
     "react-multi-carousel": "^2.8.2",
+    "react-redux": "^8.0.5",
     "react-slick": "^0.29.0",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1"
   }
 }

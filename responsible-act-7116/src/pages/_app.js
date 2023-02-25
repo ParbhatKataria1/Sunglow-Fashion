@@ -1,15 +1,22 @@
 import Footer from '@/components/Footer'
 import Navbar from '@/components/navbar'
+import { store } from '@/redux/store'
 import '@/styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
+import { Provider } from 'react-redux'
 import LandingPage from '../components/Anthropologie'
+import { SessionProvider } from "next-auth/react"
 // <Navbar/>
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, session }) {
   return(
   <ChakraProvider>
-    <Navbar/>
-    <Component {...pageProps} />
+    {/* <SessionProvider session={session} > */}
+      <Provider store={store}>
+        <Navbar/>
+        <Component {...pageProps} />
+      </Provider>
     <Footer/>
+    {/* </SessionProvider> */}
   </ChakraProvider>
   )
 }

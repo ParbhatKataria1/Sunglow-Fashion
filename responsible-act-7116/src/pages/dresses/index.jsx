@@ -1,4 +1,6 @@
+
 // import ProductCard from '@/components/ProductCard'
+import Accordion1 from '@/components/Accordion1'
 import { Box, Divider, Flex, Grid, Heading, Select, Spacer, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
@@ -68,42 +70,7 @@ const Dresses = () => {
                 <Flex flexDir={'column'}>
                 <Text fontSize={'xx-small'} mb={'10px'}>Filter by:</Text>
                 <Flex flexDir={'column'}>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Color</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Style</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Sleeve Length</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Length</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Occasion</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Neckline</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Size</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Size Type</Text>
-                      <Text>+</Text>
-                    </Flex>
-                    <Flex borderTop={'1px solid grey'} justifyContent={'space-between'} h={'50px'} alignItems={'center'} pl={'3px'} pr={'3px'} fontSize={'x-small'} fontWeight={'500px'}>
-                      <Text>Price</Text>
-                      <Text>+</Text>
-                    </Flex>
+                    <Accordion1 data={data} setData={setData}/>
                 </Flex>
                 </Flex>
             </Flex>

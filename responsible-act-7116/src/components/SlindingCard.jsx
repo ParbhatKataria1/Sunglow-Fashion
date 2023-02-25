@@ -1,4 +1,5 @@
-import { Box, Text,Flex,Button, Link } from "@chakra-ui/react";
+import { Box, Text,Flex,Button, Link as ChakraLink } from "@chakra-ui/react";
+import Link from "next/link";
 import React,{useState,useEffect} from "react";
 import { ChevronLeftIcon,ChevronRightIcon } from "@chakra-ui/icons";
 import Carousel from "react-multi-carousel";
@@ -51,7 +52,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
 
    useEffect(() => {
      const id = setInterval(() => {
-       console.log(imageState);
+      //  console.log(imageState);
        if (imageState == something.length - 1) {
          setImageState(0);
        } else {
@@ -69,10 +70,10 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
           setCrauserDesignation(something[imageState].designation);
     },[{imageState}])
 
-  console.log(imageState)
+  // console.log(imageState)
 
   return (
-    <Box bg="white" p="1rem" id="main_Client"
+    <Box borderRadius={'10px'} bg="white" p="1rem" id="main_Client"
     bgPosition={"center"}
     bgRepeat={"no-repeat"}>
       <Carousel
@@ -110,24 +111,24 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
                     objectFit="contain"
                     width="100%"
                     transition="0.3s ease-in-out"
-                    _hover={{
-                      transform: 'scale(1.05)',
-                    }}
+                    
                     >
-                    <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                    <ChakraLink textDecoration="none" _hover={{ textDecoration: 'none' }}>
                       <Box 
                         className="imgS" 
                         transform="scale(1.0)"  
                         objectFit="contain"
                         width="100%"
-                          transition="1s ease-in-out"
+                          transition=".4s ease-in-out"
                           _hover={{
-                            transform: 'scale(2)',
+                            transform: 'scale(1.2)',
                           }}
                           >
+                            <Link href='dresses' >
                         <Image height={204} width={700}  src={e.img1} alt="image"/>
+                        </Link>
                       </Box>
-                    </Link>
+                    </ChakraLink>
                   </Box>           
                 </Box>
               <Box className="overlay overlay-bottom"
@@ -171,7 +172,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
              </Box>
             </Box>
             <Box>
-              <Text fontSize={"15px"}>{e.name}</Text>
+              <Text p={'10px'} fontSize={"15px"}>{e.name}</Text>
             </Box>
           </Box>
         ))}
