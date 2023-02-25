@@ -8,7 +8,14 @@ export async function fetchCartData(){
         console.log('error occured in the cart redux store while getting the data')
     }
 }
-
+export async function fetchPostCartData(obj){
+    try {
+        let data = await axios.post(cartUrl, obj);
+        return data.data;
+    } catch (error) {
+        console.log('error occured in the cart redux store while posting the data')
+    }
+}
 
 
 export async function fetchUpdateCartData(id , obj){

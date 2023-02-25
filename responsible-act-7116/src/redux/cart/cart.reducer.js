@@ -17,6 +17,9 @@ export function reducer (state=init, action){
             case types.GET_CART_DATA:
             return {...state, loading:false, error:false, cartData:payload}
 
+            case types.POST_CART_DATA:
+            return {...state, loading:false, error:false, cartData:[...state.cartData, payload]}
+
             case types.UPDATE_CART_DATA:
                 let newdata1 = state.cartData.map((el)=>{
                     return el.id===payload.id?payload:el;
