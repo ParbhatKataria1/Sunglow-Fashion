@@ -90,7 +90,7 @@ const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   // const { data: session, status } = useSession();
   // console.log(data)
-  const [searchBox, setSearchBox] = useState(true);
+  const [searchBox, setSearchBox] = useState(false);
   const dispatch = useDispatch();
   const [map, setmap] = useState([]);
   
