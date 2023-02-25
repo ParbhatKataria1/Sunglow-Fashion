@@ -1,4 +1,5 @@
-import { Box, Text,Flex,Button, Link } from "@chakra-ui/react";
+import { Box, Text,Flex,Button, Link as ChakraLink } from "@chakra-ui/react";
+import Link from "next/link";
 import React,{useState,useEffect} from "react";
 import { ChevronLeftIcon,ChevronRightIcon } from "@chakra-ui/icons";
 import Carousel from "react-multi-carousel";
@@ -51,7 +52,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
 
    useEffect(() => {
      const id = setInterval(() => {
-       console.log(imageState);
+      //  console.log(imageState);
        if (imageState == something.length - 1) {
          setImageState(0);
        } else {
@@ -69,7 +70,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
           setCrauserDesignation(something[imageState].designation);
     },[{imageState}])
 
-  console.log(imageState)
+  // console.log(imageState)
 
   return (
     <Box bg="white" p="1rem" id="main_Client"
@@ -114,7 +115,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
                       transform: 'scale(1.05)',
                     }}
                     >
-                    <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                    <ChakraLink textDecoration="none" _hover={{ textDecoration: 'none' }}>
                       <Box 
                         className="imgS" 
                         transform="scale(1.0)"  
@@ -125,9 +126,11 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
                             transform: 'scale(2)',
                           }}
                           >
+                            <Link href='dresses' >
                         <Image height={204} width={700}  src={e.img1} alt="image"/>
+                        </Link>
                       </Box>
-                    </Link>
+                    </ChakraLink>
                   </Box>           
                 </Box>
               <Box className="overlay overlay-bottom"

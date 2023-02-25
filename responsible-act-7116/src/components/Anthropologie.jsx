@@ -2,21 +2,26 @@ import { StarIcon } from '@chakra-ui/icons';
 import { Button, Flex,Box,Grid,  SimpleGrid, Stack, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import SlindingCard from './SlindingCard';
+import Link from 'next/Link'
 
 // ---------------------------- NavbarTwo ------------------------------
 import {
   HStack,
-  Link,
+  Link as ChakraLink,
   IconButton,
   useDisclosure,
   useColorModeValue
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon} from '@chakra-ui/icons';
+import { store } from '@/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getNavItems } from '@/redux/nav/nav.action';
 
-const Links = ['New!', 'Furniture', 'Decor', 'Kitchen & Dining', 'Candles', 'Bedding', 'Bath', 'Outdoor', 'Stationery', 'Kids', 'Gifts', 'Sale'];
+const ChakraLinks = ['New!', 'Furniture', 'Decor', 'Kitchen & Dining', 'Candles', 'Bedding', 'Bath', 'Outdoor', 'Stationery', 'Kids', 'Gifts', 'Sale'];
 
-const NavLink = ({ children }) => (
-  <Link
+const NavChakraLink = ({ children }) => (
+  <ChakraLink
     px={2}
     py={1}
     rounded={'md'}
@@ -26,7 +31,7 @@ const NavLink = ({ children }) => (
     }}
     href={'#'}>
     {children}
-  </Link>
+  </ChakraLink>
 );
 
 export function NavbarTwo() {
@@ -49,8 +54,8 @@ export function NavbarTwo() {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
              >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {ChakraLinks.map((ChakraLink) => (
+                <NavChakraLink key={ChakraLink}>{ChakraLink}</NavChakraLink>
               ))}
             </HStack>
           </HStack>
@@ -60,8 +65,8 @@ export function NavbarTwo() {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {ChakraLinks.map((ChakraLink) => (
+                <NavChakraLink key={ChakraLink}>{ChakraLink}</NavChakraLink>
               ))}
             </Stack>
           </Box>
@@ -207,6 +212,12 @@ export const youMayALsoLike = [
   ];
 
 export default function LandingPage() {
+    // const data = useSelector((store)=>store.navdata);
+    // const dispatch= useDispatch();
+    // console.log(data);
+    // useEffect(()=>{
+    //     dispatch(getNavItems());
+    // }, [])
   return (
     <Box bg={"#f4f4f4"}>
     <NavbarTwo/>
@@ -279,7 +290,7 @@ export default function LandingPage() {
             </Button>
         </Box>
     </Grid>
-
+    <Link href={`/dresses`}>
     <Box width={"90%"} margin={"auto"} marginTop={"40px"} position={"relative"}>
         <Image src='https://images.ctfassets.net/5de70he6op10/3eri4S7CUYNA223W694QUo/890cffce3e1cc21308f3051be0a76baa/473929293-ls_m1.jpg?w=2694&q=80&fm=webp' alt='Dan Abramov'
         width={1357} height={1200} />
@@ -306,9 +317,11 @@ export default function LandingPage() {
         shop dresses
         </Button>
     </Box>
+    </Link>
 
     <Box marginTop={"40px"} position={"relative"}>
         <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
+        <Link href={'/clothing'} >
             <Box w='433px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/24XjZK35JsGCP4fmCO8580/6d8469a59dd0fea277acaa832dac4786/473929297-ls_m2a.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
             width={700} height={200} />
@@ -336,6 +349,10 @@ export default function LandingPage() {
             shop new clothing
             </Button>
             </Box>
+            </Link>
+
+
+            <Link href='/clothing'>
             <Box w='435px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/3i7R768ERr5ciI56znod56/151bbbbe9b52ff4c5fca01f76720fcbe/473929303-ls_m2b.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
             width={700} height={200} />
@@ -361,6 +378,9 @@ export default function LandingPage() {
             the gataway shop
             </Button>
             </Box>
+            </Link>
+
+            <Link href='/clothing' >
             <Box w='435px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/EO7OfU3ZWf8n7njPYNrCo/097740c34d53fbad8d6bbae669514b4a/473929312-ls_m2c.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
             width={500} height={200} />
@@ -387,6 +407,7 @@ export default function LandingPage() {
             shop swimwear
             </Button>
             </Box>
+            </Link>
         </Grid>
     </Box>
     
@@ -394,6 +415,7 @@ export default function LandingPage() {
     
     <Box marginTop={"40px"} position={"relative"}>
         <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
+        <Link href='/clothing' >
             <Box w='670px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/5SpSw7RKfexkiiBBqnTSz0/020ab583c49d60f3053868bbaf0ed2e8/473929316-ls_m3a.jpg?w=1302&q=80&fm=webp' alt='Dan Abramov'
             width={700} height={200} />
@@ -420,31 +442,36 @@ export default function LandingPage() {
             shop new clothing
             </Button>
             </Box>
-            <Box w='663px' h='10'>
-            <Image src='https://images.ctfassets.net/5de70he6op10/6VLdLozl8tBTMYC7Bjy39f/29875f9e1e26ad89cd2a502f70dc9eba/473929321-ls_m3b.jpg?w=1302&q=80&fm=webp' alt='Dan Abramov'
-            width={700} height={200} />
-            <Button
-                size='md'
-                height='38px'
-                width='150px'
-                borderColor='white'
-                position={"relative"}
-                top={"-70px"}
-                left={"40%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                _hover={
-                    {
-                        textDecoration: "underline"
-                    }
-                }
 
-            >
-            the gataway shop
-            </Button>
-            </Box>
+            </Link>
+
+            <Link href='/clothing' >
+                <Box w='663px' h='10'>
+                <Image src='https://images.ctfassets.net/5de70he6op10/6VLdLozl8tBTMYC7Bjy39f/29875f9e1e26ad89cd2a502f70dc9eba/473929321-ls_m3b.jpg?w=1302&q=80&fm=webp' alt='Dan Abramov'
+                width={700} height={200} />
+                <Button
+                    size='md'
+                    height='38px'
+                    width='150px'
+                    borderColor='white'
+                    position={"relative"}
+                    top={"-70px"}
+                    left={"40%"}
+                    fontSize={"12px"}
+                    padding={"10px 20px"}
+                    curson={"pointer"}
+                    textAlign={"center"}
+                    _hover={
+                        {
+                            textDecoration: "underline"
+                        }
+                    }
+
+                >
+                the gataway shop
+                </Button>
+                </Box>
+            </Link>
         </Grid>
     </Box>
 
@@ -452,6 +479,7 @@ export default function LandingPage() {
 
     <Box marginTop={"40px"} position={"relative"}>
         <Grid templateColumns='repeat(5, 1fr)' gap={7} width={"90%"} margin={"auto"}  zIndex={0}>
+        <Link href='/dresses'>
             <Box w='433px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/wH3s9ULThzua1X1ZTzDMx/3a9607dc9e8636eb96ca159919afa542/473929336-ls_m4a.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
             width={700} height={200} />
@@ -478,6 +506,9 @@ export default function LandingPage() {
             shop spring entertaining essentials
             </Button>
             </Box>
+            </Link>
+
+            <Link href='/clothing' >
             <Box w='435px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/2ABHGD0yJQ3NHq6iiJWTUw/194b56bf722572e79d65a9ed6293bb46/473929340-ls_m4b.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
             width={700} height={200} />
@@ -503,6 +534,9 @@ export default function LandingPage() {
             shop tops
             </Button>
             </Box>
+            </Link>
+
+            <Link href='/clothing' >
             <Box w='435px' h='10'>
             <Image src='https://images.ctfassets.net/5de70he6op10/7yrEmAMeP6Kx7XthafpP8b/cb1869eb48809f1b667c1b1262cc8085/473929343-ls_m4c.jpg?w=856&q=80&fm=webp' alt='Dan Abramov'
             width={500} height={200} />
@@ -528,11 +562,13 @@ export default function LandingPage() {
             shop dresses
             </Button>
             </Box>
+            </Link>
         </Grid>
     </Box>
 
     <Line/>
 
+    <Link href='/clothing' >
     <Box width={"90%"} margin={"auto"} marginTop={"40px"} position={"relative"}>
         <Image src='https://images.ctfassets.net/5de70he6op10/BYqngT4RGr1qC07s5Stvm/45ac7c1b8ee7fc4ba75a71c5bae96223/473929345-ls_m5_bhldn.jpg?w=2694&q=80&fm=webp' alt='Dan Abramov'
         width={1357} height={1200} />
@@ -559,6 +595,7 @@ export default function LandingPage() {
         shop weddings
         </Button>
     </Box>
+    </Link>
 
     <Box width={"90%"} margin={"auto"} px={4} marginTop={"40px"}>
     <Flex h={16} alignItems={'center'} justifyContent={'space-between'} fontSize={"20px"}>
@@ -587,10 +624,11 @@ export default function LandingPage() {
   
 
   <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))' width={"90%"} margin={"auto"} marginTop={"20px"}>
+    
     <Box maxW='sm'>
-        
+    <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/1h9gkbrJB6rfKMEsrQsrlE/75fdaefe631d2d0e38d24b5e5d68ec10/473929238-ls_customerfave_a.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
-            width={357} height={200} />
+            width={357} height={200} /></Link>
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
@@ -601,6 +639,7 @@ export default function LandingPage() {
             <Text>
                 Love - I have this in three colors. Why? Because you can throw it on, and the fit is seamless, it’s comfy it’s breezy.
             </Text>
+            <Link href='/dresses' >
             <Button 
                 textDecoration={"underline"} 
                 color={"blue.300"} 
@@ -614,13 +653,16 @@ export default function LandingPage() {
             >
                 shop now
             </Button>
+            </Link>
             </Stack>
         
     </Box>
+
+
     <Box maxW='sm'>
-            
+    <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/2bvup8dYlhV23fJF8JWtBi/f007eb7c84134bfe87c3dd3669ffd06f/473929242-ls_customerfave_b.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
-            width={1357} height={1200} />
+            width={1357} height={1200} /></Link>
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
@@ -631,6 +673,7 @@ export default function LandingPage() {
             <Text>
             Super cute, perfect little crossbody. Holds your phone, money, lipstick and keys.
             </Text>
+            <Link href='/dresses' >
             <Button 
                 textDecoration={"underline"} 
                 color={"blue.300"} 
@@ -644,13 +687,16 @@ export default function LandingPage() {
             >
                 shop now
             </Button>
+            </Link>
             </Stack>
         
     </Box>
+
+
     <Box maxW='sm'>
-        
+    <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/7e6CTKkxyvEGN65qcfAD6e/833ca12cd46657912e24e81a42fc086a/473929246-ls_customerfave_c.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
-            width={1357} height={1200} />
+            width={1357} height={1200} /></Link>
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
@@ -661,6 +707,7 @@ export default function LandingPage() {
             <Text>
             Oversized in the best way...its a perfect cotton shirt.
             </Text>
+            <Link href='/dresses' >
             <Button 
                 textDecoration={"underline"} 
                 color={"blue.300"} 
@@ -674,13 +721,16 @@ export default function LandingPage() {
             >
                 shop now
             </Button>
+            </Link>
             </Stack>
         
     </Box>
+
+
     <Box maxW='sm'>
-        
+    <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/IRIRM5boIBRZTPtM9RGo2/d5a954acdea330f877f48ee00b9dd9e7/473929254-ls_customerfave_d.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
-            width={1357} height={1200} />
+            width={1357} height={1200} /></Link>
             <Stack mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
@@ -691,6 +741,7 @@ export default function LandingPage() {
             <Text>
             I LOVE THESE PANTS! They feel good on, whether I`m standing, sitting, or walking. Overall 10/10 would recommend!
             </Text>
+            <Link href='/dresses' >
             <Button 
                 textDecoration={"underline"} 
                 color={"blue.300"} 
@@ -704,6 +755,7 @@ export default function LandingPage() {
             >
                 shop now
             </Button>
+            </Link>
             </Stack>
         
     </Box>

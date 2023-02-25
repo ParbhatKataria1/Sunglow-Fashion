@@ -4,6 +4,8 @@ import { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import Link from 'next/link';
+
 
 import {
   Box,
@@ -14,7 +16,7 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
+  Link as ChakraLink,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -57,12 +59,15 @@ import { BsFillPersonFill } from 'react-icons/bs';
 
 
 
+
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-    <Box>
+    <Box width={'100%'}>
+      <Box >
       <SimpleSlider/>
+      </Box>
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -109,7 +114,7 @@ const Navbar = () => {
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
-            variant={'link'}
+            variant={'ChakraLink'}
             href={'#'}>
              
             <BasicUsage/>
@@ -153,8 +158,8 @@ const Navbar = () => {
 
 
 const DesktopNav = ({NAV_ITEMS}) => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
+  const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+  const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
@@ -162,21 +167,22 @@ const DesktopNav = ({NAV_ITEMS}) => {
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
+            {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
             <PopoverTrigger>
-              <Link
+              <ChakraLink
                 p={2}
                 href={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
-                color={linkColor}
+                color={ChakraLinkColor}
                 _hover={{
                   textDecoration: 'none',
-                  color: linkHoverColor,
+                  color: ChakraLinkHoverColor,
                 }}>
                 {navItem.label}
-              </Link>
+              </ChakraLink>
             </PopoverTrigger>
-
+                {/* this is causing poping effect */}
             {navItem.children && (
               <PopoverContent
                 border={0}
@@ -200,16 +206,29 @@ const DesktopNav = ({NAV_ITEMS}) => {
     </Stack>
   );
 };
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
+  const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+  const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
+  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   return (
-    <Link
-      href={href}
+    <Box
       role={'group'}
       display={'block'}
       p={2}
       rounded={'md'}
       _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-      <Stack direction={'row'} align={'center'}>
+
+
+{/* here is the starting */}
+
+
+
+<Box>
+          <Popover trigger={'hover'} placement={'bottom-start'}>
+            {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
+            <PopoverTrigger>
+
+            <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
@@ -230,9 +249,111 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
-    </Link>
+
+            </PopoverTrigger>
+                {/* this is causing poping effect */}
+            {subOption && (
+              <PopoverContent
+                border={0}
+                boxShadow={'xl'}
+                bg={popoverContentBgColor}
+                p={4}
+                rounded={'xl'}
+                minW={'sm'}>
+                <Stack>
+                  {subOption.length && subOption.map((child, ind) => (
+                    // <h1>this is me</h1>
+                    <DesktopSubOption key={ind} option={child} href={href} />
+                    // <DesktopSubNav key={child.label} {...child} />
+                  ))}
+                </Stack>
+
+              </PopoverContent>
+
+            )}
+          </Popover>
+</Box>
+
+
+
+{/* here is the ending */}
+
+
+    </Box>
   );
 };
+
+
+const DesktopSubOption = ({ option, href }) => {
+  return (
+    // issue if I wrap this flex around ChakraLink then there will a hydration problem
+    <Flex alignItems={'center'} role={'group'}
+    display={'block'}
+    p={2}
+    rounded={'md'}
+    _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}>
+        <Link href={href}>
+        <Box>
+          <Text
+            transition={'all .3s ease'}
+            _groupHover={{ color: 'pink.400' }}
+            fontWeight={500}>
+              {option}
+            
+          </Text>
+        </Box>
+          </Link>
+      </Flex>
+  );
+};
+
+
+// function SubOptions({value, href}){
+//   const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+//   const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
+//   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+//   return (
+//     <>
+//       <Box key={navItem.label}>
+//           <Popover trigger={'hover'} placement={'bottom-start'}>
+//             {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
+//             <PopoverTrigger>
+//               <ChakraLink
+//                 p={2}
+//                 href={navItem.href ?? '#'}
+//                 fontSize={'sm'}
+//                 fontWeight={500}
+//                 color={ChakraLinkColor}
+//                 _hover={{
+//                   textDecoration: 'none',
+//                   color: ChakraLinkHoverColor,
+//                 }}>
+//                 {navItem.label}
+//               </ChakraLink>
+//             </PopoverTrigger>
+//                 {/* this is causing poping effect */}
+//             {navItem.children && (
+//               <PopoverContent
+//                 border={0}
+//                 boxShadow={'xl'}
+//                 bg={popoverContentBgColor}
+//                 p={4}
+//                 rounded={'xl'}
+//                 minW={'sm'}>
+//                 <Stack>
+//                   {navItem.children.map((child) => (
+//                     <DesktopSubNav key={child.label} {...child} />
+//                   ))}
+//                 </Stack>
+
+//               </PopoverContent>
+
+//             )}
+//           </Popover>
+//         </Box>
+//     </>
+//   )
+// }
 
 
 
@@ -243,91 +364,189 @@ const NAV_ITEMS1 = [
     label: 'New!',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
+        label: 'Shop by Category',
+        subLabel: 'Accessories, Beauty & Wellness, Clothing',
+        subOption:[
+          'Accessories,Beauty & Wellness','Clothing','Dresses','Home & Furniture','Jewelry','Petites',
+        ],
+        href: '/clothing',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
+        label: 'Featured',
+        subLabel: 'Bold & Bright Dresses, Shirt Dresses',
+        subOption:[
+          '{Spring}Time to Celebrate','Trending: Citrus Shades',
+          'Spring 2023: Sculpture + Shape',
+          'Trending: Utility',
+          'Trending: The Bubble',
+          'Denim: Every Way, Every Day',
+        ],
+        href: '/clothing',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Dresses',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
+        label: 'Shop by Category',
+        subLabel: 'Shop All Dresses, New! Top Rated Dresses',
+        subOption:[
+          'Shop All Dresses',
+          'New!',
+          'Top Rated Dresses',
+          'Bridesmaid Dresse',
+        ],
+        href: '/dresses',
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
+        label: 'Featured Shops',
+        subLabel: 'Bold & Bright Dresses, Shirt Dresses',
+        subOption:[
+          'Bold & Bright Dresses',
+          'Shirt Dresses',
+          'Trending: Tulle',
+          'Little Black Dresses'
+        ],
+        href: 'dresses',
       },
     ],
   },
   {
-    label: 'Learn Design',
+    label: 'Shoes',
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: 'Accessories',
+    href: '#',
+  },
+  {
+    label: 'Weddings',
+    href: '#',
+  },
+  {
+    label: 'Home & Furniture  ',
+    href: '#',
+  },
+  {
+    label: 'Beauty & Wellness',
     href: '#',
   },
 ];
 const NAV_ITEMS2 = [
   {
-    label: 'not inspiration',
+    label: 'New!',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
+        label: 'Shop by Category',
+        subLabel: 'Shop All New!, Bath, Bedding, Candles',
+        subOption:[
+          'Shop All New!',
+          'Bath',
+          'Bedding',
+          'Candles',
+          'Décor',
+        ],
         href: '#',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
+        label: 'Furniture',
+        subLabel: 'Easter Gifting & Entertaining, Spring 2023:Sculpture + Shape',
+        subOption:[
+          'Easter Gifting & Entertaining',
+          'Spring 2023: Sculpture + Shape',
+          'Spring 2023: Color + Character',
+          'Spring 2023: Pattern + Texture',
+        ],
         href: '#',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Furniture',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
+        label: 'Shop by Category',
+        subLabel: 'Explore All Furniture, Shop All Furniture, Chairs',
+        subOption:[
+          'Explore All Furniture',
+          'Shop All Furniture',
+          'Chairs',
+          'Storage Furniture & Consoles'
+        ],
         href: '#',
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
+        label: 'Decor',
+        subLabel: 'Living Room, Bedroom, Kitchen, Dining Room',
+        subOption:[
+          'Living Room',
+          'Bedroom',
+          'Kitchen & Dining Room',
+          'Modular Seating',
+          'Seating Collections',
+        ],
         href: '#',
       },
     ],
   },
   {
-    label: 'Learn Design',
+    label: 'Kitchen & Dining',
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: 'Candles',
+    href: '#',
+  },
+  {
+    label: 'Bedding',
+    href: '#',
+  },
+  {
+    label: 'Bath',
+    href: '#',
+  },
+  {
+    label: 'Outdoor',
+    href: '#',
+  },
+  {
+    label: 'Kids',
+    href: '#',
+  },
+  {
+    label: 'Gifts',
     href: '#',
   },
 ];
 
-export class SimpleSlider extends Component {
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div/>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div/>
+  );
+}
+
+export  class SimpleSlider extends Component {
   render() {
-    const settings = {
-      lazyLoad: true,
-      autoplaySpeed: 3000,
+    var settings = {
+      dots: false,
       infinite: true,
-      autoplay: true,
+      speed: 1000,
+      autoplay:true,
       slidesToShow: 1,
       slidesToScroll: 1,
+      initialSlide: 0,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
       responsive: [
         {
           breakpoint: 1024,
@@ -355,17 +574,17 @@ export class SimpleSlider extends Component {
         }
       ]
     };
+
+
     return (
       <div >
         <Slider {...settings}>
-          <Box bg='red.300'>
-            <Center>FROCKS FULL OF SUNSHINE these spring favorites had us at yellow shop the new collection</Center>
+          <Box bg={'red.200'}>
+            <Center>meet our most valuable layers Tees, Please! shop them all</Center>
           </Box>
-          <Box bg='gray.400'>
-            <Center>2</Center>
-          </Box>
-          <Box bg='blue.300'>
-            <Center>3</Center>
+          <Box bg={'red.200'}>
+            <Center>crochet, ruffles, eyelet, lace... White shop little white dresses
+            </Center>
           </Box>
         </Slider>
       </div>
