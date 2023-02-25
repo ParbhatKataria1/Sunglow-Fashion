@@ -13,7 +13,7 @@ const Clothing = () => {
       let res=await axios.get('https://apiserver-no4z.onrender.com/clothing')
       .then(res=>setData(res.data))
     }
-    
+
     // console.log(data)
     const handleChange=(e)=>{
       if(e.target.value==='lth'){

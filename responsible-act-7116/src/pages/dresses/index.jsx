@@ -78,7 +78,7 @@ const Dresses = () => {
                 {
                   data.map((ele)=>(
                     // console.log(ele)
-                      <Flex flexDir={'column'} key={ele.id}>
+                      <Flex flexDir={'column'} key={ele.id} position= {"relative"}>
                         {/* <Flex flexDir={'column'}> */}
                           <Image id='hoverimg' onMouseOver={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v3+ele.image.burl}`} onMouseOut={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v1+ele.image.burl}`} src={ele.image.furl+ele.image.version.v1+ele.image.burl} style={{cursor:'pointer',}} width={450} height={300} alt={'img1'}/>
                           <Text fontSize={'small'} >{ele.title}</Text>

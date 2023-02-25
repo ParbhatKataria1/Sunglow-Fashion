@@ -57,10 +57,6 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNavItems } from '@/redux/nav/nav.action';
 
-
-
-
-
 function SearchItemBox({data}){
 
   console.log('we are in search', data)
@@ -85,7 +81,6 @@ function SearchItemBox({data}){
     </Box>
   )
 }
-
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   // const { data: session, status } = useSession();

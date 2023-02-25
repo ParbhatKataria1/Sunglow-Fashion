@@ -30,16 +30,9 @@ import Image from "next/image";
 
 const ProductItem = ({
   title,
-  brand,
-  current_price,
-  original_price,
-  rating,
-  rating_count,
-  thumbnail,
-  query_url,
+  price,
   id,
-  getData,
-  url,}) => {
+  img, url,getData}) => {
 
 
   const toast = useToast();
@@ -70,7 +63,7 @@ const ProductItem = ({
               borderRadius={"15px"}
             >
               <CheckCircleIcon w={30} h={30} />
-              <Text size="lg" ml="15px">{`${name} has been deleted!`}</Text>
+              <Text size="lg" ml="15px">{`${title} has been deleted!`}</Text>
             </Flex>
           ),
         })
@@ -90,45 +83,19 @@ const ProductItem = ({
         borderBottom="1px solid gainsboro"
         alignItems={"center"}
       >
-        <Image src={thumbnail} width={100} heigth={100} alt="thumb"/>
+        <Image src={img} width={100} height={200} alt="thumb"/>
         <Box w="50%" textAlign={"start"}>
-          <Box fontSize={"16px"}>
-            <Flex>
-              <Text as="span" fontSize={"16px"} fontWeight={"bold"} mr={2}>
-                Ratings :
-              </Text>
-              {convertor(rating)}
-         
-              <Box mt={1.5} ml={2} >
-                <AiFillStar color="rgb(56,142,60)"/>
-              </Box>
-            </Flex>
-          </Box>
           <Text fontSize={"16px"}>
             <Text as="span" fontSize={"16px"} fontWeight={"bold"}>
-              Brand :{" "}
+              Price :{" "}
             </Text>
-            {brand}
+            {convertor(price)}
           </Text>
-
-          <Text fontSize={"16px"}>
-            <Text as="span" fontSize={"16px"} fontWeight={"bold"}>
-              Actual Price :{" "}
-            </Text>
-            {convertor(original_price)}
-          </Text>
-          <Text fontSize={"16px"}>
-            <Text as="span" fontSize={"16px"} fontWeight={"bold"}>
-              Discounted Price :{" "}
-            </Text>
-            {convertor(current_price)}
-          </Text>
-
           <Text noOfLines={1} fontSize={"16px"} mb="20px">
             <Text as="span" fontSize={"16px"} fontWeight={"bold"}>
               Product Name :{" "}
             </Text>
-            {name}
+            {title}
           </Text>
         </Box>
         <Box display={"flex"} gap={3}>
@@ -167,14 +134,13 @@ const ProductItem = ({
           </Tooltip>
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay />
-                <ModalContent w={'70%'}>
+                <ModalContent  >
                   <ModalHeader>
-                    <Heading size={"sm"}>Enter The Details Here</Heading>
                   </ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
                     <HStack my={1}></HStack>
-                    <HStack justifyContent={"center"} alignItems={"center"}>
+                    <HStack justifyContent={"center"} alignItems={"center"} h={"400px"} w={"100px"}>
                       <EditProduct id={id}/>
                     </HStack>
                   </ModalBody>

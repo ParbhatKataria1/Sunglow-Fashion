@@ -10,10 +10,11 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import AddProducts from "../../Components/Admin/AddProducts";
 import ProductsList from "../../Components/Admin/ProductsList";
 import EditProduct from "../../Components/Admin/EditProduct";
 import { base_url } from "../../Utils/url";
+import AddProduct from "@/components/Admin/AddProduct";
+import Piechart from "@/components/Admin/Chart";
 // import { cardsData } from "@/components/Admin/Data/Data";
 
 const url=`${base_url}/allproducts`;
@@ -27,23 +28,21 @@ const Admin = () => {
   }, []);
 
   return (
-    <Box w={["95%", "95%", "80%"]} m="auto" mb= {16}>
+    <Box w={["95%", "95%", "80%"]} m="auto" >
       <Tabs size="md" variant="enclosed">
-      <Grid templateColumns={{ sm: '1fr 1fr', md: '1fr 4fr' }} gap={4}>
-        <TabList>
-           <Flex flexDirection="column" >
-          <Tab>Home</Tab>
-          <Tab>Add Product</Tab>
-          <Tab>Products</Tab>
-          <Tab>Edit Product</Tab>
+      <Grid templateColumns={{ sm: '1fr 1fr', md: '1fr 4fr' }} gap={4} >
+        <TabList height={"400px"} mt={"60px"} >
+           <Flex flexDirection="column" color={"red.500"}>
+              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Home</Tab>
+              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Add Product</Tab>
+              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Products</Tab>
+              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Edit Product</Tab>
           </Flex>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Heading size={"lg"} textAlign={"left"} mt={4}>
-              Welcome Mukesh
-            </Heading>
-            <Box
+            <Piechart/>
+            {/*<Box
               display="flex"
               mt={8}
               flexDirection={["column", "row", "row"]}
@@ -96,13 +95,12 @@ const Admin = () => {
               >
                 0 have not Pass Review
               </Box>
-            </Box>
+            </Box>*/}
           </TabPanel>
           <TabPanel>
             <Heading size={"lg"} textAlign={"left"} mt={4}>
-              Add Product
             </Heading>
-            <AddProducts />
+            <AddProduct/>
           </TabPanel>
           <TabPanel>
             <Heading size={"lg"} textAlign={"left"} mt={4}>
@@ -116,6 +114,7 @@ const Admin = () => {
             </Heading>
             <EditProduct />
           </TabPanel>
+          
         </TabPanels>
         </Grid>
       </Tabs>
