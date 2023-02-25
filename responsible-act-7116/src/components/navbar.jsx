@@ -43,6 +43,9 @@ import {
   ModalCloseButton,
   Checkbox,
   Heading,
+  VStack,
+  HStack,
+  Divider,
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
@@ -88,11 +91,14 @@ function SearchItemBox({data}){
 
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
-  // const { data: session, status } = useSession();
-  // console.log(data)
+  const { data: session, status } = useSession();
   const [searchBox, setSearchBox] = useState(false);
   const dispatch = useDispatch();
   const [map, setmap] = useState([]);
+  let profileImage= session?.user?.image;
+  let profileName = session?.user?.name;
+  // console.log(profileImage, profileName, session)
+
   
 
 
@@ -170,15 +176,29 @@ const Navbar = () => {
             {searchBox && <SearchItemBox  data={map} /> }
           </InputGroup> 
           <svg fill='gray' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 20.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.304-17l-3.431 14h-2.102l2.541-11h-16.812l4.615 13h13.239l3.474-14h2.178l.494-2h-4.196z"/></svg>
-          <Button
+          
+            {
+              profileImage && <HStack w={'180px'} justifyContent='center'>
+              <Image w={'30px'} borderRadius={'50px'} src={profileImage} ></Image>
+              <Divider colorScheme='gray' orientation='vertical' />
+              <Text fontSize={'16px'}>{profileName}</Text>
+            </HStack>
+            }
+          
+
+          {
+            !profileImage && <Button
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
+            w='180px'
             variant={'ChakraLink'}
             href={'#'}>
              
             <BasicUsage/>
           </Button>
+          }
+          
           
         </Stack>
       </Flex>
