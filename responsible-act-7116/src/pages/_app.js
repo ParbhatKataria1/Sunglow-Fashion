@@ -10,13 +10,13 @@ import { SessionProvider } from "next-auth/react"
 export default function App({ Component, pageProps, session }) {
   return(
   <ChakraProvider>
-    {/* <SessionProvider session={session} > */}
+    <SessionProvider session={session} >
       <Provider store={store}>
         <Navbar/>
         <Component {...pageProps} />
       </Provider>
     <Footer/>
-    {/* </SessionProvider> */}
+    </SessionProvider>
   </ChakraProvider>
   )
 }
