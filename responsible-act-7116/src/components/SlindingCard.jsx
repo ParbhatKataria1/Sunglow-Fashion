@@ -73,7 +73,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
   // console.log(imageState)
 
   return (
-    <Box bg="white" p="1rem" id="main_Client"
+    <Box borderRadius={'10px'} bg="white" p="1rem" id="main_Client"
     bgPosition={"center"}
     bgRepeat={"no-repeat"}>
       <Carousel
@@ -111,9 +111,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
                     objectFit="contain"
                     width="100%"
                     transition="0.3s ease-in-out"
-                    _hover={{
-                      transform: 'scale(1.05)',
-                    }}
+                    
                     >
                     <ChakraLink textDecoration="none" _hover={{ textDecoration: 'none' }}>
                       <Box 
@@ -121,9 +119,9 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
                         transform="scale(1.0)"  
                         objectFit="contain"
                         width="100%"
-                          transition="1s ease-in-out"
+                          transition=".4s ease-in-out"
                           _hover={{
-                            transform: 'scale(2)',
+                            transform: 'scale(1.2)',
                           }}
                           >
                             <Link href='dresses' >
@@ -174,7 +172,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
              </Box>
             </Box>
             <Box>
-              <Text fontSize={"15px"}>{e.name}</Text>
+              <Text p={'10px'} fontSize={"15px"}>{e.name}</Text>
             </Box>
           </Box>
         ))}
