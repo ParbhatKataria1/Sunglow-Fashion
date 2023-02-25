@@ -5,15 +5,18 @@ import '@/styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'react-redux'
 import LandingPage from '../components/Anthropologie'
+import { SessionProvider } from "next-auth/react"
 // <Navbar/>
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, session }) {
   return(
   <ChakraProvider>
-    <Navbar/>
+    {/* <SessionProvider session={session} > */}
       <Provider store={store}>
+        <Navbar/>
         <Component {...pageProps} />
       </Provider>
     <Footer/>
+    {/* </SessionProvider> */}
   </ChakraProvider>
   )
 }
