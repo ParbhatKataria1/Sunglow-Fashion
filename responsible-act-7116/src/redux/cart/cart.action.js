@@ -6,6 +6,7 @@ export  const getCartData =  ()=>async(dispatch)=>{
     dispatch({type:types.CART_LOADING});
     try {
         let data = await fetchCartData();
+        console.log(data);
         if(data){
             dispatch({type:types.GET_CART_DATA, payload:data})
         }
@@ -17,9 +18,10 @@ export  const getCartData =  ()=>async(dispatch)=>{
 
 export  const postCartData =  (obj)=>async(dispatch)=>{
     dispatch({ type: types.CART_LOADING });
-    console.log(obj);
+ console.log(obj);
     try {
         let data = await fetchPostCartData(obj);
+       
         if(data){
             
             dispatch({type:types.POST_CART_DATA, payload:data})

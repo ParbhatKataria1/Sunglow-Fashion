@@ -10,14 +10,14 @@ import Slider from "react-slick";
 import { RecentlyViewed, youMayALsoLike } from '@/components/AnthrolivingHome'
 import SlindingCard from '@/components/SlindingCard'
 import {postCartData} from "../../redux/cart/cart.action"
-import { useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 const ItemDetails = ({ data }) => {
-    const store=useSelector((store)=> console.log(store))
-    console.log(data)
+    const dispatch = useDispatch();
+    // console.log(data)
     // const [shopButton, setShopButton] = useState(false);
     const AddToBasket = () => {
-        postCartData(data)
+        dispatch(postCartData(data))
         console.log(123);
         console.log(data);
     }
