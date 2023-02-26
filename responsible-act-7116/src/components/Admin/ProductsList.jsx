@@ -5,17 +5,11 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Button,
   Checkbox,
   Flex,
   Grid,
   GridItem,
   Heading,
-  Menu,
-  MenuButton,
-  MenuItemOption,
-  MenuList,
-  MenuOptionGroup,
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
@@ -25,22 +19,12 @@ import { productListGenerator, starGenderator } from "../../Utils/function";
 import { base_url } from "../../Utils/url";
 import ProductItem from "./ProductItem";
 
-
-/*
-http://localhost:8080/mobiles
-http://localhost:8080/tablets
-http://localhost:8080/tv
-http://localhost:8080/laptops
-http://localhost:8080/washing-machine
-http://localhost:8080/refrigerators
-*/
 const categories = [
-  { id: 1, category: "Mobiles" },
-  { id: 2, category: "Tablets" },
-  { id: 3, category: "TV" },
-  { id: 4, category: "Laptops" },
-  { id: 5, category: "Washing Mach..." },
-  { id: 6, category: "Refrigerators" },
+  { id: 1, category: "Clothing" },
+  { id: 2, category: "Shoes" },
+  { id: 3, category: "Pants" },
+  { id: 4, category: "Dresses" },
+  { id: 5, category: "Bata Shoes" },
 ];
 const starRating = [
   { id: 1,star:2 },

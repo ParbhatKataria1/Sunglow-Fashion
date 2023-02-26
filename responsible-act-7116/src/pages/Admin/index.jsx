@@ -14,8 +14,7 @@ import ProductsList from "../../Components/Admin/ProductsList";
 import EditProduct from "../../Components/Admin/EditProduct";
 import { base_url } from "../../Utils/url";
 import AddProduct from "@/components/Admin/AddProduct";
-import Piechart from "@/components/Admin/Chart";
-// import { cardsData } from "@/components/Admin/Data/Data";
+import Dashboard from "@/components/Admin/Dashboard";
 
 const url=`${base_url}/allproducts`;
 const Admin = () => {
@@ -41,61 +40,7 @@ const Admin = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Piechart/>
-            {/*<Box
-              display="flex"
-              mt={8}
-              flexDirection={["column", "row", "row"]}
-              gap="20px"
-            >
-           
-            <Box
-            w={["95%", "30%", "30%"]}
-            m="auto"
-            backgroundColor={"green"}
-            height={"200px"}
-            borderRadius="20px"
-            fontSize="25px"
-            textAlign="center"
-            display= "flex"
-            justifyContent={"center"}
-            alignItems = "center"
-            color={"white"}
-            >
-            {data.length} Products
-            </Box>
-         
-              <Box
-                w={["95%", "30%", "30%"]}
-                m="auto"
-                backgroundColor={"orange"}
-                height={"200px"}
-                borderRadius="20px"
-                fontSize="25px"
-                display= "flex"
-                justifyContent={"center"}
-                alignItems = "center"
-                textAlign="center"
-                color={"white"}
-              >
-                0 Under Review
-              </Box>
-              <Box
-                w={["95%", "30%", "30%"]}
-                m="auto"
-                backgroundColor={"tomato"}
-                height={"200px"}
-                borderRadius="20px"
-                fontSize="25px"
-                display= "flex"
-                justifyContent={"center"}
-                alignItems = "center"
-                color={"white"}
-                textAlign="center"
-              >
-                0 have not Pass Review
-              </Box>
-            </Box>*/}
+           <Dashboard/>
           </TabPanel>
           <TabPanel>
             <Heading size={"lg"} textAlign={"left"} mt={4}>

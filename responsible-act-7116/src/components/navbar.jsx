@@ -118,6 +118,7 @@ function SearchItemBox({data}){
     </>
   )
 }
+
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { data: session, status } = useSession();
