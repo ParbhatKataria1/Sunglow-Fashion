@@ -10,13 +10,13 @@ import {
   Link as ChakraLink,
   IconButton,
   useDisclosure,
-  useColorModeValue
+//   useColorModeValue
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon} from '@chakra-ui/icons';
-import { store } from '@/redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getNavItems } from '@/redux/nav/nav.action';
+// import { store } from '@/redux/store';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useEffect } from 'react';
+// import { getNavItems } from '@/redux/nav/nav.action';
 
 const ChakraLinks = ['New!', 'Furniture', 'Decor', 'Kitchen & Dining', 'Candles', 'Bedding', 'Bath', 'Outdoor', 'Stationery', 'Kids', 'Gifts', 'Sale'];
 

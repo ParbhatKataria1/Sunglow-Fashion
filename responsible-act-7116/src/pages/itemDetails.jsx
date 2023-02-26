@@ -10,6 +10,8 @@ import ImageItem from '@/components/ImageItem'
 // import SlindingCard from './Home/SlindingCard'
 import { Component } from "react";
 import Slider from "react-slick";
+import { RecentlyViewed, youMayALsoLike } from '@/components/AnthrolivingHome'
+import SlindingCard from '@/components/SlindingCard'
 
 const ItemDetails = () => {
     const [shopButton, setShopButton] = useState(false);
@@ -348,31 +350,34 @@ export class MultipleItems extends Component {
       slidesToScroll: 5
     };
     return (
-      <div>
-        <Slider {...settings}>
-          <div>
-            <ImageItem/>
-          </div>
-          <div>
-          <ImageItem/>
-          </div>
-          <div>
-          <ImageItem/>
-          </div>
-          <div>
-          <ImageItem/>
-          </div>
-          <div>
-          <ImageItem/>
-          </div>
-          <div>
-          <ImageItem/>
-          </div>
-          <div>
-          <ImageItem/>
-          </div>
-        </Slider>
-      </div>
+      <>
+      <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          px="2rem"
+          mb="0.5rem"
+        >
+          <Text fontWeight={"700"} fontSize={"22px"} >
+            You May Also Like
+          </Text>
+        </Box>
+        <SlindingCard something={youMayALsoLike} />
+      </Box>
+        <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            px="2rem"
+            mb="0.5rem"
+          >
+            <Text fontWeight={"700"} fontSize={"22px"} >
+              Recently Viewed
+            </Text>
+          </Box>
+          <SlindingCard something={RecentlyViewed} />
+        </Box>
+      </>
     );
   }
 }
