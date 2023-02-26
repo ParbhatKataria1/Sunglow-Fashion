@@ -11,6 +11,7 @@ export async function fetchCartData(){
 export async function fetchPostCartData(obj){
     try {
         let data = await axios.post(cartUrl, obj);
+        console.log(data);
         return data.data;
     } catch (error) {
         console.log('error occured in the cart redux store while posting the data')
