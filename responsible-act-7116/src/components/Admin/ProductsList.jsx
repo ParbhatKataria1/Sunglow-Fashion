@@ -51,8 +51,8 @@ const ProductsList = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log("getData",getData)
-  console.log("url",url)
+  // console.log("getData",getData)
+  // console.log("url",url)
   return (
     <Box pos={"relative"} border={"0px solid green"}>
       <Grid
@@ -152,7 +152,7 @@ const ProductsList = () => {
           <SimpleGrid columns={1} spacing="50px" border={"0px solid black"}>
             <Box mt={1}>
               {data.map((el) => {
-                console.log(el);
+                // console.log(el);
 
                 return (
                   <ProductItem

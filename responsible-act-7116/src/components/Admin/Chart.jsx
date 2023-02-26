@@ -13,14 +13,14 @@ function Piechart()
    const getdata= async()=>{
      const reqData= await fetch("https://apiserver-no4z.onrender.com/clothing");
      const resData= await reqData.json();
-     console.log(resData);
+    //  console.log(resData);
      for(let i=0; i<resData.length; i++)
      {
       getcountry.push(resData[i].title);
       getpopulation.push(resData[i].price);
      }     
-     console.log("brand",getcountry);
-console.log("rating",getpopulation);
+    //  console.log("brand",getcountry);
+// console.log("rating",getpopulation);
      setCountry(getcountry);
      setPopulation(getpopulation);
    }
