@@ -12,5 +12,7 @@ const rootReducer = combineReducers({
 	cart: cartReducer,
 });
 
+const rootReducer = combineReducers({navReducer, cartReducer});
+
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 

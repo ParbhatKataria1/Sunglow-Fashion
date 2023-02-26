@@ -46,6 +46,7 @@ import {
   VStack,
   HStack,
   Divider,
+  useToast,
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
@@ -55,39 +56,80 @@ import {
   Search2Icon
 } from '@chakra-ui/icons';
 
+import { FcGoogle } from 'react-icons/fc';
 import { BsFillCartFill } from 'react-icons/bs';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNavItems } from '@/redux/nav/nav.action';
+import { getCartData } from '@/redux/cart/cart.action';
+import { useRouter } from 'next/router';
+
+
+
+
 
 function SearchItemBox({data}){
+  const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
+  const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
+  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
-  console.log('we are in search', data)
+  // console.log('we are in search', data)
   return (
-    <Box overflow={'scroll'} w={'100%'} top='40px' p={'20px'}  h='450px' borderRadius={'8px'} zIndex={'10000'} position={'absolute'} bg='gray.100'>
+    <>
+
+    
+
+
+
+    <Box overflow={'scroll'} w={'100%'} top='40px' p={'20px'}  h='450px' borderRadius={'8px'} zIndex={'10000'} position={'absolute'}  boxShadow={'xl'}
+                bg={popoverContentBgColor}
+                rounded={'xl'}>
       {
         data.map((el)=>{
-          return <Flex alignItems={'center'} role={'group'}
+          return <Flex  alignItems={'center'} 
           display={'block'}
           p={2}
           rounded={'md'}
-          _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}><Link  href={`/dresses/${el.id}`}  key={el.id}><Text
-          transition={'all .3s ease'}
-          
-          fontWeight={500}>
-            {el.title}
-          
-        </Text></Link>
+          _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}><Link  href={`/itemDetails/${el.id}`}  key={el.id}>
+            <Flex>
+            <Text
+              transition={'all .3s ease'}fontWeight={500}>
+                {el.title}
+            </Text>
+                <Flex
+              transition={'all .3s ease'}
+              transform={'translateX(-10px)'}
+              opacity={0}
+             
+              justify={'flex-end'}
+              align={'center'}
+              flex={1}>
+              <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+            </Flex>
+
+            </Flex>
+        
+        </Link>
         </Flex> 
+        
         })
       }
     </Box>
+    </>
   )
 }
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { data: session, status } = useSession();
   const [searchBox, setSearchBox] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
+  const cartCount = useSelector(state=>state.cartReducer.cartData);
+  const temp = useSelector(state=>state.cartReducer.cartData);
+  
+  // console.log(temp)
+  const cartLength = cartCount.length;
+  // console.log(cartLength)
+
   const dispatch = useDispatch();
   const [map, setmap] = useState([]);
   let profileImage= session?.user?.image;
@@ -97,29 +139,36 @@ const Navbar = () => {
   
 
 
-  const product = useSelector(state=>state?.navdata) || [];
+  const product = useSelector(state=>state?.navReducer?.navdata) || [];
   // console.log(product)
   useEffect(()=>{
     if(product.length==0)
-    dispatch(getNavItems())
+    dispatch(getNavItems());
+    
   },[]);
 
-
-
+  useEffect(()=>{
+    if(cartCount==0){
+      dispatch(getCartData())
+    }
+  },[cartCount])
+  
+  
   function inputSearch(value){
     let temp = product.filter((el)=>{
       return el.title.toLowerCase().includes(value.toLowerCase())
     })
     if(value.trim().length==0)temp =[]
-    console.log('filter', temp);
     if(temp.length){
       setSearchBox(true);
     }
     else {
       setSearchBox(false)
     }
+    // console.log('temp', value, product)
     setmap(temp);
   }
+  // console.log('searchBox', product)
   return (
     <>
     <Box zIndex={'1000'}  width={'100%'}>
@@ -145,8 +194,9 @@ const Navbar = () => {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
           </Text>
+          <Link href='/'>
             <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' alt=""/>
-
+            </Link>
           
 
         </Flex>
@@ -160,7 +210,7 @@ const Navbar = () => {
           spacing={6}>
             position={'relative'}
               <InputGroup w='md' >
-            <Input  type='tel' placeholder='Search' onChange={(e)=>{inputSearch(e.target.value)}} />
+            <Input onFocus={()=>setIsFocus(true)} onBlur={()=>setIsFocus(false)}  type='tel' placeholder='Search' onChange={(e)=>{inputSearch(e.target.value)}} />
             <InputRightElement
             
               pointerEvents='none'
@@ -168,16 +218,24 @@ const Navbar = () => {
               children={<Search2Icon color='gray.300' />}
 
             />
-            {searchBox && <SearchItemBox  data={map} /> }
+            {searchBox && isFocus &&  <SearchItemBox  data={map} /> }
           </InputGroup> 
-          <svg fill='gray' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 20.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.304-17l-3.431 14h-2.102l2.541-11h-16.812l4.615 13h13.239l3.474-14h2.178l.494-2h-4.196z"/></svg>
+
+          {/*  ***********cart ****************** */}
+          <ToastExample cartLength={cartLength}/>
+          
           
             {
-              profileImage && <HStack w={'180px'} justifyContent='center'>
+              profileImage &&
+              <VStack position={'relative'} alignItems='end' justifyContent={'end'}>
+              <HStack w={'180px'} justifyContent='center'>
               <Image w={'30px'} borderRadius={'50px'} src={profileImage} ></Image>
               <Divider colorScheme='gray' orientation='vertical' />
               <Text fontSize={'16px'}>{profileName}</Text>
+
             </HStack>
+              <Button right={'10px'} position={'absolute'} top='30px' size='xs' colorScheme='blue' onClick={()=>signOut('google')}>SignOut</Button>
+            </VStack>
             }
           
 
@@ -231,6 +289,44 @@ const Navbar = () => {
 }
 
 
+function ToastExample({cartLength}) {
+  const toast = useToast();
+  const route = useRouter();
+  const { data: session, status } = useSession();
+  let profileImage= session?.user?.image;
+  let profileName = session?.user?.name;
+
+  function goToCart(){
+    if(!profileImage && !profileName){
+
+      return toast({
+          title: 'ERROR!!',
+          description: "You are not Signed. Please SignIn First",
+          status: 'error',
+          position:'bottom-left',
+          duration: 4000,
+          isClosable: true,
+        })
+    }
+    else {
+      route.push('./cartPage')
+    }
+  }
+  
+
+  return (
+
+    <>
+    <Box cursor={'pointer'} onClick={goToCart} position={'relative'}>
+            <Box zIndex={'10'} >
+            <svg fill='gray' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 20.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.304-17l-3.431 14h-2.102l2.541-11h-16.812l4.615 13h13.239l3.474-14h2.178l.494-2h-4.196z"/></svg></Box>
+            <Flex p={'4px'} h='15px' fontSize={'14px'}  borderRadius={'50px'} bg='red.400' color={'white'} alignItems={'center' } zIndex='0' justifyContent='center' top={'0px'} left='24px' position='absolute' >{cartLength}</Flex>
+    </Box>   
+    </>
+  )
+}
+
+
 
 const DesktopNav = ({NAV_ITEMS}) => {
   const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
@@ -238,6 +334,7 @@ const DesktopNav = ({NAV_ITEMS}) => {
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
+    // <h1>this is mee</h1>
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
@@ -286,6 +383,7 @@ const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
   const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   return (
+    // <h1>this is mee</h1>
     <Box
       role={'group'}
       display={'block'}
@@ -294,13 +392,10 @@ const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
       _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
 
 
-{/* here is the starting */}
-
 
 
 <Box>
           <Popover trigger={'hover'} placement={'bottom-start'}>
-            {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
             <PopoverTrigger>
 
             <Stack direction={'row'} align={'center'}>
@@ -326,7 +421,6 @@ const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
       </Stack>
 
             </PopoverTrigger>
-                {/* this is causing poping effect */}
             {subOption && (
               <PopoverContent
                 border={0}
@@ -337,9 +431,7 @@ const DesktopSubNav = ({ label, href, subLabel, subOption }) => {
                 minW={'sm'}>
                 <Stack>
                   {subOption.length && subOption.map((child, ind) => (
-                    // <h1>this is me</h1>
                     <DesktopSubOption key={ind} option={child} href={href} />
-                    // <DesktopSubNav key={child.label} {...child} />
                   ))}
                 </Stack>
 
@@ -383,52 +475,6 @@ const DesktopSubOption = ({ option, href }) => {
 };
 
 
-// function SubOptions({value, href}){
-//   const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
-//   const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
-//   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-//   return (
-//     <>
-//       <Box key={navItem.label}>
-//           <Popover trigger={'hover'} placement={'bottom-start'}>
-//             {/* this is not causing poping effect  this is just the option that we have created like New, Dresses*/}
-//             <PopoverTrigger>
-//               <ChakraLink
-//                 p={2}
-//                 href={navItem.href ?? '#'}
-//                 fontSize={'sm'}
-//                 fontWeight={500}
-//                 color={ChakraLinkColor}
-//                 _hover={{
-//                   textDecoration: 'none',
-//                   color: ChakraLinkHoverColor,
-//                 }}>
-//                 {navItem.label}
-//               </ChakraLink>
-//             </PopoverTrigger>
-//                 {/* this is causing poping effect */}
-//             {navItem.children && (
-//               <PopoverContent
-//                 border={0}
-//                 boxShadow={'xl'}
-//                 bg={popoverContentBgColor}
-//                 p={4}
-//                 rounded={'xl'}
-//                 minW={'sm'}>
-//                 <Stack>
-//                   {navItem.children.map((child) => (
-//                     <DesktopSubNav key={child.label} {...child} />
-//                   ))}
-//                 </Stack>
-
-//               </PopoverContent>
-
-//             )}
-//           </Popover>
-//         </Box>
-//     </>
-//   )
-// }
 
 
 
@@ -732,14 +778,6 @@ function BasicUsage() {
               Next
             </Button>
             <br />
-            <Button
-              mt='15px'
-              colorScheme='blue'
-              width={"100%"}
-              variant='outline'
-            >
-              USE MOBILE NUMBER INSTEAD
-            </Button>
           </ModalBody>
 
           <ModalFooter>
@@ -757,12 +795,17 @@ function BasicUsage() {
 
               {/* this is the google authentication */}
               <Text> Or sing up with</Text>
+              <Box textAlign={'center'}>
               <button className="btn btn-link btn-floating-mx-1"
               type='button'
                 onClick={()=>signIn('google')}
               >
-                this is me
+                <HStack>
+                <FcGoogle/>
+                <Text>Google</Text>
+                </HStack>
               </button>
+              </Box>
             </Flex>
           </ModalFooter>
         </ModalContent>
