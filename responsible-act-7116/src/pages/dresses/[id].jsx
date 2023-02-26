@@ -9,10 +9,18 @@ import { Component } from "react";
 import Slider from "react-slick";
 import { RecentlyViewed, youMayALsoLike } from '@/components/AnthrolivingHome'
 import SlindingCard from '@/components/SlindingCard'
+import {postCartData} from "../../redux/cart/cart.action"
+import { useSelector } from 'react-redux';
 
 const ItemDetails = ({ data }) => {
+    const store=useSelector((store)=> console.log(store))
     console.log(data)
-    const [shopButton, setShopButton] = useState(false);
+    // const [shopButton, setShopButton] = useState(false);
+    const AddToBasket = () => {
+        postCartData(data)
+        console.log(123);
+        console.log(data);
+    }
     return (
         <Box mb={'100px'}>
             <Heading textAlign={'center'}>FurnitureShop / All Furniture</Heading>
@@ -22,7 +30,6 @@ const ItemDetails = ({ data }) => {
 
                     {/* <Image width={400} height={400} src={`${this.image.furl}${this.image.version.v2}${this.image.burl}`}></Image> */}
                     <VerticalSwipeToSlide data={data} />
-                    {/* <ImageComponent/> */}
                     <Box mt={'30px'}>
 
                         <Text fontSize={'18px'}>Complete The Look</Text>
@@ -51,7 +58,7 @@ const ItemDetails = ({ data }) => {
                         <HStack >
                             <Text m={'10px'}>Colors Available:</Text>
 
-                            {data.color.map((el, ind) => {
+                            {data.length&&data.color.map((el, ind) => {
                                 return <Text m={'10px'} key={ind + 1}>{el.alt}</Text>
                             })}
                         </HStack>
@@ -59,7 +66,7 @@ const ItemDetails = ({ data }) => {
                             <Stack spacing={5} direction='row'>
 
 
-                                {data.color.map((el, ind) => {
+                                {data.length &&data.color.map((el, ind) => {
                                     return <Radio ml={'10px'} mb='10px' key={ind + 1} /*colorScheme={`${el.alt.toLowerCase()}.300`} bg={el.alt.toLowerCase()} value={el.alt.toLowerCase()}*/>
                                     </Radio>
 
@@ -70,7 +77,7 @@ const ItemDetails = ({ data }) => {
                             <Text m={'10px'}>Size**</Text>
                             <HStack ml={'10px'} mt={'18px'}>
 
-                                <Example value={data.size.map((el) => { return el.s })} />
+          {/* ************> change                      <Example value={data.size.map((el) => { return el.s })} /> */}
                             </HStack>
                         </Box>
                         <Box>
@@ -81,7 +88,7 @@ const ItemDetails = ({ data }) => {
                                 <option value='option3'>Option 3</option>
                             </Select>
                         </Box>
-                        <Button m={'10px'} mt={'20px'} zIndex='0' colorScheme='teal' w={'100%'}>
+                        <Button m={'10px'} mt={'20px'} zIndex='0' colorScheme='teal' w={'100%'} onClick={AddToBasket}>
                             Add To Basket
                         </Button>
                         <HStack textDecoration={'underline'} justifyContent={'space-between'} m={'10px'}>
@@ -169,12 +176,12 @@ export class VerticalSwipeToSlide extends Component {
     constructor({ data }) {
         super({ data });
         this.image = data.image
-        this.version = data.image.version
+        this.version = [data.image.version.v1, data.image.version.v2, data.image.version.v3, data.image.version.v4]
         // this.v1 = data.image.version.v1
         // this.v2 = data.image.version.v2
         // this.v3 = data.image.version.v3
         // this.v4 = data.image.version.v4
-        // console.log(`${this.version.v}+${1}`);
+        console.log(this.version[0]);
     }
     render() {
         const settings = {
@@ -200,7 +207,7 @@ export class VerticalSwipeToSlide extends Component {
                 <Slider {...settings}>
                     {
                         Array(4).fill('').map((el, ind) => {
-                            const v ='.v'+(ind + 1);
+                            const v = this.version[ind];
                             return <div w={'200px'} zIndex='100' key={el.id}>
                                 <ReactImageMagnify {...{
                                     smallImage: {
@@ -208,11 +215,11 @@ export class VerticalSwipeToSlide extends Component {
                                         width: 400,
                                         height: 600,
                                         // src:this.image.price,
-                                        src: `${this.image.furl}${this.version[v]}${this.image.burl}`
+                                        src: `${this.image.furl}${v}${this.image.burl}`
                                     },
                                     largeImage: {
                                         // src: this.image.price,
-                                        // src: `${this.image.furl}${data.image.v2}${this.image.burl}`,
+                                        src: `${this.image.furl}${v}${this.image.burl}`,
                                         width: 1200,
                                         height: 1500,
                                     },
@@ -291,63 +298,63 @@ function Example({ value }) {
 
 
 
-const data =
-{
-    "id": 1,
-    "image": {
-        "furl": "https://images.urbndata.com/is/image/Anthropologie/4130326950015_072_b",
-        "version": {
-            "v1": "",
-            "v2": "2",
-            "v3": "3",
-            "v4": "4"
-        },
-        "burl": "?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360",
-        "surl": "?$a15-pdp-detail-shot$&fit=constrain&qlt=80&wid=100"
-    },
-    "title": "By Anthropologie Strapless Mini Dress",
-    "price": "160.00",
-    "color": [
-        {
-            "colorimg": "https://images.urbndata.com/is/image/Anthropologie/4130326950015_072_s?fit=constrain&hei=56&qlt=75",
-            "alt": "YELLOW"
-        }
-    ],
-    "fit": [
-        {
-            "title": "Standard",
-            "choosed": true
-        },
-        {
-            "title": "Petite",
-            "choosed": false
-        },
-        {
-            "title": "Plus",
-            "choosed": false
-        }
-    ],
-    "size": [
-        {
-            "s": "XXS"
-        },
-        {
-            "s": "XS"
-        },
-        {
-            "s": "S"
-        },
-        {
-            "s": "M"
-        },
-        {
-            "s": "L"
-        },
-        {
-            "s": "XL"
-        }
-    ]
-}
+// const data =
+// {
+//     "id": 1,
+//     "image": {
+//         "furl": "https://images.urbndata.com/is/image/Anthropologie/4130326950015_072_b",
+//         "version": {
+//             "v1": "",
+//             "v2": "2",
+//             "v3": "3",
+//             "v4": "4"
+//         },
+//         "burl": "?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360",
+//         "surl": "?$a15-pdp-detail-shot$&fit=constrain&qlt=80&wid=100"
+//     },
+//     "title": "By Anthropologie Strapless Mini Dress",
+//     "price": "160.00",
+//     "color": [
+//         {
+//             "colorimg": "https://images.urbndata.com/is/image/Anthropologie/4130326950015_072_s?fit=constrain&hei=56&qlt=75",
+//             "alt": "YELLOW"
+//         }
+//     ],
+//     "fit": [
+//         {
+//             "title": "Standard",
+//             "choosed": true
+//         },
+//         {
+//             "title": "Petite",
+//             "choosed": false
+//         },
+//         {
+//             "title": "Plus",
+//             "choosed": false
+//         }
+//     ],
+//     "size": [
+//         {
+//             "s": "XXS"
+//         },
+//         {
+//             "s": "XS"
+//         },
+//         {
+//             "s": "S"
+//         },
+//         {
+//             "s": "M"
+//         },
+//         {
+//             "s": "L"
+//         },
+//         {
+//             "s": "XL"
+//         }
+//     ]
+// }
 
 
 export class MultipleItems extends Component {
@@ -393,7 +400,7 @@ export class MultipleItems extends Component {
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths() {
-    const res = await fetch("https://apiserver-no4z.onrender.com/products")
+    const res = await fetch("https://apiserver-no4z.onrender.com/dresses")
     const data = await res.json()
     console.log(data)
 
@@ -405,12 +412,12 @@ export async function getStaticPaths() {
         fallback: false, // can also be true or 'blocking'
     }
 }
-
+// * ************> change     
 // // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
     console.log(context)
     const { params: { id } } = context;
-    const res = await fetch(`https://apiserver-no4z.onrender.com/products/${id}`);
+    const res = await fetch(`https://apiserver-no4z.onrender.com/dresses/${id}`);
     const data = await res.json();
     return {
         // Passed to the page component as props
