@@ -1,9 +1,16 @@
-const { combineReducers, applyMiddleware, legacy_createStore } = require("redux");
+const {
+	combineReducers,
+	applyMiddleware,
+	legacy_createStore,
+} = require("redux");
 import thunk from "redux-thunk";
 import { reducer as navReducer } from "./nav/nav.reducer";
 import { reducer as cartReducer } from "./cart/cart.reducer";
 
-
+const rootReducer = combineReducers({
+	nav: navReducer,
+	cart: cartReducer,
+});
 
 const rootReducer = combineReducers({navReducer, cartReducer});
 
