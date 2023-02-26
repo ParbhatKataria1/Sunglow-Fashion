@@ -220,7 +220,6 @@ export default function LandingPage() {
     // }, [])
   return (
     <Box bg={"#f4f4f4"}>
-    <NavbarTwo/>
     <Grid 
         gap={7} 
         gridTemplateColumns={"repeat(5,1fr)"}
@@ -625,11 +624,12 @@ export default function LandingPage() {
 
   <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))' width={"90%"} margin={"auto"} marginTop={"20px"}>
     
-    <Box maxW='sm'>
-    <Link href='/dresses'>
-            <Image src='https://images.ctfassets.net/5de70he6op10/1h9gkbrJB6rfKMEsrQsrlE/75fdaefe631d2d0e38d24b5e5d68ec10/473929238-ls_customerfave_a.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
-            width={357} height={200} /></Link>
-            <Stack mt='6' spacing='3'>
+    <Box maxW='sm'  >
+            <Link href='/dresses'>
+                <Image src='https://images.ctfassets.net/5de70he6op10/1h9gkbrJB6rfKMEsrQsrlE/75fdaefe631d2d0e38d24b5e5d68ec10/473929238-ls_customerfave_a.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
+                width={357} height={200} />
+            </Link>
+            <Stack h='250px' mb={'50px'}  justify={'space-between'} mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
             </Text>
@@ -663,7 +663,7 @@ export default function LandingPage() {
     <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/2bvup8dYlhV23fJF8JWtBi/f007eb7c84134bfe87c3dd3669ffd06f/473929242-ls_customerfave_b.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={1357} height={1200} /></Link>
-            <Stack mt='6' spacing='3'>
+            <Stack h='250px' mb={'50px'} justify={'space-between'}  mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
             </Text>
@@ -697,7 +697,7 @@ export default function LandingPage() {
     <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/7e6CTKkxyvEGN65qcfAD6e/833ca12cd46657912e24e81a42fc086a/473929246-ls_customerfave_c.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={1357} height={1200} /></Link>
-            <Stack mt='6' spacing='3'>
+            <Stack h='250px' mb={'50px'} justify={'space-between'} mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
             </Text>
@@ -731,7 +731,7 @@ export default function LandingPage() {
     <Link href='/dresses'>
             <Image src='https://images.ctfassets.net/5de70he6op10/IRIRM5boIBRZTPtM9RGo2/d5a954acdea330f877f48ee00b9dd9e7/473929254-ls_customerfave_d.jpg?w=630&q=80&fm=webp' alt='Dan Abramov'
             width={1357} height={1200} /></Link>
-            <Stack mt='6' spacing='3'>
+            <Stack h='250px' justify={'space-between'} mt='6' spacing='3'>
             <Text pt='2' fontSize='sm' fontFamily={"times romer"}>
                 CUSTOMER FAVORITE
             </Text>
@@ -759,9 +759,9 @@ export default function LandingPage() {
             </Stack>
         
     </Box>
-  </SimpleGrid>
+  </SimpleGrid >
 
-  <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
+  <Box  fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
         <Box
           display="flex"
           justifyContent="space-between"
@@ -776,6 +776,7 @@ export default function LandingPage() {
     </Box>
     <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
     <Box
+    mt={'50px'}
       display="flex"
       justifyContent="space-between"
       px="2rem"
