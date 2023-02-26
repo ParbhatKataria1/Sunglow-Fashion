@@ -33,6 +33,6 @@ export function reducer (state=init, action){
             return {...state, loading:true, error:false, cartData:newdata2}
     
         default:
-            state;
+            return state;
     }
 }

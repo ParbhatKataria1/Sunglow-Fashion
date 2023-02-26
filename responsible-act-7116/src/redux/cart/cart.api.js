@@ -1,8 +1,8 @@
-
+import axios from 'axios'
 const cartUrl  = 'https://apiserver-no4z.onrender.com/cart';
 export async function fetchCartData(){
     try {
-        let data = await axios.get(cartUrl);
+        let data = await axios.get('https://apiserver-no4z.onrender.com/cart');
         return data.data;
     } catch (error) {
         console.log('error occured in the cart redux store while getting the data')
