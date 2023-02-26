@@ -19,6 +19,6 @@ export function reducer (state = initStata, action){
             return {...state, error:true}
     
         default:
-            state;
+            return state;
     }
 }
