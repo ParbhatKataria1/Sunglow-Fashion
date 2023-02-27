@@ -3,7 +3,7 @@
 ![image](https://www.linkpicture.com/q/logo_684.png)
 
 # Overview
- Sunglow Fashion is an e-commerce platform to buy clothes,beauty & Wellness,fashion,furniture jewellery,etc.
+ Sunglow Fashion is an e-commerce platform to buy clothes,beauty & Wellness,fashion,furniture and jewellery,etc.
  
 # Features
 <ul><li>Browsing and Buying different Products</li>
