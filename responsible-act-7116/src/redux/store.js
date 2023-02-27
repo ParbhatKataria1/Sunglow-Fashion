@@ -7,10 +7,10 @@ import thunk from "redux-thunk";
 import { reducer as navReducer } from "./nav/nav.reducer";
 import { reducer as cartReducer } from "./cart/cart.reducer";
 
-const rootReducer = combineReducers({
-	nav: navReducer,
-	cart: cartReducer,
-});
+// const rootReducer = combineReducers({
+// 	nav: navReducer,
+// 	cart: cartReducer,
+// });
 
 const rootReducer = combineReducers({navReducer, cartReducer});
 

@@ -2,7 +2,7 @@ import { Box, Flex, Image, Select, TagLabel, Text } from '@chakra-ui/react'
 import React from 'react'
 
 const CartItem = ({cartItem}) => {
-console.log(cartItem);
+// console.log(cartItem);
     return (
         <Box mb={'10px'}>
             <Flex justifyContent={'space-between'}
