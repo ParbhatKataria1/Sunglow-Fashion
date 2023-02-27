@@ -196,7 +196,7 @@ const Navbar = () => {
             color={useColorModeValue('gray.800', 'white')}>
           </Text>
           <Link href='/'>
-            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' alt=""/>
+              <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='https://www.linkpicture.com/q/logo_684.png' alt=""/>
             </Link>
           
 
