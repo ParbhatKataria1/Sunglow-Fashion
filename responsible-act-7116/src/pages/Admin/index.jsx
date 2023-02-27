@@ -10,8 +10,8 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import ProductsList from "../../Components/Admin/ProductsList";
-import EditProduct from "../../Components/Admin/EditProduct";
+import ProductsList from "../../components/Admin/ProductsList";
+import EditProduct from "../../components/Admin/EditProduct";
 import { base_url } from "../../Utils/url";
 import AddProduct from "@/components/Admin/AddProduct";
 import Dashboard from "@/components/Admin/Dashboard";

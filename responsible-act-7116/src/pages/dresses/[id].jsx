@@ -1,16 +1,17 @@
 import { Box, Button, Center, Container, Divider, Flex, Grid, GridItem, Heading, HStack, ListItem, Radio, RadioGroup, Select, Stack, Text, UnorderedList, useRadio, useRadioGroup, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import Link from 'next/link'
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ImageItem from '@/components/ImageItem'
+import ImageItem from '@/components/imageItem'
 import { Component } from "react";
 import Slider from "react-slick";
 import { RecentlyViewed, youMayALsoLike } from '@/components/AnthrolivingHome'
 import SlindingCard from '@/components/SlindingCard'
 import {postCartData} from "../../redux/cart/cart.action"
 import { useDispatch} from 'react-redux';
+import Image from 'next/image';
 
 
 const ItemDetails = ({ data }) => {
@@ -32,7 +33,6 @@ const ItemDetails = ({ data }) => {
             duration: 4000,
             isClosable: true,
         })
-
     }
     return (
         <Box mb={'100px'}>
@@ -194,7 +194,7 @@ export class VerticalSwipeToSlide extends Component {
         // this.v2 = data.image.version.v2
         // this.v3 = data.image.version.v3
         // this.v4 = data.image.version.v4
-        console.log(this.version[0]);
+        // console.log(this.version[0]);
     }
     render() {
         const settings = {
@@ -222,7 +222,8 @@ export class VerticalSwipeToSlide extends Component {
                         Array(4).fill('').map((el, ind) => {
                             const v = this.version[ind];
                             return <div w={'200px'} zIndex='100' key={el.id}>
-                                <ReactImageMagnify {...{
+                            <Box width={"40%"}  marginLeft={"280px"} height={"300px"}><Image  src={`${this.image.furl}${v}${this.image.burl}`}  width={200} height={200}/></Box>
+                               {/* <ReactImageMagnify {...{
                                     smallImage: {
                                         alt: 'Wristwatch by Ted Baker London',
                                         width: 400,
@@ -236,7 +237,7 @@ export class VerticalSwipeToSlide extends Component {
                                         width: 1200,
                                         height: 1500,
                                     },
-                                }} />
+                                }} />*/}
                             </div>
                         })
                     }
@@ -428,7 +429,7 @@ export async function getStaticPaths() {
 // * ************> change     
 // // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-    console.log(context)
+    // console.log(context)
     const { params: { id } } = context;
     const res = await fetch(`https://apiserver-no4z.onrender.com/dresses/${id}`);
     const data = await res.json();

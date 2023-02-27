@@ -141,12 +141,12 @@ function RecentOrders() {
     setLoading(true);
     getAllProducts().then((res) => {
        data.push(res);
-      console.log(res)
+      // console.log(res)
       setDataSource(res);
       setLoading(false);
     });
   }, []);
-  console.log("data",dataSource)
+  // console.log("data",dataSource)
   return (
     <>
       <Typography.Text>Recent Orders</Typography.Text>
