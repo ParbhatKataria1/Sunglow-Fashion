@@ -1,4 +1,4 @@
-import { Box, Button, Center, Container, Divider, Flex, Grid, GridItem, Heading, HStack, ListItem, Radio, RadioGroup, Select, Stack, Text, UnorderedList, useRadio, useRadioGroup } from '@chakra-ui/react'
+import { Box, Button, Center, Container, Divider, Flex, Grid, GridItem, Heading, HStack, ListItem, Radio, RadioGroup, Select, Stack, Text, UnorderedList, useRadio, useRadioGroup, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import ReactImageMagnify from 'react-image-magnify';
@@ -12,18 +12,31 @@ import SlindingCard from '@/components/SlindingCard'
 import {postCartData} from "../../redux/cart/cart.action"
 import { useDispatch} from 'react-redux';
 
+
 const ItemDetails = ({ data }) => {
     const dispatch = useDispatch();
+    const toast = useToast()
+
     // console.log(data)
     // const [shopButton, setShopButton] = useState(false);
     const AddToBasket = () => {
         dispatch(postCartData(data))
-        console.log(123);
-        console.log(data);
+        // console.log(123);
+        // console.log(data);
+            
+        toast({
+            position: 'top',
+            title: 'Cart',
+            description: "Item Successfully Added to the Cart.",
+            status: 'success',
+            duration: 4000,
+            isClosable: true,
+        })
+
     }
     return (
         <Box mb={'100px'}>
-            <Heading textAlign={'center'}>FurnitureShop / All Furniture</Heading>
+            <Heading textAlign={'center'}> Product Details </Heading>
             <Flex w={'90%'} justifyContent='space-around' m={'auto'} mt={'40px'}>
                 <Box width={'50%'} justifyContent='center' >
 

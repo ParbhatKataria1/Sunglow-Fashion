@@ -10,6 +10,7 @@ import {
     Input,
     Text, Image, Accordion, Heading
 } from '@chakra-ui/react'
+import Link from 'next/link';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from './cartItem';
@@ -43,13 +44,16 @@ const PaymentOption = () => {
                         <Text>$492.2</Text>
                     </Flex>
                     <Divider mb={'12px'} />
-                    <Button borderRadius='0px'
+                    <Link href={'/shipping'}><Button borderRadius='0px'
                         fontWeight='normal'
                         mb={'20px'}
                         bgColor={'rgb(75,86,102)'}
                         color='white'
                         border="1px solid rgb(75,86,102)"
-                        _hover={{ bg: 'white', border: "1px solid rgb(75,86,102)", color: 'rgb(75,86,102)' }}>PROCEED TO CHECKOUT </Button>
+                        _hover={{
+                            bg: 'white', border: "1px solid rgb(75,86,102)",
+                            color: 'rgb(75,86,102)'
+                        }}>PROCEED TO CHECKOUT </Button></Link>
                     <Button
                         borderRadius='5px'
                         fontWeight='normal'
@@ -98,7 +102,7 @@ const PaymentOption = () => {
 
 const Cart = () => {
     const dispatch = useDispatch()
-    const cartData = useSelector((store) => store.cart)
+    const cartData = useSelector((store) => store.cartReducer)
     // console.log(cartData.cartData);
 
     useEffect(() => {
