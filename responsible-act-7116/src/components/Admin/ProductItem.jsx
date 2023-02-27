@@ -26,19 +26,23 @@ import axios from "axios";
 import { convertor } from "../../Utils/function"
 import EditProduct from "./EditProduct";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
+// ---------------
 
+// ------------------
 const ProductItem = ({
+  el,
   title,
   price,
   id,
-  img, url,getData}) => {
-
+  image, url,getData}) => {
+    const router = useRouter()
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const editProduct=(id)=>{
-    // console.log(id)
+    console.log(id)
     onOpen()
   }
 
@@ -70,34 +74,17 @@ const ProductItem = ({
       )
       .then(() => getData());
   };
-  
+  console.log("el12",el)
 
   return (
     <Box border={'0px solid red'} width={'100%'}>
-      <Flex
-        w="100%"
-        justify="space-between"
-        pt="20px"
-        pb={"20px"}
-        gap={"20px"}
-        borderBottom="1px solid gainsboro"
-        alignItems={"center"}
-      >
-        <Image src={img} width={100} height={200} alt="thumb"/>
-        <Box w="50%" textAlign={"start"}>
-          <Text fontSize={"16px"}>
-            <Text as="span" fontSize={"16px"} fontWeight={"bold"}>
-              Price :{" "}
-            </Text>
-            {convertor(price)}
-          </Text>
-          <Text noOfLines={1} fontSize={"16px"} mb="20px">
-            <Text as="span" fontSize={"16px"} fontWeight={"bold"}>
-              Product Name :{" "}
-            </Text>
-            {title}
-          </Text>
-        </Box>
+    <Flex flexDir={'column'} key={  id} position={"relative"} onClick={() => router.push(`/dresses/${  id}`)}>
+    {/* <Flex flexDir={'column'}> */}
+    <Image id='hoverimg' onMouseOver={e => e.target.srcset = `${image.furl + image.version.v3 +   image.burl}`} onMouseOut={e => e.target.srcset = `${  image.furl +   image.version.v1 +   image.burl}`} src={  image.furl +   image.version.v1 +   image.burl} style={{ cursor: 'pointer', }} width={450} height={300} alt={'img1'} />
+    <Text fontSize={'small'} >{  title}</Text>
+    {/* </Flex> */}
+    <Text>${  price}</Text>
+  </Flex>
         <Box display={"flex"} gap={3}>
           <Tooltip label="Delete">
             <Circle
@@ -150,7 +137,6 @@ const ProductItem = ({
                 </ModalContent>
               </Modal>
         </Box>
-      </Flex>
     </Box>
   );
 };
