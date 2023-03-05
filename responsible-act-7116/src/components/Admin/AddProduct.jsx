@@ -16,6 +16,9 @@ import {
 
   import React, { useState } from "react";
 import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
+import { useDispatch } from 'react-redux';
+import { postNavItems } from '@/redux/nav/nav.action';
+import { postALlProductData } from '@/redux/allProduct/allProduct.action';
 
 
 const intitialData = {
@@ -30,6 +33,7 @@ const intitialData = {
   export default function AddProduct() {
     const [data, setData] = useState(intitialData);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
   const toast = useToast();
   const {
     name,
@@ -65,24 +69,18 @@ const intitialData = {
         </Flex>
       ),
     });
-    await fetch("http://localhost:8080/testing", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(setData(intitialData));
+    dispatch(postALlProductData(data)).then((res)=>{setData(intitialData);console.log(res)});
     // navigate("/")
   };
     return (
       <Flex
         align={'center'}
         justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')} >
+        bg={useColorModeValue('white', 'white')} >
         <Stack spacing={8} mx={'100px'} w={'600px'} py={3} px={6}>
           <Box
             rounded={'lg'}
-            bg={useColorModeValue('orange.300', 'gray.700')}
+            bg={useColorModeValue('gray.100', 'gray.700')}
             boxShadow={'lg'} 
             width={"90%"}
             p={30}>
@@ -134,6 +132,7 @@ const intitialData = {
             w={"440px"}
             mb={2}
             mt={8}
+            onClick={handleSubmit}
             colorscheme="green"
             type="submit"
             isLoading={loading}bg={'blue.400'}

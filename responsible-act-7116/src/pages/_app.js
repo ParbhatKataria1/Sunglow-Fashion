@@ -1,4 +1,4 @@
-import Footer from '@/components/Footer'
+import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import { store } from '@/redux/store'
 import '@/styles/globals.css'

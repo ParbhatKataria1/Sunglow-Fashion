@@ -32,7 +32,7 @@ export async function fetchUpdateCartData(id , obj){
 
 export async function fetchDeleteCartData(id){
     try {
-        let data = await axios.delete(`${cartUrl}/${id}`, obj);
+        let data = await axios.delete(`${cartUrl}/${id}`);
         return data.data;
     } catch (error) {
         console.log('error occured in the cart redux store while deleting the data')

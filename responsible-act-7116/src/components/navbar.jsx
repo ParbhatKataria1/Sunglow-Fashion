@@ -72,30 +72,32 @@ function SearchItemBox({data}){
   const ChakraLinkColor = useColorModeValue('gray.600', 'gray.200');
   const ChakraLinkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-
+  // console.log(data)
+  const router = useRouter();
   // console.log('we are in search', data)
+  // console.log(242)
   return (
     <>
-
-    
-
-
-
-    <Box overflow={'scroll'} w={'100%'} top='40px' p={'20px'}  h='450px' borderRadius={'8px'} zIndex={'10000'} position={'absolute'}  boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                rounded={'xl'}>
+    <Box zIndex='10' onClick={()=>console.log('gdagdasgdsagdsa')} overflow={'scroll'} w={'100%'} top='40px' p={'20px'}  h='450px' borderRadius={'8px'}  position={'absolute'}  boxShadow={'xl'}
+        bg={popoverContentBgColor}
+        rounded={'xl'}>
       {
         data.map((el)=>{
-          return <Flex  alignItems={'center'} 
+          return <Flex key={el.id}  alignItems={'center'} 
           display={'block'}
           p={2}
           rounded={'md'}
-          _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}  direction={'row'} align={'center'}><Link  href={`/itemDetails/${el.id}`}  key={el.id}>
+           direction={'row'} align={'center'}>
+            
             <Flex>
+            <Link  href={`/clothing`}>
             <Text
               transition={'all .3s ease'}fontWeight={500}>
                 {el.title}
             </Text>
+            </Link>
+
+
                 <Flex
               transition={'all .3s ease'}
               transform={'translateX(-10px)'}
@@ -109,7 +111,6 @@ function SearchItemBox({data}){
 
             </Flex>
         
-        </Link>
         </Flex> 
         
         })
@@ -123,7 +124,7 @@ const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { data: session, status } = useSession();
   const [searchBox, setSearchBox] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+  // const [isFocus, setIsFocus] = useState(false);
   const cartCount = useSelector(state=>state.cartReducer.cartData);
   const temp = useSelector(state=>state.cartReducer.cartData);
   
@@ -172,7 +173,7 @@ const Navbar = () => {
   // console.log('searchBox', product)
   return (
     <>
-    <Box zIndex={'1000'}  width={'100%'}>
+    <Box zIndex={'1000'} h={'230px'}  width={'100%'}>
     
       <Box >
       <SimpleSlider/>
@@ -196,7 +197,7 @@ const Navbar = () => {
             color={useColorModeValue('gray.800', 'white')}>
           </Text>
           <Link href='/'>
-            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='logo.png' alt=""/>
+            <Image w={'140px'} h='100px' objectFit={'cover'} layout='fill' src='https://www.linkpicture.com/q/logo_684.png' alt=""/>
             </Link>
           
 
@@ -211,15 +212,14 @@ const Navbar = () => {
           spacing={6}>
             position={'relative'}
               <InputGroup w='md' >
-            <Input onFocus={()=>setIsFocus(true)} onBlur={()=>setIsFocus(false)}  type='tel' placeholder='Search' onChange={(e)=>{inputSearch(e.target.value)}} />
+            <Input type='tel' placeholder='Search' onChange={(e)=>{inputSearch(e.target.value)}} />
             <InputRightElement
             
               pointerEvents='none'
 
-              children={<Search2Icon color='gray.300' />}
 
             />
-            {searchBox && isFocus &&  <SearchItemBox  data={map} /> }
+            {searchBox &&  <SearchItemBox  data={map} /> }
           </InputGroup> 
 
           {/*  ***********cart ****************** */}
@@ -252,8 +252,12 @@ const Navbar = () => {
             <BasicUsage/>
           </Button>
           }
-          
-          
+          {
+            profileImage && 
+          <Link href='/admin'>
+          <Button >Admin</Button>
+          </Link>
+          }
         </Stack>
       </Flex>
 
@@ -310,7 +314,7 @@ function ToastExample({cartLength}) {
         })
     }
     else {
-      route.push('./cartPage')
+      route.push('/cartpage')
     }
   }
   
@@ -483,13 +487,13 @@ const DesktopSubOption = ({ option, href }) => {
 
 const NAV_ITEMS1 = [
   {
-    label: 'New!',
+    label: 'New!/Clothing',
     children: [
       {
         label: 'Shop by Category',
         subLabel: 'Accessories, Beauty & Wellness, Clothing',
         subOption:[
-          'Accessories,Beauty & Wellness','Clothing','Dresses','Home & Furniture','Jewelry','Petites',
+          'Accessories,Beauty & Wellness','Clothing'
         ],
         href: '/clothing',
       },
@@ -530,117 +534,37 @@ const NAV_ITEMS1 = [
           'Trending: Tulle',
           'Little Black Dresses'
         ],
-        href: 'dresses',
+        href: '/dresses',
       },
     ],
   },
   {
     label: 'Shoes',
-    href: '#',
-  },
-  {
-    label: 'Accessories',
-    href: '#',
-  },
-  {
-    label: 'Weddings',
-    href: '#',
-  },
-  {
-    label: 'Home & Furniture  ',
-    href: '#',
-  },
-  {
-    label: 'Beauty & Wellness',
-    href: '#',
-  },
-];
-const NAV_ITEMS2 = [
-  {
-    label: 'New!',
     children: [
       {
         label: 'Shop by Category',
-        subLabel: 'Shop All New!, Bath, Bedding, Candles',
+        subLabel: 'Shop All Shoes, New! Top Rated Dresses',
         subOption:[
-          'Shop All New!',
-          'Bath',
-          'Bedding',
-          'Candles',
-          'Décor',
+          'Trending: Tulle',
+          'Little Black Shoes'
         ],
-        href: '#',
+        href: '/shoes',
       },
       {
-        label: 'Furniture',
-        subLabel: 'Easter Gifting & Entertaining, Spring 2023:Sculpture + Shape',
+        label: 'Featured Shops',
+        subLabel: 'Bold & Bright Shoes, Shirt Dresses',
         subOption:[
-          'Easter Gifting & Entertaining',
-          'Spring 2023: Sculpture + Shape',
-          'Spring 2023: Color + Character',
-          'Spring 2023: Pattern + Texture',
+          'Bold & Bright Shoes',
+          'Trending: Tulle',
+          'Little Black Shoes'
         ],
-        href: '#',
+        href: '/shoes',
       },
     ],
-  },
-  {
-    label: 'Furniture',
-    children: [
-      {
-        label: 'Shop by Category',
-        subLabel: 'Explore All Furniture, Shop All Furniture, Chairs',
-        subOption:[
-          'Explore All Furniture',
-          'Shop All Furniture',
-          'Chairs',
-          'Storage Furniture & Consoles'
-        ],
-        href: '#',
-      },
-      {
-        label: 'Decor',
-        subLabel: 'Living Room, Bedroom, Kitchen, Dining Room',
-        subOption:[
-          'Living Room',
-          'Bedroom',
-          'Kitchen & Dining Room',
-          'Modular Seating',
-          'Seating Collections',
-        ],
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Kitchen & Dining',
-    href: '#',
-  },
-  {
-    label: 'Candles',
-    href: '#',
-  },
-  {
-    label: 'Bedding',
-    href: '#',
-  },
-  {
-    label: 'Bath',
-    href: '#',
-  },
-  {
-    label: 'Outdoor',
-    href: '#',
-  },
-  {
-    label: 'Kids',
-    href: '#',
-  },
-  {
-    label: 'Gifts',
-    href: '#',
-  },
+    href: '/shoes',
+  }
 ];
+const NAV_ITEMS2 = [];
 
 
 function SampleNextArrow(props) {
@@ -788,13 +712,12 @@ function BasicUsage() {
                 Sign Up
               </Text>
               <Text fontSize={"11px"} mt='9px'>
-                Welcome! It's quick and easy to set up an account
+                Welcome! It&apost;s quick and easy to set up an account
               </Text>
               <Button mt='15px' variant='outline'>
                 CREATE AN ACCOUNT
               </Button>
 
-              {/* this is the google authentication */}
               <Text> Or sing up with</Text>
               <Box textAlign={'center'}>
               <button className="btn btn-link btn-floating-mx-1"

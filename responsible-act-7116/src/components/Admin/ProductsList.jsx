@@ -1,18 +1,28 @@
+import { getAllProductData } from "@/redux/allProduct/allProduct.action";
 import {
   Box,
+  Button,
   Flex,
   Grid,
   GridItem,
   Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { productListGenerator } from "../../Utils/function";
-import { base_url } from "../../Utils/url";
-import Accordion1 from "../Accordion1";
-import ProductItem from "./ProductItem";
+import { useDispatch, useSelector } from "react-redux";
+import { productListGenerator } from "../../utils/function";
+import { base_url } from "../../utils/url";
+import Accordion1 from "../accordion1";
+import ProductItem from "./productItem";
 
 // const categories = [
 //   { id: 1, category: "Mobiles" },
@@ -33,22 +43,54 @@ import ProductItem from "./ProductItem";
 const url = `${base_url}/allproduct`;
 
 const ProductsList = () => {
-  const [data, setData] = useState([]);
+  let temp = useSelector((state)=>state.productReducer);
+  temp = temp.allProductData;
+  const [data, setData] = useState([...temp]);
+  console.log('temp', data, temp);
+  
   const [productList, setProductList] = useState([]);
-  const getData = async () => {
-    axios
-      .get(`${url}`)
-      .then((res) => {
-        setData(res.data);
-        setProductList(productListGenerator(res.data));
-      })
-      .catch((err) => console.log(err));
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-  console.log("getData", getData);
-  console.log("url", url);
+  const dispatch = useDispatch();
+
+useEffect(()=>{
+  if(data.length==0){
+    dispatch(getAllProductData()).then((res)=>{
+      setData([...res])
+    })
+  }
+},[])
+
+
+
+
+  // const getData = async () => {
+  //   axios
+  //     .get(`${url}`)
+  //     .then((res) => {
+  //       setData(res.data);
+  //       setProductList(productListGenerator(res.data));
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  const handleChange=(e)=>{
+    let temp = [...data];
+    if(e.target.value==='lth'){
+      setData(temp.sort((a,b)=>(parseInt(a.price))-parseInt(b.price)))
+      console.log('sorting')
+    }else if(e.target.value==='htl'){
+      setData(temp.sort((a,b)=>(+b.price)-(+a.price)))
+    }
+    console.log(data)
+  }
+
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
+
+  // console.log("getData", getData);
+  // console.log("url", url);
   return (
     <Box pos={"relative"} border={"0px solid green"} marginLeft={"-90px"}>
       <Flex gap={"10px"} justifyContent={"center"} textAlign={"center"}>
@@ -125,7 +167,7 @@ const ProductsList = () => {
           FORMAL DRESSES
         </Box>
       </Flex>
-      <Flex w={"98%"} m={"20px 0px 5px 150px"} justifyContent={"space-between"}>
+      <Flex w={"100%"} p='20px' m={"20px 0px 5px 150px"} justifyContent={"space-between"}>
         <Heading
           fontSize={"xl"}
           display={"flex"}
@@ -140,92 +182,40 @@ const ProductsList = () => {
         </Heading>
         <Flex alignItems={"center"} gap={"7px"}>
           <Text>Sort:</Text>
-          <Select placeholder="Featured">
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest</option>
-            <option>Best Selling</option>
-            <option>Ratings: High to Low</option>
-          </Select>
+          <Select placeholder='Featured' onChange={(e)=>handleChange(e)} >
+                            <option value={'lth'}>Price: Low to High</option>
+                            <option value={'htl'}>Price: High to Low</option>
+                        </Select>
         </Flex>
       </Flex>
       <Flex
-        w={"98%"}
+        w={"100%"}
         m={"auto"}
         mt={"0px"}
         justifyContent={"space-between"}
         fontSize={"15px"}
       >
-        <Flex flexDir={"column"} w={"55%"} mt={"-50px"} fontSize={"10px"}>
-          <Text fontSize={"lg"} mb={"10px"} borderBottom={"1px solid grey"}>
-            Browse by:
-          </Text>
-          <Flex flexDir={"column"} mb={"40px"} fontSize={"13px"}>
-            <Text mb={"10px"}>Cocktail & Party Dresses</Text>
-            <Text  mb={"10px"}>
-              Lounge & Casual Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Little Black Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Little White Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Maxi Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Midi Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Mini & Tunic Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Jumpsuits
-            </Text>
-            <Flex flexDir={"column"} alignItems={"flex-start"} pl={"20px"}>
-              <Text  mb={"10px"}>
-                Black Tie Wedding
-              </Text>
-              <Text  mb={"10px"}>
-                Cocktail Wedding
-              </Text>
-              <Text  mb={"10px"}>
-                Casual Wedding
-              </Text>
-              <Text  mb={"10px"}>
-                Beach Wedding
-              </Text>
-            </Flex>
-            <Text  mb={"10px"}>
-                      </Text>
-            <Text  mb={"10px"}>
-              Petite Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Plus Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Bridesmaid Dresses
-            </Text>
-            <Text  mb={"10px"}>
-              Wedding Dresses
-            </Text>
-          </Flex>
-          <Flex flexDir={"column"}>
-            <Text fontSize={"xx-small"} mb={"10px"}>
-              Filter by:
-            </Text>
-            <Flex flexDir={"column"}>
-              <Accordion1 data={data} setData={setData} />
-            </Flex>
-          </Flex>
-        </Flex>
+
+<Flex flexDir={'column'} w={'35%'} mt={'-60px'}>
+                  <Text fontSize={'small'} mb={'10px'} borderBottom={'1px solid grey'}>Browse by:</Text>
+                  
+                  <Flex flexDir={'column'}>
+                  <Text fontSize={'sm'} mb={'10px'}>Filter by:</Text>
+                  <Flex flexDir={'column'}>
+                      <Accordion1 data={data} setData={setData}/>
+                  </Flex>
+                  </Flex>
+              </Flex>
+
+
+
+
+        
 
         <GridItem p={{ base: 1, sm: 1, md: 1 }}>
           <Flex justifyContent={"flex-end"} mb={59}></Flex>
           <Grid
-            w={"95%"}
+            w={"100%"}
             margin={"auto"}
             gridTemplateColumns={"repeat(4,1fr)"}
             gap={"5px"}
@@ -249,3 +239,4 @@ const ProductsList = () => {
 };
 
 export default ProductsList;
+

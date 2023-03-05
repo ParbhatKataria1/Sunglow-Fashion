@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Accordion,
     AccordionItem,
@@ -16,23 +16,79 @@ import {
     Input,
     Text,Radio, RadioGroup, Stack, Checkbox, Image,
   } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
+
+  let userDummy = {
+    firstname:'',
+    lastname:"",
+    country:"",
+    street_address:"",
+    address:"",
+    city:"",
+    postCode:"",
+    mobile:"",
+    mode:"",
+}
 
 const PaymentOption = () => {
     const [card, setcard] = useState(false);
     const [cod, setcod] = useState(false);
+    const [orderData, setorderdata] = useState({});
+    const [cardDetails, setCardDetails] = useState({});
+    const router = useRouter();
+    let [cardDetail, setcarddetail] = useState({
+        cardnumber:'',
+        cvv:''
+    })
+
+    function changeTheData(key, value){
+        let temp = {
+          ...shipData,
+          [key]:value
+        }
+        setCardDetails(temp);
+      }
+
+      function handleSubmit(){
+        let temp = false;
+        console.log(cardDetail)
+        for(let key in cardDetail){
+            if(cardDetail[key].trim().length==0){
+                temp = true;
+                break;
+            }
+        }
+        if(temp){
+            alert('please enter the card details')
+        }
+        else {
+
+            router.push('/successpage')
+        }
+        console.log('1', cardDetail)
+      }
+
+
+    useEffect(()=>{
+        let temp1 = JSON.parse(sessionStorage.getItem('order-data'));
+        setorderdata(temp1);
+    },[])
+    const {subtotal, tax, totalPrice} = orderData || {};
+    
+    
   return (
     <Box pb={'80px'} pt={'20px'} w='90%' m='auto'>
           <Breadcrumb  mb={'30px'}>
             <BreadcrumbItem>
-            <BreadcrumbLink href='#'>Ship or Pick Up</BreadcrumbLink>
+            <BreadcrumbLink href='/shipping'>Ship or Pick Up</BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem>
-            <BreadcrumbLink href='#'>Payment</BreadcrumbLink>
+            <BreadcrumbLink href='/payment/option'>Payment</BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href='#'>Review</BreadcrumbLink>
+            <BreadcrumbLink href='/payment'>Review</BreadcrumbLink>
             </BreadcrumbItem>
         </Breadcrumb>
 
@@ -53,7 +109,7 @@ const PaymentOption = () => {
                     </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                        <CreditCard/>
+                        <CreditCard cardDetail={cardDetail} setcarddetail={setcarddetail}  />
                     </AccordionPanel>
                 </AccordionItem>
 
@@ -85,7 +141,7 @@ const PaymentOption = () => {
                         <Flex direction='column'>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
                             <Text>SubTotal</Text>
-                            <Text>$432.2</Text>
+                            <Text>{subtotal}</Text>
                         </Flex>
                         <Divider mb={'15px'}/>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
@@ -95,15 +151,15 @@ const PaymentOption = () => {
                         <Divider mb={'15px'}/>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
                             <Text>Estimated Tax</Text>
-                            <Text>$43.2</Text>
+                            <Text>${tax}</Text>
                         </Flex>
                         <Divider mb={'15px'}/>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
                             <Text>Total</Text>
-                            <Text>$492.2</Text>
+                            <Text>${totalPrice}</Text>
                         </Flex>
                         <Divider mb={'15px'}/>
-                        <Button mb={'15px'}>Continue To Payment</Button>
+                        <Button onClick={handleSubmit} mb={'15px'}>Continue To Payment</Button>
                         {/* <Divider/> */}
                         <Accordion defaultIndex={[0]} allowMultiple>
                             <AccordionItem>
@@ -136,17 +192,40 @@ const PaymentOption = () => {
 
 export default PaymentOption
 
-function CreditCard(){
+function CreditCard({cardDetail, setcarddetail}){
+    let [userdata, setuserdata] = useState({...userDummy});
+    
+
+
+    function changeCardData(key, value){
+        console.log(value)
+        let temp = {
+            ...cardDetail,
+            [key]:value
+        }
+        setcarddetail(temp);
+    }
+
+
+
+
+    useEffect(()=>{
+        let temp2 = JSON.parse(sessionStorage.getItem('user-details'));
+        setuserdata(temp2)
+    },[])
+    const {firstname, lastname, country, street_address, address, city, postCode, mobile, mode} = userdata || {};
     return (
         <Box bg={'gray.100'} p='15px' borderRadius={'8px'}>
             <Flex mb={'8px'}>
                 <Box>
                     <Text>CARD NUMBER*</Text>
-                    <Input border={'1px solid lightgray'}></Input>
+                    <Input type={'number'} onChange={(e)=>{
+                        changeCardData('cardnumber', e.target.value)
+                    }} border={'1px solid lightgray'}></Input>
                 </Box>
                 <Box>
                     <Text>Expiration Date*</Text>
-                    <Input
+                    <Input 
                         placeholder="Select Date and Time"
                         size="md"
                         type="datetime-local"
@@ -156,6 +235,10 @@ function CreditCard(){
                 <Box>
                     <Text>CVV*</Text>
                     <Input
+                    type={'number'}
+                    onChange={(e)=>{
+                        changeCardData('cvv', e.target.value)
+                    }}
                         placeholder="Select Date and Time"
                         size="md"
                         border={'1px solid lightgray'}
@@ -164,25 +247,31 @@ function CreditCard(){
             </Flex>
             <Divider border={'gray.600'}/>
             <Text mt={'13px'}>Billing Address</Text>
-            <Text mt={'13px'}>parbhat kataria</Text>
-            <Text mt={'13px'}>#890</Text>
-            <Text mt={'13px'}>Amritsar, 149001, 1234</Text>
-            <Text mt={'13px'}>Country : IN</Text>
-            <Text mt={'13px'}>9432-422-432</Text>
+            <Text mt={'13px'}>{userdata?.firstname}</Text>
+            <Text mt={'13px'}>{street_address}</Text>
+            <Text mt={'13px'}>{city+" "+postCode}</Text>
+            <Text mt={'13px'}>Country : {country}</Text>
+            <Text mt={'13px'}>{mobile}</Text>
         </Box>
     )
 }
 
 function CashOnDelivery(){
+    let [userdata, setuserdata] = useState({...userDummy});
+    useEffect(()=>{
+        let temp2 = JSON.parse(sessionStorage.getItem('user-details'));
+        setuserdata(temp2)
+    },[])
+    const {firstname, lastname, country, street_address, address, city, postCode, mobile, mode} = userdata || {};
     return (
         <Flex bg={'gray.100'} p='15px' borderRadius={'8px'} justifyContent='space-between'>
             <Box>
                 <Text mt={'13px'}>Billing Address</Text>
-                <Text mt={'13px'}>parbhat kataria</Text>
-                <Text mt={'13px'}>#890</Text>
-                <Text mt={'13px'}>Amritsar, 149001, 1234</Text>
-                <Text mt={'13px'}>Country : IN</Text>
-                <Text mt={'13px'}>9432-422-432</Text>
+                <Text mt={'13px'}>{userdata?.firstname}</Text>
+            <Text mt={'13px'}>{street_address}</Text>
+            <Text mt={'13px'}>{city+" "+postCode}</Text>
+            <Text mt={'13px'}>Country : {country}</Text>
+            <Text mt={'13px'}>{mobile}</Text>
             </Box>
             <Image borderRadius={'9px'} w='200px' src='https://serving.photos.photobox.com/66232980d40147cdee77e3ba00340d4f6788f30bc5ce3b9f0f4d229ee96f6fef05e0f469.jpg'></Image>
         </Flex>

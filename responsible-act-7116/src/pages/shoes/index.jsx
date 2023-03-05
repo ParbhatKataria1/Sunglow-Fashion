@@ -1,4 +1,4 @@
-import Accordion1 from '@/components/Accordion1'
+import Accordion1 from '@/components/accordion1'
 import { Box, Flex, Grid, Heading, Select, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
@@ -29,7 +29,7 @@ const Shoes = () => {
               <Box cursor={'pointer'} pt={'25px'} fontSize={"small"} w={'200px'} h={'70px'} bgImg={'url(https://images.ctfassets.net/5de70he6op10/61AjzQ71WgOAQfYooxFzaQ/59d06b09fb9334e99c0db1f02f5fb16c/10-11_Shoe_Topper.jpg?w=630&q=80&fm=webp)'}>10 - 11</Box>
             </Flex>
                 <Flex w={'80%'} m={'40px 0px 20px 250px'}  justifyContent={'space-between'} >
-                <Heading fontSize={'xl'} display={'flex'} gap={'30px'} alignItems={'center'} > Women's Shoes:<Text fontSize={'small'} fontWeight={'normal'}>{data.length} products</Text> </Heading>
+                <Heading fontSize={'xl'} display={'flex'} gap={'30px'} alignItems={'center'} > Women&sbquo;s Shoes:<Text fontSize={'small'} fontWeight={'normal'}>{data.length} products</Text> </Heading>
                     <Flex alignItems={'center'} gap={'7px'}>
                         <Text>Sort:</Text>
                         <Select placeholder='Featured'>
@@ -75,7 +75,7 @@ const Shoes = () => {
                             <Flex gap={'10px'} h={'20px'} alignItems={'center'} >
                             {
                                 ele.color.map((ele)=>(
-                                    <Image style={{borderRadius:'50%'}} width={20} height={20} src={ele.colorimg} alt={ele.alt}/>
+                                    <Image key={ele.id} style={{borderRadius:'50%'}} width={20} height={20} src={ele.colorimg} alt={ele.alt}/>
                                 ))
                             }
                             <Text display={'flex'} gap={'5px'}>{ele.color.length} <Text>colors</Text></Text>

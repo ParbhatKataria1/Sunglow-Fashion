@@ -10,7 +10,7 @@ const init = {
 
 export function reducer (state=init, action){
     const { type, payload } = action;
-    console.log(payload);
+    // console.log(payload);
     switch (type) {
         case types.CART_LOADING:
             return {...state, loading:true, error:false}

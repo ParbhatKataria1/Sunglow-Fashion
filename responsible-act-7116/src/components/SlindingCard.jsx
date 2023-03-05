@@ -5,7 +5,7 @@ import { ChevronLeftIcon,ChevronRightIcon } from "@chakra-ui/icons";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from 'next/image';
-import './SlindindCard.module.css'
+import './slindindCard.module.css'
 
 
 const SlindingCard = ({ something, prodVal = 5 }) => {
