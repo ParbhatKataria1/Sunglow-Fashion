@@ -1,4 +1,5 @@
 import Accordion1 from '@/components/Accordion1'
+import ProductCard from '@/components/ProductCard'
 import { Box, Flex, Grid, Heading, Select, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
@@ -6,23 +7,25 @@ import React,{useEffect, useState} from 'react'
 
 const Clothing = () => {
     const [data,setData]=useState([])
-    useEffect(()=>{
-      getData()
-    },[])
     const getData=async()=>{
       let res=await axios.get('https://apiserver-no4z.onrender.com/clothing')
       .then(res=>setData(res.data))
     }
-    
-    // console.log(data)
+    useEffect(()=>{
+      getData()
+    },[])
+   
     const handleChange=(e)=>{
       if(e.target.value==='lth'){
         setData(prevdata=>prevdata.sort((a,b)=>(+a.price)-(+b.price)))
       }else if(e.target.value==='htl'){
         setData(prevdata=>prevdata.sort((a,b)=>(+b.price)-(+a.price)))
       }
-      console.log(data)
+      // console.log(data)
     }
+    
+    console.log(data)
+    
     return (
       <>
                
@@ -81,25 +84,11 @@ const Clothing = () => {
               </Flex>
               
               <Grid w={'80%'} gridTemplateColumns={'repeat(3,1fr)'} gap={'30px'}>
-                  {
+                  {/* {
                     data.map((ele,i)=>(
-                        <Flex flexDir={'column'} key={i}>
-                          {/* <Flex flexDir={'column'}> */}
-                            <Image id='hoverimg' onMouseOver={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v3+ele.image.burl}`} onMouseOut={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v1+ele.image.burl}`} src={ele.image.furl+ele.image.version.v1+ele.image.burl} style={{cursor:'pointer',}} width={450} height={300} alt={'img1'}/>
-                            <Text fontSize={'small'} >{ele.title}</Text>
-                          {/* </Flex> */}
-                            <Text>${ele.price}</Text>
-                            <Flex gap={'10px'} h={'20px'} alignItems={'center'} >
-                            {
-                                ele.color.map((ele)=>(
-                                    <Image style={{borderRadius:'50%'}} width={20} height={20} src={ele.colorimg} alt={ele.alt}/>
-                                ))
-                            }
-                            <Text display={'flex'} gap={'5px'}>{ele.color.length} <Text>colors</Text></Text>
-                            </Flex>
-                        </Flex>
+                        // <ProductCard data={ele} key={ele.id} />
                       ))
-                  }
+                  } */}
               </Grid>
             </Flex>
         </Box>

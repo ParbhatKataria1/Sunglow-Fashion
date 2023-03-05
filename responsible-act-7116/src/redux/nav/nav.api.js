@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const url = 'https://apiserver-no4z.onrender.com/products'
+const url = 'https://apiserver-no4z.onrender.com/clothing'
 export async function fetchNavData(){
     try {
         let data = await axios.get(url);
