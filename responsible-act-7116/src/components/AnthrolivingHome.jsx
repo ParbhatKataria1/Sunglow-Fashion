@@ -1,7 +1,7 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Button, Flex,Box,Grid,  SimpleGrid, Stack, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import { NavbarTwo } from './anthropologie';
+import { NavbarTwo } from './Anthropologie';
 export const Line=()=>{
         for(let i=0;i<26;i++){
           return <div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
