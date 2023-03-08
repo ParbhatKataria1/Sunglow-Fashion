@@ -52,15 +52,19 @@ const PaymentOption = () => {
     }
 
     function transerData(){
+        const details = JSON.parse(sessionStorage.getItem('user-details'));
+
         console.log(cartData);
         cartData.map((el)=>{
-            let obj = {...el};
-            let temp = obj.id;
-            delete obj.id;
-            obj.status = false;
-            dispatch(postOrderData(obj)).then(()=>{
-                dispatch(deleteCartData(temp))
-            });
+                let obj = {...el};
+                let temp = obj.id;
+                obj.qty = obj.qty==null?1:obj.qty;
+                delete obj.id;
+                obj.status = false;
+                obj.details = details;
+                dispatch(postOrderData(obj)).then(()=>{
+                    dispatch(deleteCartData(temp))
+                });
         })
     }
 

@@ -362,7 +362,7 @@ function DrawerExample({profileImage, profileName}) {
           <Link href='/admin'>
           {/* <Button p='20px' ></Button> */}
           <Button
-            onClick={()=>signOut('google')}
+            // onClick={()=>signOut('google')}
           mt='20px'
             as={'a'}
             display={'inline-flex'}
@@ -384,6 +384,9 @@ function DrawerExample({profileImage, profileName}) {
           {
             !profileImage && <Button
             as={'a'}
+            ml='-14px'
+            mb='20px'
+            mt='20px'
             fontSize={'sm'}
             fontWeight={400}
             w='180px'
@@ -795,8 +798,10 @@ function BasicUsage() {
     <>
       {domLoaded && (
         <Button
+          mt={'20px'}
+          // mb='20px'
           as={"a"}
-          display={ "inline-flex" }
+          // display={ "inline-flex" }
           fontSize={"sm"}
           fontWeight={600}
           color={"white"}
