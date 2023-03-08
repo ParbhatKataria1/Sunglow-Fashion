@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router'
 
-const Dresses = () => {
+const Allproduct = () => {
     const [data,setData]=useState([]);
     // const params = useSearchParams();
     const router = useRouter();
@@ -16,7 +16,7 @@ const Dresses = () => {
     console.log(temp)
     const [page, setpage] = useState(temp);
     let totalPages = Math.ceil(data.length/5)
-    console.log(temp, 'this is ', router?.query?.page)
+
 //     
 // router.query.page = "page"
 // router.push(router)
@@ -25,12 +25,12 @@ const Dresses = () => {
 
     // console.log(params,'tihsifidas')
     const getData=async()=>{
-      let res=await axios.get('https://apiserver-no4z.onrender.com/dresses')
+      let res=await axios.get('https://apiserver-no4z.onrender.com/allproduct')
       .then(res=>setData(res.data))
-      setpage(temp)
     }
     useEffect(()=>{
       getData();
+      setpage(temp)
     },[temp])
 
 
@@ -97,7 +97,7 @@ const Dresses = () => {
               </Flex>
             <Box w='100%'   >
                 <Flex  zIndex='10' w={'100%'} bg='white' p='20px'     justifyContent={'space-between'} >
-                <Heading fontSize={'xl'} display={'flex'} gap={'30px'} alignItems={'center'} > Women&sbquo;s Dresses:<Text fontSize={'small'} fontWeight={'normal'}>{data.length} products</Text> </Heading>
+                <Heading fontSize={'xl'} display={'flex'} gap={'30px'} alignItems={'center'} > Women&sbquo;s All Product:<Text fontSize={'small'} fontWeight={'normal'}>{data.length} products</Text> </Heading>
                     <Flex alignItems={'center'} gap={'7px'}>
                         <Text>Sort:</Text>
                         <Select placeholder='Featured' onChange={(e)=>handleChange(e)} >
@@ -114,9 +114,9 @@ const Dresses = () => {
                     newdata.map((ele)=>(
                       // console.log(ele)
 
-                      <Card  key={ele.id}maxW='sm'>
+                      <Card  key={ele.id} maxW='sm'>
                         <CardBody>
-                        <Link href={`/dresses/${ele.id}`}>
+                        <Link  href={`/allproduct/${ele.id}`}>
                         <Image id='hoverimg' onMouseOver={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v3+ele.image.burl}`} onMouseOut={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v1+ele.image.burl}`} src={ele.image.furl+ele.image.version.v1+ele.image.burl} objectFit="scale-down" style={{cursor:'pointer',}} width={250} height={'340px'} alt={'img1'}/></Link>
 
                           <Stack mt='6' >
@@ -134,7 +134,7 @@ const Dresses = () => {
                             <Button variant='solid' size='sm' colorScheme='blue'>
                               Buy now
                             </Button>
-                            <Link href={`/dresses/${ele.id}`}>
+                            <Link href={`/allproduct/${ele.id}`}>
                             <Button variant='ghost'  size='sm' colorScheme='blue'>
                               View Details
                               
@@ -143,6 +143,26 @@ const Dresses = () => {
                           </ButtonGroup>
                         </CardFooter>
                       </Card>
+
+
+
+                      // <Link key={ele.id} href={`/shoes/${ele.id}`}>
+                      //   <Flex flexDir={'column'} key={ele.id}>
+                      //     {/* <Flex flexDir={'column'}> */}
+                      //       <Image id='hoverimg' onMouseOver={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v3+ele.image.burl}`} onMouseOut={e=>e.target.srcset=`${ele.image.furl+ele.image.version.v1+ele.image.burl}`} src={ele.image.furl+ele.image.version.v1+ele.image.burl} style={{cursor:'pointer',}} width={450} height={300} alt={'img1'}/>
+                      //       <Text fontSize={'small'} >{ele.title}</Text>
+                      //     {/* </Flex> */}
+                      //       <Text>${ele.price}</Text>
+                      //       <Flex gap={'10px'} h={'20px'} alignItems={'center'} >
+                      //       {
+                      //           ele.color.map((ele)=>(
+                      //               <Image key={ele.id} style={{borderRadius:'50%'}} width={20} height={20} src={ele.colorimg} alt={ele.alt}/>
+                      //           ))
+                      //       }
+                      //       <Text display={'flex'} gap={'5px'}>{ele.color.length} <Text>colors</Text></Text>
+                      //       </Flex>
+                      //   </Flex>
+                      //   </Link>
                       ))
                   }
               </Grid>
@@ -152,7 +172,7 @@ const Dresses = () => {
         </Flex>
 
 
-        <Flex alignItems={'center'} w={'98%'}  justifyContent={'center'} m={'auto'} >
+        <Flex mt='200px' alignItems={'center'} w={'98%'}  justifyContent={'center'} m={'auto'} >
         {
           <Button
           isDisabled={page!==1?false:true}
@@ -168,7 +188,7 @@ const Dresses = () => {
 
       {
         Array(totalPages).fill(-1).map((el, ind)=>{
-          return <Button isDisabled={ind+1==page?true:false} m='9px' onClick={changePage} key={ind+1} >{ind+1}</Button>
+          return <Button  isDisabled={ind+1==page?true:false} m='9px' onClick={changePage} key={ind+1} >{ind+1}</Button>
         })
       }
     
@@ -188,4 +208,4 @@ const Dresses = () => {
     )
   }
 
-export default Dresses
+export default Allproduct

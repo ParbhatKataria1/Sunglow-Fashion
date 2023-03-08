@@ -1,70 +1,164 @@
+import React, { ReactNode, useState } from 'react';
 import {
+  IconButton,
   Box,
+  CloseButton,
   Flex,
-  Grid,
-  Heading,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import ProductsList from "../../components/admin/productsList";
-import EditProduct from "../../components/admin/editProduct";
-import { base_url } from "../../utils/url";
-import AddProduct from "../../components/admin/addProduct";
-import Dashboard from "../../components/admin/dashboard";
+  Icon,
+  useColorModeValue,
+  Link,
+  Drawer,
+  DrawerContent,
+  Text,
+  useDisclosure,
+  BoxProps,
+  FlexProps,
+} from '@chakra-ui/react';
+import {
+  FiHome,
+  FiTrendingUp,
+  FiCompass,
+  FiStar,
+  FiSettings,
+  FiMenu,
+} from 'react-icons/fi';
+import { IconType } from 'react-icons';
+import { ReactText } from 'react';
+import Dashboard from '@/components/admin/dashboard';
+import EditProduct from '@/components/admin/editProduct';
+import ProductItem from '@/components/admin/productItem';
+import ProductsList from '@/components/admin/productsList';
+import AddProduct from '@/components/admin/addProduct';
 
-const url=`${base_url}/allproducts`;
-const Admin = () => {
-  let [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch(`${url}`)
-      .then((res) => res.json())
-      .then((res) => setData(res));
-  }, []);
+const LinkItems = [
+  { name: 'Home', icon: FiHome,num:1 },
+  { name: 'TrackOrder', icon: FiTrendingUp,num:2 },
+  { name: 'ManageProduct', icon: FiStar, num:3 },
+  { name: 'AddProduct', icon: FiCompass, num:4 },
+];
 
+export default function SimpleSidebar({ children }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [num, setnum] = useState(1);
+
+  function changePage(value){
+    console.log(value)
+    setnum(value);
+  }
+  console.log(changePage, 'main')
   return (
-    <Box w={["95%", "95%", "80%"]} m="auto" >
-      <Tabs size="md" variant="enclosed">
-      <Grid templateColumns={{ sm: '1fr 1fr', md: '1fr 4fr' }} gap={4} >
-        <TabList height={"400px"} mt={"60px"} >
-           <Flex flexDirection="column" color={"white"}>
-              <Tab bg="blue.700" mt={"20px"} color={"white"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Home</Tab>
-              <Tab bg="blue.700" mt={"20px"}  p={"15px"} px='25px' fontSize={"15px"} fontWeight={900}>Add Product</Tab>
-              <Tab bg="blue.700" mt={"20px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Products</Tab>
-              <Tab bg="blue.700" mt={"20px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Edit Product</Tab>
-          </Flex>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-           <Dashboard/>
-          </TabPanel>
-          <TabPanel>
-            <Heading size={"lg"} textAlign={"left"} mt={4}>
-            </Heading>
-            <AddProduct/>
-          </TabPanel>
-          <TabPanel>
-            <Heading size={"lg"} textAlign={"left"} mt={4}>
-              All Products List
-            </Heading>
-            <ProductsList />
-          </TabPanel>
-          <TabPanel>
-            <Heading size={"lg"} textAlign={"left"} mt={4}>
-              All Products List
-            </Heading>
-            <EditProduct />
-          </TabPanel>
-          
-        </TabPanels>
-        </Grid>
-      </Tabs>
+    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+      <SidebarContent
+      changePage={changePage} 
+        onClose={() => onClose}
+        display={{ base: 'none', md: 'block' }}
+      />
+      <Drawer
+        autoFocus={false}
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        returnFocusOnClose={false}
+        onOverlayClick={onClose}
+        size="full">
+        <DrawerContent>
+          <SidebarContent onClose={onClose} />
+        </DrawerContent>
+      </Drawer>
+      {/* mobilenav */}
+      <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      <Box   justifyContent='center' ml={{ base: 0, md: 60 }} p="4">
+        {num==1 && <Dashboard/>}
+        {num==2 && <EditProduct/>}
+        {num==3 && <ProductsList/>}
+        {num==4 && <AddProduct/>}
+      </Box>
+    </Box>
+  );
+}
+
+
+const SidebarContent = ({changePage, onClose, ...rest}) => {
+  console.log(changePage, 'sidebar is not a fu')
+  return (
+    <Box
+      bg={useColorModeValue('white', 'gray.900')}
+      borderRight="1px"
+      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      w={{ base: 'full', md: 60 }}
+      pos="fixed"
+      h="full"
+      {...rest}>
+      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+        <Text fontSize="2xl"  fontWeight="bold">
+          Admin Panel
+        </Text>
+        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+      </Flex>
+      {LinkItems.map((link) => (
+        <NavItem key={link.name} num={link.num} changePage={changePage} icon={link.icon}>
+          {link.name}
+        </NavItem>
+      ))}
     </Box>
   );
 };
 
-export default Admin;
+const NavItem = ({changePage,num, icon, children, ...rest }) => {
+  console.log(changePage, 'navitem')
+  return (
+    <Link onClick={()=>{changePage(num)}} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+      <Flex
+        align="center"
+        p="4"
+        mx="4"
+        borderRadius="lg"
+        role="group"
+        cursor="pointer"
+        _hover={{
+          bg: 'cyan.400',
+          color: 'white',
+        }}
+        {...rest}>
+        {icon && (
+          <Icon
+            mr="4"
+            fontSize="16"
+            _groupHover={{
+              color: 'white',
+            }}
+            as={icon}
+          />
+        )}
+        {children}
+      </Flex>
+    </Link>
+  );
+};
+const MobileNav = ({ onOpen, ...rest }) => {
+  return (
+    <Flex
+      ml={{ base: 0, md: 60 }}
+      px={{ base: 4, md: 24 }}
+      height="20"
+      alignItems="center"
+      bg={useColorModeValue('white', 'gray.900')}
+      borderBottomWidth="1px"
+      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+      justifyContent="flex-start"
+      {...rest}>
+      <IconButton
+        variant="outline"
+        onClick={onOpen}
+        aria-label="open menu"
+        icon={<FiMenu />}
+      />
+
+      <Text fontSize="2xl" ml="8" fontWeight="bold">
+        Logo
+      </Text>
+    </Flex>
+  );
+};

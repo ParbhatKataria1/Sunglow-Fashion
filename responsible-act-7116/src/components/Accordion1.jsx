@@ -23,7 +23,7 @@ const Accordion1 = ({data,setData}) => {
       <>
         <h2>
           <AccordionButton display={'flex'} justifyContent={'space-between'}>
-            <Box as="span" flex='1' textAlign='left' fontSize={'small'} >
+            <Box as="span" flex='1' textAlign='left' fontSize={'md'} >
               Price
             </Box>
             {isExpanded ? (
@@ -40,6 +40,33 @@ const Accordion1 = ({data,setData}) => {
       </>
     )}
   </AccordionItem>
+
+
+  <AccordionItem>
+    {({ isExpanded }) => (
+      <>
+        <h2>
+          <AccordionButton display={'flex'} justifyContent={'space-between'}>
+            <Box as="span" flex='1' textAlign='left' fontSize={'md'} >
+              Color
+            </Box>
+            {isExpanded ? (
+              <MinusIcon fontSize='12px' />
+            ) : (
+              <AddIcon fontSize='12px' />
+            )}
+          </AccordionButton>
+        </h2>
+        <AccordionPanel pb={4}>
+          <Checkbox  isDisabled >Yellow Styles</Checkbox>
+          <Checkbox isDisabled>Blue Styles</Checkbox>
+          <Checkbox isDisabled>Green Styles</Checkbox>
+          <Checkbox isDisabled>Red Styles</Checkbox>
+        </AccordionPanel>
+      </>
+    )}
+  </AccordionItem>
+  
 
 
 </Accordion>

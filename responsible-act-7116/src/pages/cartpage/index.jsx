@@ -1,4 +1,4 @@
-import { getCartData } from '@/redux/cart/cart.action';
+import { deleteCartData, getCartData } from '@/redux/cart/cart.action';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import {
     AccordionButton,
@@ -36,7 +36,7 @@ const PaymentOption = ({tem}) => {
     // console.log(cartData);
     let subtotal = 0;
         cartData.forEach((el)=>{
-            subtotal+=parseInt(el.price)*(+el.qty);
+            subtotal+=parseInt(el.price)*(el.qty?+el.qty:1);
             // console.log(coupen.subtotal, 'this', el.price, el.qty, parseInt(el.price)*(+el.qty));
         })
         let tax = Math.floor(subtotal/13);
@@ -45,7 +45,8 @@ const PaymentOption = ({tem}) => {
 
         // console.log(coupen)
     // }
-        
+
+    console.log('subtotal',subtotal)
     
     
     function submit(){
@@ -55,9 +56,9 @@ const PaymentOption = ({tem}) => {
         router.push('/shipping')
     }
     function usePromo(){
-        console.log('promo')
+        // console.log('promo')
         if(promo == 'sunglow'){
-            console.log(coupen);
+            // console.log(coupen);
             let temp = Math.floor(coupen.subtotal*(.85));
             let ttax = Math.floor(temp/13);
             let obj = {
@@ -65,12 +66,12 @@ const PaymentOption = ({tem}) => {
                 tax:ttax,
                 totalPrice:temp+ttax
             }
-            console.log(obj, 'tis');
+            // console.log(obj, 'tis');
             setpromo('');
             setcoupen({...obj});
         }
     }
-    console.log(coupen, 'thisi is coutpen')
+    // console.log(coupen, 'thisi is coutpen')
     return (
         // <Box pb={'80px'} pt={'20px'} w='90%' m='auto'>
         // <Flex justifyContent={'space-between'}>
@@ -164,6 +165,10 @@ const Cart = () => {
     useEffect(() => {
         dispatch(getCartData())
     }, [])
+// console.log(cartData, 'thiismcar')
+    function handleDelete(id){
+        dispatch(deleteCartData(id))
+    }
 
     return (
         <Box pt={'20px'} w='95%' m='auto'>
@@ -174,10 +179,10 @@ const Cart = () => {
                             borderTop={'1px solid lightgray'}
                             borderBottom={'1px solid lightgray'}
                             m="10px" p='10px 10px'>
-                            <Box w='20%'>
+                            <Box w='33%'>
                                 <Text>Item</Text>
                             </Box>
-                            <Box w={'40%'} > <Text>Description</Text> </Box>
+                            <Box w={'20%'} > <Text>Description</Text> </Box>
                             <Box>
                                 <Text>Item Price</Text>
                             </Box>
@@ -187,11 +192,12 @@ const Cart = () => {
                             <Box>
                                 <Text>Total Price</Text>
                             </Box>
+                            <Box w='5%'></Box>
                         </Flex>
                         {cartData?.cartData.map((item) => {
                             return (
                                 <Box key={item.id}>
-                                    <CartItem cartItem={item} />
+                                    <CartItem cartItem={item} handleDelete={handleDelete} />
                                 </Box>
                             )
                         })}
@@ -209,9 +215,9 @@ export default Cart;
 
 
 
-const CartItem = ({cartItem}) => {
-    console.log(cartItem)
-    console.log('cartItem')
+const CartItem = ({cartItem, handleDelete}) => {
+    // console.log(cartItem)
+    // console.log('cartItem')
     const [item, setitem ] = useState({...cartItem, qty:1});
     const dispatch = useDispatch();
     function changeTheData(qty){
@@ -222,36 +228,38 @@ const CartItem = ({cartItem}) => {
         }
         delete newdata.id;
         dispatch(updateCartData(cartItem.id, newdata)).then(()=>{
-            console.log('gdafdagda')
+            // console.log('gdafdagda')
             setitem(newdata)
         })
 
     }
-console.log(cartItem);
+// console.log(cartItem, 'comone');
     return (
-        <Box mb={'10px'}>
-            <Flex justifyContent={'space-between'}
+        <Box mb={'10px'} border='1px solid lightgray' borderRadius={'5px'}>
+            <Flex justifyContent={'flex-start'}
                 borderTop={'1px solid lightgray'}
                 borderBottom={'1px solid lightgray'}
+                
                 p='10px'>
-                <Box w='20%'>
-                    <Flex>
-                        <Image w={'100%'} src={cartItem.image.furl} alt={cartItem.title} ></Image>
+                <Box w='30%' mr='70px' borderRadius={'5px'} border={'1px solid black'} bg='black' boxShadow={'rgba(0, 0, 0, 0.35) 0px 5px 15px;'}>
+                    <Flex w='100%' justifyContent={'center'} alignItems='center' h='200px'  >
+                        <Image h={'100%'} objectFit='cover'  src={cartItem.image.furl} alt={cartItem.title} ></Image>
 
                     </Flex>
                 </Box>
-                <Box w={'35%'} >
+                <Divider variant='solid' h='200px' colorScheme='purple' orientation='vertical' />
+                <Box mr='40px'  w={'20%'} >
 
                     <Text fontWeight={500}>{cartItem.title }</Text>
                     <Text>style: {cartItem.productdetails.styleno }</Text>
                     <Text>Color : BLUE MOTIF</Text>
                     <Text>Size Set of 4</Text>
                 </Box>
-                <Box>
+                <Box mr='60px'>
                     {/* <Text>Item Price</Text> */}
-                    <Text>{ cartItem.price}</Text>
+                    <Text>${ cartItem.price}</Text>
                 </Box>
-                <Box>
+                <Box mr='30px'>
                     {/* <Text>Quanitity</Text> */}
                     <Select placeholder={cartItem.qty} onChange={(e)=>{changeTheData(e.target.value)}}>
                         <option value="1">1</option>
@@ -276,10 +284,12 @@ console.log(cartItem);
                         <option value="20">20</option>
                     </Select>
                 </Box>
-                <Box>
+
+                <Box mr='70px'>
                     {/* <Text>Total Price</Text> */}
-                    <Text>{parseInt(item.price)*(+item.qty) }</Text>  
+                    <Text>${parseInt(item.price)*(+item.qty) }</Text>  
                 </Box>
+                <Box cursor={'pointer'} onClick={()=>handleDelete(cartItem.id)} w='5%'><svg w='10px' h='10px' clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/></svg></Box>
             </Flex>
         </Box>
     )

@@ -165,7 +165,7 @@ const Shipping = () => {
                 <Input  onChange={(e)=>{changeTheData('mobile', e.target.value)}}   type='tel' placeholder='phone number' />
               </InputGroup>
             </Box>
-            <Input type='submit'></Input>
+            {/* <Input type='submit'></Input> */}
           </Box>
       </FormControl>
 

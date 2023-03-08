@@ -10,49 +10,178 @@ import {
     Button,
     Heading,
     Text,
+    Image,
     useColorModeValue,
     useToast,
+    Select,
+    HStack,
   } from '@chakra-ui/react';
 
-  import React, { useState } from "react";
+  import React, { useEffect, useState } from "react";
 import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
 import { useDispatch } from 'react-redux';
 import { postNavItems } from '@/redux/nav/nav.action';
 import { postALlProductData } from '@/redux/allProduct/allProduct.action';
+import axios from 'axios';
 
-
+const base = `https://apiserver-no4z.onrender.com`
 const intitialData = {
-  name: "",
-  image: "",
-  colour:"",
-  size:"",
+  title: "",
   price: "",
+  image: {
+    furl: "",
+    version: {
+      v1: "",
+      v2: "2",
+      v3: "3",
+      v4: "4"
+    },
+    burl: "?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360",
+    surl: "?$a15-pdp-detail-shot$&fit=constrain&qlt=80&wid=100"
+  },
+  color: [
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_437_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    },
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_070_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    },
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_042_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    },
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_041_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    },
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_027_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    },
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_001_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    },
+    {
+      colorimg: "https://images.urbndata.com/is/image/Anthropologie/4123650590242_010_s?fit=constrain&hei=56&qlt=75",
+      "color": "YELLOW"
+    }
+  ],
+  fit: [
+    {
+      "title": "Standard",
+      "choosed": true
+    },
+    {
+      "title": "Petite",
+      "choosed": false
+    },
+    {
+      "title": "Plus",
+      "choosed": false
+    }
+  ],
+  size: [
+    {
+      "s": "XXS"
+    },
+    {
+      "s": "XS"
+    },
+    {
+      "s": "S"
+    },
+    {
+      "s": "M"
+    },
+    {
+      "s": "L"
+    },
+    {
+      "s": "XL"
+    }
+  ],
+  productdetails: {
+    "styleno": 4130326950015,
+    "colorcode": "072",
+    "discription": [
+      {
+        "disc": "Viscose, nylon; polyester trim"
+      },
+      {
+        "disc": "Side zip"
+      },
+      {
+        "disc": "Hand wash"
+      },
+      {
+        "disc": "Imported"
+      }
+    ],
+    "dimensions": [
+      {
+        "title": "Standard",
+        "desc": "Measures 27.75* long"
+      },
+      {
+        "title": "Petite",
+        "desc": "Measures 26* long"
+      },
+      {
+        "title": "Plus",
+        "desc": "Measures 30.75* long"
+      }
+    ]
+  },
+  sideimg: [
+    {
+      "img": "https://images.urbndata.com/is/image/Anthropologie/4114950250001_004_b2?$an-category$&qlt=80&fit=constrain"
+    },
+    {
+      "img": "https://images.urbndata.com/is/image/Anthropologie/80132772_024_b2?$an-category$&qlt=80&fit=constrain"
+    }
+  ]
 };
 
   
   export default function AddProduct() {
+    
+    const [update, setupdate] = useState(false)
     const [data, setData] = useState(intitialData);
   const [loading, setLoading] = useState(false);
+  const [type, settype]= useState('allproduct');
   const dispatch = useDispatch()
   const toast = useToast();
   const {
-    name,
+    title,
     image,
-    price,
-    colour,
-    size,
+    price
   } = data;
   const handleChange = (e) => {
+    console.log(e.target.name, e.target.value);
     const { name, value } = e.target;
     const val =
       name === "price"
         ? Number(value)
         : value;
-    setData({ ...data, [name]: val });
+
+    let obj;
+    if(name==='image'){
+      obj = {...data, image : {...data.image, furl:val}}
+    }
+    else {
+      obj = {...data, [name]:val}
+    }
+    console.log(data)
+    setData(obj);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log('we are in the ')
     toast({
       position: "top-left",
       render: () => (
@@ -69,11 +198,90 @@ const intitialData = {
         </Flex>
       ),
     });
-    dispatch(postALlProductData(data)).then((res)=>{setData(intitialData);console.log(res)});
+    if(type=='allproduct'){
+      axios.post(`${base}/${type}`, data).then((res)=>{setData({...intitialData});console.log(res.data)});
+      // dispatch(postALlProductData(data)).then((res)=>{setData(intitialData);console.log(res)});
+    }
+    else if(type=='dresses'){
+      axios.post(`${base}/${type}`, data).then((res)=>{setData({...intitialData});console.log(res.data)});
+    }
+    else if(type=='clothing'){
+      axios.post(`${base}/${type}`, data).then((res)=>{setData({...intitialData});console.log(res.data)});
+    }
+    else if(type=='shoes'){
+      axios.post(`${base}/${type}`, data).then((res)=>{setData({...intitialData});console.log(res.data)});
+    }
+    
     // navigate("/")
   };
+
+
+  // useEffect(()=>{},[data])
     return (
-      <Flex
+      <>
+
+
+<Stack  h='500px' border={'1px solid red'} bg='white' direction={{ base: 'column', md: 'row' }}>
+      <Flex  border={'1px solid red'} p={8} flex={1} align={'center'} justify={'center'}>
+        <Stack spacing={4} w={'full'} maxW={'md'}>
+          <Heading fontSize={'2xl'}>Add Product</Heading>
+          <FormControl id="text">
+            <FormLabel>Title</FormLabel>
+            <Input type="text" 
+            placeholder='Enter the product title'
+            value={title}
+            name="title"
+            onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl id="image">
+            <FormLabel>Image Link</FormLabel>
+            <Input type="text"placeholder="Enter Image Url"
+            value={image.furl}
+            onChange={handleChange}
+            name = "image" />
+          </FormControl>
+          <FormControl id="price">
+          <HStack>
+            <FormLabel>Price</FormLabel>
+            <Input type="number" 
+            placeholder="Enter Price"
+            value={price}
+            onChange={handleChange}
+            name = "price"
+            
+            />
+            <Select placeholder='All Product' onChange={(e)=>{settype(e.target.value)}}>
+              <option value='allproduct'>All Product</option>
+              <option value='dresses'>Dresses</option>
+              <option value='shoes'>Shoes</option>
+              <option value='clothing'>Clothing</option>
+            </Select>
+          </HStack>
+          </FormControl>
+          <Stack spacing={6}>
+            <Button onClick={handleSubmit} colorScheme={'blue'} variant={'solid'}>
+              Add To The Database
+            </Button>
+          </Stack>
+        </Stack>
+      </Flex>
+      <Flex border={'1px solid red'} flex={1}>
+        <Image
+          alt={'Login Image'}
+          objectFit={'cover'}
+          h='100%'
+          src={
+            'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
+          }
+        />
+      </Flex>
+    </Stack>
+
+
+
+
+      {/* <Flex
         align={'center'}
         justify={'center'}
         bg={useColorModeValue('white', 'white')} >
@@ -147,6 +355,9 @@ const intitialData = {
             </Stack>
           </Box>
         </Stack>
-      </Flex>
+      </Flex> */}
+      
+      
+      </>
     );
   }

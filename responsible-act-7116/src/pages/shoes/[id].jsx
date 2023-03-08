@@ -4,42 +4,65 @@ import Link from 'next/link'
 // import ReactImageMagnify from 'react-image-magnify';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ImageItem from '../../components/imageItem'
 import { Component } from "react";
 import Slider from "react-slick";
 import { RecentlyViewed, youMayALsoLike } from '../../components/anthrolivingHome'
 import SlindingCard from '../../components/slindingCard'
 import {postCartData} from "../../redux/cart/cart.action"
 import { useDispatch} from 'react-redux';
+import ImageItem from '../../components/imageItem';
+import Image from 'next/image';
 
 const ItemDetails = ({ data }) => {
+    const [version, setversion] = useState("")
     const dispatch = useDispatch();
     // console.log(data)
     // const [shopButton, setShopButton] = useState(false);
+    let newdata = data;
+    function changeTheData(key, value){
+        newdata = {
+            ...data,
+            [key]:value
+        }
+        console.log(newdata, 1)
+
+    }
+    console.log(data)
     const AddToBasket = () => {
-        dispatch(postCartData(data))
+        
+        dispatch(postCartData({...newdata}))
         console.log(123);
-        console.log(data);
+        // console.log(ndata);
     }
     return (
+        <>
+        <Box  mt={{ base:'330px', sm:'260px',  md:'0px'}} ></Box>
         <Box mb={'100px'}>
-            <Heading textAlign={'center'}>FurnitureShop / All Furniture</Heading>
-            <Flex w={'90%'} justifyContent='space-around' m={'auto'} mt={'40px'}>
-                <Box width={'50%'} justifyContent='center' >
+            <Heading textAlign={'center'}>Product Details</Heading>
+            <Flex w={'90%'} direction={{ base:'column',  md:'row'}} justifyContent='space-around' m={'auto'} mt={'40px'}>
+                <Box width={{base:'100%',md:'50%'}} justifyContent='center' >
+                    <Flex justifyContent='space-around' direction='row'>
+                        <Flex direction={'column'} h='100%' justifyContent='space-between'>
+                            {/* <Heading>this is me</Heading> */}
+                            {
+                                Array(4).fill(-1).map((el, ind)=>{
+                                    return <Box m='5px' boxSizing={'border-box'} border={`${(ind?String(ind+1):"")===version?'3px solid lightgray':'3px solid white'}`} cursor='pointer' onClick={()=>{setversion(ind?String(ind+1):"")}}> <Image width={100} height={100} src={`${data.image.furl}${ind?String(ind+1):""}${data.image.burl}`}></Image></Box>
+                                })
+                            }
+                        </Flex>
+                         <Image width={400} height={400} src={`${data.image.furl}${version}${data.image.burl}`}></Image>
+                    </Flex>
+                    {/* <VerticalSwipeToSlide data={data} /> */}
+                    <Box p='10px' borderRadius='8px' bg='gray.100' mt={'30px'}>
 
-
-                    {/* <Image width={400} height={400} src={`${this.image.furl}${this.image.version.v2}${this.image.burl}`}></Image> */}
-                    <VerticalSwipeToSlide data={data} />
-                    <Box mt={'30px'}>
-
-                        <Text fontSize={'18px'}>Complete The Look</Text>
+                        <Text fontSize={'18px'}>More Items</Text>
                         <hr />
                         <HStack>
                             <Box marginTop={"40px"} position={"relative"}>
                                 <Grid templateColumns='repeat(3, 1fr)' gap={5} width={"100%"} margin={"auto"} zIndex={0}>
-                                    <ImageItem />
-                                    <ImageItem />
-                                    <ImageItem />
+                                    <ImageItem image={'https://images.urbndata.com/is/image/Anthropologie/4130348690217_038_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360'} />
+                                    <ImageItem image={'https://images.urbndata.com/is/image/Anthropologie/4130646420031_014_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360'}/>
+                                    <ImageItem image={'https://images.urbndata.com/is/image/Anthropologie/4130646420031_104_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360'} />
                                 </Grid>
                             </Box>
                         </HStack>
@@ -51,7 +74,8 @@ const ItemDetails = ({ data }) => {
 
 
 
-                <Box w={'40%'}>
+                <Box w={{base:'100%',md:'40%'}} p='10px'>
+                    <Heading mt={{base:'10px',md:'0px'}}>Detailed Info</Heading>
                     <Text fontSize={'18px'} m={'10px'}>{data.title}</Text>
                     <Text m={'10px'}>Price : ${data.price}</Text>
                     <Box >
@@ -67,7 +91,7 @@ const ItemDetails = ({ data }) => {
 
 
                                 {data.length &&data.color.map((el, ind) => {
-                                    return <Radio ml={'10px'} mb='10px' key={ind + 1} /*colorScheme={`${el.alt.toLowerCase()}.300`} bg={el.alt.toLowerCase()} value={el.alt.toLowerCase()}*/>
+                                    return <Radio ml={'10px'} mb='10px' key={ind + 1} colorScheme={`${el.alt.toLowerCase()}.300`} bg={el.alt.toLowerCase()} value={el.alt.toLowerCase()}>
                                     </Radio>
 
                                 })}
@@ -77,15 +101,20 @@ const ItemDetails = ({ data }) => {
                             <Text m={'10px'}>Size**</Text>
                             <HStack ml={'10px'} mt={'18px'}>
 
-          {/* ************> change                      <Example value={data.size.map((el) => { return el.s })} /> */}
+                              <Example  w='100%' value={data.size.map((el) => {
+                                 return <Text key={el.id} onClick={()=>changeTheData('size', el.s)}>{el.s }</Text>})} />
                             </HStack>
                         </Box>
                         <Box>
                             <Text m={'10px'} mt='20px'>Qty**</Text>
-                            <Select m={'10px'} placeholder='Select option'>
-                                <option value='option1'>Option 1</option>
-                                <option value='option2'>Option 2</option>
-                                <option value='option3'>Option 3</option>
+                            <Select  onChange={(e)=>changeTheData('qty',e.target.value)} m={'10px'} placeholder='Select option'>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+
                             </Select>
                         </Box>
                         <Button m={'10px'} mt={'20px'} zIndex='0' colorScheme='teal' w={'100%'} onClick={AddToBasket}>
@@ -116,7 +145,7 @@ const ItemDetails = ({ data }) => {
                 </Box>
             </Flex>
             <Box w='90%' m={'auto'}>
-                <Box m='auto'>
+                <Box >
                     <Box mt={'70px'}>
                         <Text>Others Also Viewed</Text>
                         <Divider />
@@ -169,6 +198,7 @@ const ItemDetails = ({ data }) => {
 
 
         </Box>
+        </>
     )
 }
 
@@ -214,9 +244,11 @@ export class VerticalSwipeToSlide extends Component {
                                         alt: 'Wristwatch by Ted Baker London',
                                         width: 400,
                                         height: 600,
+                                        // src:this.image.price,
                                         src: `${this.image.furl}${v}${this.image.burl}`
                                     },
                                     largeImage: {
+                                        // src: this.image.price,
                                         src: `${this.image.furl}${v}${this.image.burl}`,
                                         width: 1200,
                                         height: 1500,
@@ -366,7 +398,7 @@ export class MultipleItems extends Component {
         };
         return (
             <>
-                <Box fontFamily="Aqleema- Regular, sans-serif" width={"95%"} margin={"auto"}>
+                <Box border='1px solid pink' fontFamily="Aqleema- Regular, sans-serif" width={"100%"} margin={"auto"}>
                     <Box
                         display="flex"
                         justifyContent="space-between"
@@ -398,7 +430,7 @@ export class MultipleItems extends Component {
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths() {
-    const res = await fetch("https://apiserver-no4z.onrender.com/dresses")
+    const res = await fetch("https://apiserver-no4z.onrender.com/shoes")
     const data = await res.json()
     console.log(data)
 
@@ -415,7 +447,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     console.log(context)
     const { params: { id } } = context;
-    const res = await fetch(`https://apiserver-no4z.onrender.com/dresses/${id}`);
+    const res = await fetch(`https://apiserver-no4z.onrender.com/shoes/${id}`);
     const data = await res.json();
     return {
         // Passed to the page component as props

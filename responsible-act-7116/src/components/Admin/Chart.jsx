@@ -69,7 +69,7 @@ export function Piechart() {
     getData()
   },[])
   return (
-    <Flex  mb='100px'  borderRadius='6px' bg='gray.100' boxShadow={'rgba(0, 0, 0, 0.35) 0px 5px 15px;'} alignItems='center'>
+    <Flex  mb='100px' bg='white'   borderRadius='6px'  boxShadow={'rgba(0, 0, 0, 0.35) 0px 5px 15px;'} alignItems='center'>
       <PieChart width={350} height={400}>
         <Pie
           dataKey="value"

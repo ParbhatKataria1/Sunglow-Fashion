@@ -430,7 +430,7 @@ export class MultipleItems extends Component {
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths() {
-    const res = await fetch("https://apiserver-no4z.onrender.com/clothing")
+    const res = await fetch("https://apiserver-no4z.onrender.com/allproduct")
     const data = await res.json()
     console.log(data)
 
@@ -447,7 +447,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     console.log(context)
     const { params: { id } } = context;
-    const res = await fetch(`https://apiserver-no4z.onrender.com/clothing/${id}`);
+    const res = await fetch(`https://apiserver-no4z.onrender.com/allproduct/${id}`);
     const data = await res.json();
     return {
         // Passed to the page component as props

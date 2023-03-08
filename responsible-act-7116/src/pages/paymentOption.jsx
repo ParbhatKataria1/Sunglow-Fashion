@@ -17,6 +17,10 @@ import {
     Text,Radio, RadioGroup, Stack, Checkbox, Image,
   } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { postOrderData } from '@/redux/order/order.action';
+import { deleteCartData } from '@/redux/cart/cart.action';
+import axios from 'axios';
 
   let userDummy = {
     firstname:'',
@@ -35,13 +39,33 @@ const PaymentOption = () => {
     const [cod, setcod] = useState(false);
     const [orderData, setorderdata] = useState({});
     const [cardDetails, setCardDetails] = useState({});
+    const [orderType, setorderType] = useState('')
     const router = useRouter();
+    const dispatch = useDispatch();
+    const cartData = useSelector(state=>state.cartReducer.cartData);
     let [cardDetail, setcarddetail] = useState({
         cardnumber:'',
         cvv:''
     })
+    function just(){
+        axios.post('https://weak-ruby-bass-kit.cyclic.app/orderList',{tis:'4'})
+    }
+
+    function transerData(){
+        console.log(cartData);
+        cartData.map((el)=>{
+            let obj = {...el};
+            let temp = obj.id;
+            delete obj.id;
+            obj.status = false;
+            dispatch(postOrderData(obj)).then(()=>{
+                dispatch(deleteCartData(temp))
+            });
+        })
+    }
 
     function changeTheData(key, value){
+        
         let temp = {
           ...shipData,
           [key]:value
@@ -52,6 +76,7 @@ const PaymentOption = () => {
       function handleSubmit(){
         let temp = false;
         console.log(cardDetail)
+        if(orderType!='cod')
         for(let key in cardDetail){
             if(cardDetail[key].trim().length==0){
                 temp = true;
@@ -62,7 +87,7 @@ const PaymentOption = () => {
             alert('please enter the card details')
         }
         else {
-
+            transerData()
             router.push('/successpage')
         }
         console.log('1', cardDetail)
@@ -102,14 +127,14 @@ const PaymentOption = () => {
                         return true
                     })}>
                         <Box as="span" flex='1' textAlign='left'>
-                        <Radio value='1' isChecked={card} p='5px'></Radio>
+                        <Radio onClick={()=>{setorderType('card'),just()}} value='1' isChecked={card} p='5px'></Radio>
                         Credit Card
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                        <CreditCard cardDetail={cardDetail} setcarddetail={setcarddetail}  />
+                        <CreditCard  cardDetail={cardDetail} setcarddetail={setcarddetail}  />
                     </AccordionPanel>
                 </AccordionItem>
 
@@ -120,7 +145,7 @@ const PaymentOption = () => {
                         return true;
                     })}>
                         <Box as="span" flex='1' textAlign='left'>
-                        <Radio value='2' isChecked={cod} p='5px'></Radio>
+                        <Radio onClick={()=>{setorderType('cod')}} value='2' isChecked={cod} p='5px'></Radio>
                         Cash On Delivery
                         </Box>
                         <AccordionIcon />
