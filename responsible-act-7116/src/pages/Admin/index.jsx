@@ -25,7 +25,7 @@ import {
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import Dashboard from "../../components/admin/dashboard";
-import EditProduct from "../../components/Admin/TrackOrder";
+import EditProduct from "../../components/admin/trackOrder";
 // import ProductItem from "../../components/admin/productItem";
 import ProductsList from "../../components/admin/productsList";
 import AddProduct from "../../components/admin/addProduct";

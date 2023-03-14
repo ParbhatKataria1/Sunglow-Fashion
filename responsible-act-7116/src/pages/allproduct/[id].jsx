@@ -29,7 +29,7 @@ import Slider from "react-slick";
 import {
   RecentlyViewed,
   youMayALsoLike,
-} from "../../components/AnthrolivingHome";
+} from "../../components/anthrolivingHome";
 import SlindingCard from "../../components/slindingCard";
 import { postCartData } from "../../redux/cart/cart.action";
 import { useDispatch } from "react-redux";
