@@ -24,11 +24,11 @@ import {
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
-import Dashboard from "@/components/admin/dashboard";
-import EditProduct from "@/components/Admin/TrackOrder";
-import ProductItem from "@/components/admin/productItem";
-import ProductsList from "@/components/admin/productsList";
-import AddProduct from "@/components/admin/addProduct";
+import Dashboard from "../../components/admin/dashboard";
+import EditProduct from "../../components/Admin/TrackOrder";
+// import ProductItem from "../../components/admin/productItem";
+import ProductsList from "../../components/admin/productsList";
+import AddProduct from "../../components/admin/addProduct";
 
 const LinkItems = [
   { name: "Home", icon: FiHome, num: 1 },
