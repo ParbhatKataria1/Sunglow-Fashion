@@ -102,43 +102,10 @@ export function NavbarTwo() {
   );
 }
 
-{
-  /*-------------------------------------Anthropologie ---------------------------------*/
-}
 
-export const Line = () => {
-  for (let i = 0; i < 26; i++) {
-    return (
-      <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    );
-  }
-};
+{
+  /*-----------Anthropologie -----------*/
+}
 
 export const youMayALsoLike = [
   {
@@ -267,102 +234,66 @@ export const RecentlyViewed = [
 ];
 
 export default function LandingPage() {
-  // const data = useSelector((store)=>store.navdata);
-  // const dispatch= useDispatch();
-  // console.log(data);
-  // useEffect(()=>{
-  //     dispatch(getNavItems());
-  // }, [])
   return (
     <Box bg={"#f4f4f4"}>
-      <Grid
-        gap={7}
-        gridTemplateColumns={"repeat(4,1fr)"}
+      <SimpleGrid
+        columns={{ base: 2, sm: 2, md: 4 }}
+        spacing={8}
         margin={"auto"}
         width={"90%"}
         marginTop={5}
-        zIndex="0"
         fontFamily={"Times New Roman"}
       >
-        <Box>
-          <Flex
-            justifyContent={"center"}
-            alignItems={"center"}
-            h="100px"
-            cursor={"pointer"}
-            flex={1}
-            fontWeight={"400"}
-            fontSize={"lg"}
-            borderRadius={"15px"}
-            bg={"#f7f6f2"}
-            color={"black"}
-            border={"5px solid #DBAC07"}
-          >
-            to the{" "}
-            <span style={{ fontWeight: "900", marginLeft: "5px" }}>
-              {" "}
-              TOP(s)
-            </span>
-          </Flex>
-        </Box>
-        <Box cursor={"pointer"}>
-          <Flex
-            justifyContent={"center"}
-            alignItems={"center"}
-            h="100px"
-            cursor={"pointer"}
-            flex={1}
-            fontWeight={"400"}
-            fontSize={"lg"}
-            borderRadius={"15px"}
-            bg={"#f7f6f2"}
-            color={"black"}
-            border={"5px solid #DBAC07"}
-          >
-            <span style={{ fontWeight: "900", marginRight: "5px" }}>
-              JEANS,
-            </span>{" "}
-            please
-          </Flex>
-        </Box>
-        <Box>
-          <Flex
-            justifyContent={"center"}
-            alignItems={"center"}
-            h="100px"
-            cursor={"pointer"}
-            flex={1}
-            fontWeight={"400"}
-            fontSize={"lg"}
-            borderRadius={"15px"}
-            bg={"#f7f6f2"}
-            color={"black"}
-            border={"5px solid #DBAC07"}
-          >
-            <span style={{ fontWeight: "900", marginRight: "5px" }}>PANTS</span>{" "}
-            preferred
-          </Flex>
-        </Box>
-        <Box>
-          <Flex
-            justifyContent={"center"}
-            alignItems={"center"}
-            h="100px"
-            cursor={"pointer"}
-            flex={1}
-            fontWeight={"400"}
-            fontSize={"lg"}
-            borderRadius={"15px"}
-            bg={"#f7f6f2"}
-            color={"black"}
-            border={"5px solid #DBAC07"}
-          >
-            the{" "}
-            <span style={{ fontWeight: "900", marginLeft: "5px" }}>DECOR</span>{" "}
-            edit
-          </Flex>
-        </Box>
-      </Grid>
+        <Button
+          flex={1}
+          fontWeight={"400"}
+          fontSize={"lg"}
+          borderRadius={"15px"}
+          bg={"#f7f6f2"}
+          color={"black"}
+          border={"1px solid #DBAC07"}
+        >
+          to the{" "}
+          <span style={{ fontWeight: "900", marginLeft: "5px" }}> TOP(s)</span>
+        </Button>
+        <Button
+          flex={2}
+          fontWeight={"400"}
+          fontSize={"lg"}
+          borderRadius={"15px"}
+          bg={"#f7f6f2"}
+          color={"black"}
+          border={"1px solid #DBAC07"}
+        >
+          <span style={{ fontWeight: "900", marginRight: "5px" }}>JEANS,</span>{" "}
+          please
+        </Button>
+        <Button
+          flex={3}
+          fontWeight={"400"}
+          fontSize={"lg"}
+          borderRadius={"15px"}
+          bg={"#f7f6f2"}
+          color={"black"}
+          border={"1px solid #DBAC07"}
+        >
+          <span style={{ fontWeight: "900", marginRight: "5px" }}>PANTS</span>{" "}
+          preferred
+        </Button>
+        <Button
+          flex={4}
+          fontWeight={"400"}
+          fontSize={"lg"}
+          borderRadius={"15px"}
+          bg={"#f7f6f2"}
+          color={"black"}
+          border={"1px solid #DBAC07"}
+        >
+          the{" "}
+          <span style={{ fontWeight: "900", marginLeft: "5px" }}>DECOR</span>{" "}
+          edit
+        </Button>
+      </SimpleGrid>
       <Link href={`/dresses`}>
         <Box
           width={"90%"}
@@ -373,19 +304,17 @@ export default function LandingPage() {
           <Image
             src="https://images.ctfassets.net/5de70he6op10/3eri4S7CUYNA223W694QUo/890cffce3e1cc21308f3051be0a76baa/473929293-ls_m1.jpg?w=2694&q=80&fm=webp"
             alt="Dan Abramov"
-            width={1357}
+            width={2200}
             height={1200}
           />
           <Button
-            size="md"
-            height="38px"
-            width="150px"
+            height="35px"
+            width="100px"
             borderColor="white"
-            position={"absolute"}
-            top={"92%"}
-            left={"48%"}
-            transform="translate(-50%, -50%)"
-            fontSize={"12px"}
+            position={"relative"}
+            top={"-75px"}
+            left={"43%"}
+            fontSize={"15px"}
             padding={"10px 20px"}
             curson={"pointer"}
             textAlign={"center"}
@@ -399,277 +328,249 @@ export default function LandingPage() {
       </Link>
 
       <Box marginTop={"40px"} position={"relative"}>
-        <Grid
-          templateColumns="repeat(5, 1fr)"
-          gap={7}
+        <SimpleGrid
+          columns={{ base: 1, sm: 1, md: 3 }}
+          spacing={8}
           width={"90%"}
           margin={"auto"}
           zIndex={0}
         >
           <Link href={"/clothing"}>
-            <Box w="433px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/24XjZK35JsGCP4fmCO8580/6d8469a59dd0fea277acaa832dac4786/473929297-ls_m2a.jpg?w=856&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={700}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"absolute"}
-                top={"560px"}
-                left={"15%"}
-                // transform="translate(-50%, -50%)"
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                zIndex={1}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                shop new clothing
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/24XjZK35JsGCP4fmCO8580/6d8469a59dd0fea277acaa832dac4786/473929297-ls_m2a.jpg?w=856&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={700}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="100px"
+              borderColor="white"
+              position={"relative"}
+              top={"-75px"}
+              left={"45%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              zIndex={1}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              shop new clothing
+            </Button>
           </Link>
-
           <Link href="/clothing">
-            <Box w="435px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/3i7R768ERr5ciI56znod56/151bbbbe9b52ff4c5fca01f76720fcbe/473929303-ls_m2b.jpg?w=856&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={700}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"relative"}
-                top={"-75px"}
-                left={"35%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                the gataway shop
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/3i7R768ERr5ciI56znod56/151bbbbe9b52ff4c5fca01f76720fcbe/473929303-ls_m2b.jpg?w=856&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={700}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="100px"
+              borderColor="white"
+              position={"relative"}
+              top={"-75px"}
+              left={"45%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              the gataway shop
+            </Button>
           </Link>
-
           <Link href="/clothing">
-            <Box w="435px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/EO7OfU3ZWf8n7njPYNrCo/097740c34d53fbad8d6bbae669514b4a/473929312-ls_m2c.jpg?w=856&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={500}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"relative"}
-                top={"-80px"}
-                left={"35%"}
-                // transform="translate(-50%, -50%)"
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                shop swimwear
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/EO7OfU3ZWf8n7njPYNrCo/097740c34d53fbad8d6bbae669514b4a/473929312-ls_m2c.jpg?w=856&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={700}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="100px"
+              borderColor="white"
+              position={"relative"}
+              top={"-75px"}
+              left={"45%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              shop swimwear
+            </Button>
           </Link>
-        </Grid>
+        </SimpleGrid>
       </Box>
 
-      <Line />
-
       <Box marginTop={"40px"} position={"relative"}>
-        <Grid
-          templateColumns="repeat(5, 1fr)"
-          gap={7}
+        <SimpleGrid
+          columns={{ base: 1, sm: 1, md: 2 }}
+          spacing={8}
           width={"90%"}
           margin={"auto"}
           zIndex={0}
         >
           <Link href="/clothing">
-            <Box w="670px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/5SpSw7RKfexkiiBBqnTSz0/020ab583c49d60f3053868bbaf0ed2e8/473929316-ls_m3a.jpg?w=1302&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={700}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"absolute"}
-                top={"540px"}
-                left={"23%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                zIndex={1}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                shop new clothing
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/5SpSw7RKfexkiiBBqnTSz0/020ab583c49d60f3053868bbaf0ed2e8/473929316-ls_m3a.jpg?w=1302&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={1000}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="110px"
+              borderColor="white"
+              position={"relative"}
+              top={"-70px"}
+              left={"40%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              zIndex={1}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              shop new clothing
+            </Button>
           </Link>
-
           <Link href="/clothing">
-            <Box w="663px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/6VLdLozl8tBTMYC7Bjy39f/29875f9e1e26ad89cd2a502f70dc9eba/473929321-ls_m3b.jpg?w=1302&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={700}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"relative"}
-                top={"-70px"}
-                left={"40%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                the gataway shop
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/6VLdLozl8tBTMYC7Bjy39f/29875f9e1e26ad89cd2a502f70dc9eba/473929321-ls_m3b.jpg?w=1302&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={1000}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="110px"
+              borderColor="white"
+              position={"relative"}
+              top={"-70px"}
+              left={"40%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              the gataway shop
+            </Button>
           </Link>
-        </Grid>
+        </SimpleGrid>
       </Box>
 
-      <Line />
-
       <Box marginTop={"40px"} position={"relative"}>
-        <Grid
-          templateColumns="repeat(5, 1fr)"
-          gap={7}
+        <SimpleGrid
+          columns={{ base: 1, sm: 1, md: 3 }}
+          spacing={8}
           width={"90%"}
           margin={"auto"}
           zIndex={0}
         >
           <Link href="/dresses">
-            <Box w="433px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/wH3s9ULThzua1X1ZTzDMx/3a9607dc9e8636eb96ca159919afa542/473929336-ls_m4a.jpg?w=856&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={700}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"absolute"}
-                top={"560px"}
-                left={"15%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                zIndex={1}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                shop spring entertaining essentials
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/wH3s9ULThzua1X1ZTzDMx/3a9607dc9e8636eb96ca159919afa542/473929336-ls_m4a.jpg?w=856&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={700}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="185px"
+              borderColor="white"
+              position={"relative"}
+              top={"-75px"}
+              left={"20%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              zIndex={1}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              shop spring entertaining essentials
+            </Button>
+          </Link>
+          <Link href="/clothing">
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/2ABHGD0yJQ3NHq6iiJWTUw/194b56bf722572e79d65a9ed6293bb46/473929340-ls_m4b.jpg?w=856&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={700}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="100px"
+              borderColor="white"
+              position={"relative"}
+              top={"-75px"}
+              left={"45%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              shop tops
+            </Button>
           </Link>
 
           <Link href="/clothing">
-            <Box w="435px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/2ABHGD0yJQ3NHq6iiJWTUw/194b56bf722572e79d65a9ed6293bb46/473929340-ls_m4b.jpg?w=856&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={700}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"relative"}
-                top={"-75px"}
-                left={"35%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                shop tops
-              </Button>
-            </Box>
+            <Image
+              src="https://images.ctfassets.net/5de70he6op10/7yrEmAMeP6Kx7XthafpP8b/cb1869eb48809f1b667c1b1262cc8085/473929343-ls_m4c.jpg?w=856&q=80&fm=webp"
+              alt="Dan Abramov"
+              width={700}
+              height={200}
+            />
+            <Button
+              size="md"
+              height="35px"
+              width="100px"
+              borderColor="white"
+              position={"relative"}
+              top={"-80px"}
+              left={"45%"}
+              fontSize={"12px"}
+              padding={"10px 20px"}
+              curson={"pointer"}
+              textAlign={"center"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              shop dresses
+            </Button>
           </Link>
-
-          <Link href="/clothing">
-            <Box w="435px" h="10">
-              <Image
-                src="https://images.ctfassets.net/5de70he6op10/7yrEmAMeP6Kx7XthafpP8b/cb1869eb48809f1b667c1b1262cc8085/473929343-ls_m4c.jpg?w=856&q=80&fm=webp"
-                alt="Dan Abramov"
-                width={500}
-                height={200}
-              />
-              <Button
-                size="md"
-                height="38px"
-                width="150px"
-                borderColor="white"
-                position={"relative"}
-                top={"-80px"}
-                left={"35%"}
-                fontSize={"12px"}
-                padding={"10px 20px"}
-                curson={"pointer"}
-                textAlign={"center"}
-                _hover={{
-                  textDecoration: "underline",
-                }}
-              >
-                shop dresses
-              </Button>
-            </Box>
-          </Link>
-        </Grid>
+        </SimpleGrid>
       </Box>
-
-      <Line />
 
       <Link href="/clothing">
         <Box
@@ -681,13 +582,13 @@ export default function LandingPage() {
           <Image
             src="https://images.ctfassets.net/5de70he6op10/BYqngT4RGr1qC07s5Stvm/45ac7c1b8ee7fc4ba75a71c5bae96223/473929345-ls_m5_bhldn.jpg?w=2694&q=80&fm=webp"
             alt="Dan Abramov"
-            width={1357}
+            width={2200}
             height={1200}
           />
           <Button
             size="md"
-            height="38px"
-            width="150px"
+            height="35px"
+            width="100px"
             borderColor="white"
             position={"absolute"}
             top={"92%"}
@@ -735,18 +636,18 @@ export default function LandingPage() {
       </Box>
 
       <SimpleGrid
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+        columns={{ base: 1, sm: 1, md: 2, lg: 4 }}
+        spacing={8}
         width={"90%"}
         margin={"auto"}
         marginTop={"20px"}
       >
-        <Box maxW="sm">
+        <Box>
           <Link href="/dresses">
             <Image
               src="https://images.ctfassets.net/5de70he6op10/1h9gkbrJB6rfKMEsrQsrlE/75fdaefe631d2d0e38d24b5e5d68ec10/473929238-ls_customerfave_a.jpg?w=630&q=80&fm=webp"
               alt="Dan Abramov"
-              width={357}
+              width={700}
               height={200}
             />
           </Link>
@@ -796,7 +697,7 @@ export default function LandingPage() {
           </Stack>
         </Box>
 
-        <Box maxW="sm">
+        <Box>
           <Link href="/dresses">
             <Image
               src="https://images.ctfassets.net/5de70he6op10/2bvup8dYlhV23fJF8JWtBi/f007eb7c84134bfe87c3dd3669ffd06f/473929242-ls_customerfave_b.jpg?w=630&q=80&fm=webp"
@@ -851,7 +752,7 @@ export default function LandingPage() {
           </Stack>
         </Box>
 
-        <Box maxW="sm">
+        <Box>
           <Link href="/dresses">
             <Image
               src="https://images.ctfassets.net/5de70he6op10/7e6CTKkxyvEGN65qcfAD6e/833ca12cd46657912e24e81a42fc086a/473929246-ls_customerfave_c.jpg?w=630&q=80&fm=webp"
@@ -903,7 +804,7 @@ export default function LandingPage() {
           </Stack>
         </Box>
 
-        <Box maxW="sm">
+        <Box>
           <Link href="/dresses">
             <Image
               src="https://images.ctfassets.net/5de70he6op10/IRIRM5boIBRZTPtM9RGo2/d5a954acdea330f877f48ee00b9dd9e7/473929254-ls_customerfave_d.jpg?w=630&q=80&fm=webp"
