@@ -10,11 +10,11 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import ProductsList from "../../components/Admin/ProductsList";
-import EditProduct from "../../components/Admin/EditProduct";
-import { base_url } from "../../Utils/url";
-import AddProduct from "@/components/Admin/AddProduct";
-import Dashboard from "@/components/Admin/Dashboard";
+import ProductsList from "../../components/admin/productsList";
+import EditProduct from "../../components/admin/editProduct";
+import { base_url } from "../../utils/url";
+import AddProduct from "../../components/admin/addProduct";
+import Dashboard from "../../components/admin/dashboard";
 
 const url=`${base_url}/allproducts`;
 const Admin = () => {
@@ -31,11 +31,11 @@ const Admin = () => {
       <Tabs size="md" variant="enclosed">
       <Grid templateColumns={{ sm: '1fr 1fr', md: '1fr 4fr' }} gap={4} >
         <TabList height={"400px"} mt={"60px"} >
-           <Flex flexDirection="column" color={"red.500"}>
-              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Home</Tab>
-              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Add Product</Tab>
-              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Products</Tab>
-              <Tab bg="orange.300" mt={"5px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Edit Product</Tab>
+           <Flex flexDirection="column" color={"white"}>
+              <Tab bg="blue.700" mt={"20px"} color={"white"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Home</Tab>
+              <Tab bg="blue.700" mt={"20px"}  p={"15px"} px='25px' fontSize={"15px"} fontWeight={900}>Add Product</Tab>
+              <Tab bg="blue.700" mt={"20px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Products</Tab>
+              <Tab bg="blue.700" mt={"20px"}  p={"15px"} fontSize={"15px"} fontWeight={900}>Edit Product</Tab>
           </Flex>
         </TabList>
         <TabPanels>

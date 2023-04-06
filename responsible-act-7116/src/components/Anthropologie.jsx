@@ -1,8 +1,8 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Button, Flex,Box,Grid,  SimpleGrid, Stack, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import SlindingCard from './SlindingCard';
-import Link from 'next/Link'
+import SlindingCard from './slindingCard';
+import Link from 'next/link'
 
 // ---------------------------- NavbarTwo ------------------------------
 import {
@@ -13,10 +13,6 @@ import {
 //   useColorModeValue
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon} from '@chakra-ui/icons';
-// import { store } from '@/redux/store';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useEffect } from 'react';
-// import { getNavItems } from '@/redux/nav/nav.action';
 
 const ChakraLinks = ['New!', 'Furniture', 'Decor', 'Kitchen & Dining', 'Candles', 'Bedding', 'Bath', 'Outdoor', 'Stationery', 'Kids', 'Gifts', 'Sale'];
 
@@ -222,18 +218,20 @@ export default function LandingPage() {
     <Box bg={"#f4f4f4"}>
     <Grid 
         gap={7} 
-        gridTemplateColumns={"repeat(5,1fr)"}
+        gridTemplateColumns={"repeat(4,1fr)"}
         margin ={"auto"} 
         width={"90%"} 
         marginTop={5} 
+        zIndex='0'
         fontFamily={"Times New Roman"}
     >
         <Box border={"1px solid #DBAC07"} >
-            <Button
+            <Box
+                cursor={'pointer'}
                 flex={1}
                 fontWeight={"400"}
                 px={"92px"}
-                py={"25px"}
+                py='20px'
                 fontSize={'lg'}
                 borderRadius={"15px"}
                 bg={'#f7f6f2'}
@@ -241,14 +239,15 @@ export default function LandingPage() {
                 border={"1px solid #DBAC07"}
             >
                 to the <span style={{fontWeight:"900", marginLeft:"5px"}}> TOP(s)</span>
-            </Button>
+            </Box>
         </Box>
         <Box border={"1px solid #DBAC07"} cursor={'pointer'}>
-            <Button
+            <Box
+            cursor={'pointer'}
                 flex={2}
                 fontWeight={"400"}
                 px={"92px"}
-                py={"25px"}
+                py='20px'
                 fontSize={'lg'}
                 borderRadius={"15px"}
                 bg={'#f7f6f2'}
@@ -256,14 +255,15 @@ export default function LandingPage() {
                 border={"1px solid #DBAC07"}
             >
             <span style={{fontWeight:"900", marginRight:"5px"}}>JEANS,</span> please
-            </Button>
+            </Box>
         </Box>
         <Box border={"1px solid #DBAC07"}>
-            <Button
+            <Box
+            cursor={'pointer'}
                 flex={3}
                 fontWeight={"400"}
                 px={"92px"}
-                py={"25px"}
+                py='20px'
                 fontSize={'lg'}
                 borderRadius={"15px"}
                 bg={'#f7f6f2'}
@@ -271,14 +271,15 @@ export default function LandingPage() {
                 border={"1px solid #DBAC07"}
             >
             <span style={{fontWeight:"900", marginRight:"5px"}}>PANTS</span> preferred
-            </Button>
+            </Box>
         </Box>
         <Box border={"1px solid #DBAC07"}>
-            <Button
+            <Box
+                cursor={'pointer'}
                 flex={4}
                 fontWeight={"400"}
                 px={"92px"}
-                py={"25px"}
+                py='20px'
                 fontSize={'lg'}
                 borderRadius={"15px"}
                 bg={'#f7f6f2'}
@@ -286,7 +287,7 @@ export default function LandingPage() {
                 border={"1px solid #DBAC07"}
             >
             the <span style={{fontWeight:"900", marginLeft:"5px"}} >DECOR</span> edit
-            </Button>
+            </Box>
         </Box>
     </Grid>
     <Link href={`/dresses`}>

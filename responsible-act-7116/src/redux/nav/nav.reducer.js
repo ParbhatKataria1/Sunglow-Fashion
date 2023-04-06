@@ -15,6 +15,15 @@ export function reducer (state = initStata, action){
         case types.NAV_GET_DATA:
             return {...state, error:false, navdata:payload, loading:false}
 
+        case types.NAV_POST_DATA:
+            return {...state, error:false, navdata:[...state.navdata, payload], loading:false}
+
+        case types.NAV_POST_DATA:
+            let newdata = state.navdata.filter((el)=>{
+                return (+el.id)!=(+payload);
+            })
+            return {...state, error:false, navdata:[...newdata], loading:false}
+
         case types.NAV_ERROR:
             return {...state, error:true}
     

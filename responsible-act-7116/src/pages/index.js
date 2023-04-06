@@ -1,4 +1,4 @@
-import LandingPage from '@/components/Anthropologie'
+import LandingPage from '../components/anthropologie'
 import Head from 'next/head'
 // import styles from '@/styles/Home.module.css'
 

@@ -1,159 +1,176 @@
-import React,{useState, useEffect} from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend,  Title} from 'chart.js';
-import { Pie } from 'react-chartjs-2';
-ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
-function Piechart()
-{
-  const [country, setCountry]= useState([]);
-  const [population, setPopulation]=useState([]);
-  useEffect( ()=>{
-    const getcountry=[];
-    const getpopulation=[];
-   const getdata= async()=>{
-     const reqData= await fetch("https://apiserver-no4z.onrender.com/clothing");
-     const resData= await reqData.json();
-     console.log(resData);
-     for(let i=0; i<resData.length; i++)
-     {
-      getcountry.push(resData[i].title);
-      getpopulation.push(resData[i].price);
-     }     
-     console.log("brand",getcountry);
-console.log("rating",getpopulation);
-     setCountry(getcountry);
-     setPopulation(getpopulation);
-   }
- getdata();
-  },[]);
-    return(
-        <React.Fragment>
-            <div className="container-fluid">
-            
-            <div className="row">               
-                <div className="col-md-5 mb-3 mt-3 ">
-            <Pie 
-               width={300}
-                height={200}
-                data={{                                          
-                labels: country,
-                datasets: [
-                    {
-                      label: 'Price:',
-                      data: population,
-                      backgroundColor: [
-                        'rgba(255, 99, 132, 10.2)',
-                        'rgba(54, 162, 235, 10.2)',
-                        'rgba(255, 206, 86, 10.2)',
-                        'rgba(75, 192, 192, 10.2)',
-                        'rgba(153, 102, 255, 10.2)',
-                        'rgba(255, 159, 64, 10.2)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',
-                        'rgba(255, 99, 132, 10.2)',
-                        'rgba(54, 162, 235, 10.2)',
-                        'rgba(255, 206, 86, 10.2)',
-                        'rgba(75, 192, 192, 10.2)',
-                        'rgba(153, 102, 255, 10.2)',
-                        'rgba(255, 159, 64, 10.2)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',
-                        'rgba(255, 99, 132, 10.2)',
-                        'rgba(54, 162, 235, 10.2)',
-                        'rgba(255, 206, 86, 10.2)',
-                        'rgba(75, 192, 192, 10.2)',
-                        'rgba(153, 102, 255, 10.2)',
-                        'rgba(255, 159, 64, 10.2)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',
-                        'rgba(255, 99, 132, 10.2)',
-                        'rgba(54, 162, 235, 10.2)',
-                        'rgba(255, 206, 86, 10.2)',
-                        'rgba(75, 192, 192, 10.2)',
-                        'rgba(153, 102, 255, 10.2)',
-                        'rgba(255, 159, 64, 10.2)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',
-                        
-                      ],
-                      borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',                               
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',       
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 109, 64, 10.6)',
-                        'rgba(125, 169, 34, 10.8)',
-                        'rgba(225, 99, 251, 10.3)',
-                        'rgba(225, 99, 101, 10.4)',       
-                      ],
-                      borderWidth: 1,
-                      hoverOffset:20,
-                      offset: [20,0,0,0,0,0,0,0,0,0]                     
-                    },
-                  ],
-            }}
-            options={{                 
-                responsive: true,         
-                plugins:{
-                    title:{
-                        fontSize: 30,
-                        text:'Show All Products',
-                        display: true ,
-                        font:{ size:20}   
-                    },
-                    legend:{
-                      labels:{
-                        font:{size:15}
-                      }
-                    }                        
-                 },                
-               }}    
-             />
-            </div>
-        </div>
-    </div>
-    </React.Fragment>
-    );
+import { Box, Flex } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from "recharts";
 
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid
+} from "recharts";
+
+const temp = [
+  { name: 'Group A', value: 400 },
+  { name: 'Group B', value: 300 },
+  { name: 'Group C', value: 300 },
+  { name: 'Group D', value: 200 },
+];
+
+export function Piechart() {
+  let [data01, setdata01] = useState([...temp]);
+  const justForUpdate = useSelector(state=>state)
+
+
+  async function getData(){
+    let arr = [];
+    let obj = {};
+
+    let otherproducts = await axios.get('https://apiserver-no4z.onrender.com/allproduct');
+    // console.log(products.data)
+    otherproducts = otherproducts.data.length;
+    obj = {};
+    obj.name = 'OtherProducts';
+    obj.value = otherproducts;
+    arr.push(obj);
+
+    let products = await axios.get('https://apiserver-no4z.onrender.com/dresses');
+    // console.log(products.data)
+    products = products.data.length;
+    obj = {};
+    obj.name = 'products';
+    obj.value = products;
+    arr.push(obj);
+
+    let shoes = await axios.get('https://apiserver-no4z.onrender.com/shoes');
+    shoes = shoes.data.length;
+    obj = {};
+    obj.name = 'shoes';
+    obj.value = shoes;
+    arr.push(obj);
+
+    let clothing = await axios.get('https://apiserver-no4z.onrender.com/clothing');
+    clothing = clothing.data.length;
+    obj = {};
+    obj.name = 'clothing';
+    obj.value = clothing;
+    arr.push(obj);
+
+
+
+    setdata01([...arr]);
+  }
+  // console.log(data01,'data', temp, 'temp')
+
+  useEffect(()=>{
+    getData()
+  },[])
+  return (
+    <Flex  mb='100px'  borderRadius='6px' bg='gray.100' boxShadow={'rgba(0, 0, 0, 0.35) 0px 5px 15px;'} alignItems='center'>
+      <PieChart width={350} height={400}>
+        <Pie
+          dataKey="value"
+          isAnimationActive={false}
+          data={data01}
+          cx={200}
+          cy={200}
+          outerRadius={80}
+          fill="#8884d8"
+          label
+        />
+        <Tooltip />
+      </PieChart>
+      <LineChart1/>
+    </Flex>
+  );
 }
-export default Piechart;
+
+
+
+
+const data = [
+  {
+    name: 'Page A',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  }
+];
+
+export function LineChart1() {
+  const [data01, setdata01] = useState([{name:'Price',uv:0}]);
+  async function getData(){
+    let arr = [{name:'Price',uv:0}]
+
+    let products = await axios.get('https://apiserver-no4z.onrender.com/dresses');
+    // console.log(products.data)
+    products = products.data;
+    // console.log(products)
+    products.map((el)=>{
+      arr.push({uv:parseInt(el.price)});
+    })
+    
+
+    let shoes = await axios.get('https://apiserver-no4z.onrender.com/shoes');
+    shoes = shoes.data;
+    shoes.map((el)=>{
+      arr.push({uv:parseInt(el.price)});
+    })
+    
+
+    let clothing = await axios.get('https://apiserver-no4z.onrender.com/clothing');
+    clothing = clothing.data;
+    clothing.map((el)=>{
+      arr.push({uv:parseInt(el.price)});
+    })
+    
+
+
+
+    setdata01([...arr]);
+  }
+  // console.log(data01,'data', temp, 'temp')
+
+  useEffect(()=>{
+    getData()
+  },[])
+  
+  // console.log(data01)
+  return (
+    <LineChart
+      width={500}
+      height={300}
+      data={data01}
+      cx={740}
+        cy={100}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="pv"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />
+      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+    </LineChart>
+  );
+}

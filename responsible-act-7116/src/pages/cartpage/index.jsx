@@ -10,12 +10,67 @@ import {
     Input,
     Text, Image, Accordion, Heading
 } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import CartItem from './cartItem';
+// import CartItem from './cartItem';
 
-const PaymentOption = () => {
+import { updateCartData } from '@/redux/cart/cart.action';
+import {  Select, TagLabel } from '@chakra-ui/react'
 
+let init = {
+    totalPrice : 0,
+    subtotal:0,
+    tax:0
+}
+
+const PaymentOption = ({tem}) => {
+    const router = useRouter();
+    let cartData = useSelector((store) => store.cartReducer)
+    cartData = cartData.cartData;
+    console.log(cartData)
+
+    const [promo, setpromo] = useState('');
+    const [coupen, setcoupen] = useState({...init});
+    // console.log(cartData);
+    let subtotal = 0;
+        cartData.forEach((el)=>{
+            subtotal+=parseInt(el.price)*(+el.qty);
+            // console.log(coupen.subtotal, 'this', el.price, el.qty, parseInt(el.price)*(+el.qty));
+        })
+        let tax = Math.floor(subtotal/13);
+        let totalPrice = subtotal+tax;
+       
+
+        // console.log(coupen)
+    // }
+        
+    
+    
+    function submit(){
+        sessionStorage.setItem('order-data',JSON.stringify({
+            subtotal, tax, totalPrice
+        }))
+        router.push('/shipping')
+    }
+    function usePromo(){
+        console.log('promo')
+        if(promo == 'sunglow'){
+            console.log(coupen);
+            let temp = Math.floor(coupen.subtotal*(.85));
+            let ttax = Math.floor(temp/13);
+            let obj = {
+                subtotal:Math.floor(temp),
+                tax:ttax,
+                totalPrice:temp+ttax
+            }
+            console.log(obj, 'tis');
+            setpromo('');
+            setcoupen({...obj});
+        }
+    }
+    console.log(coupen, 'thisi is coutpen')
     return (
         // <Box pb={'80px'} pt={'20px'} w='90%' m='auto'>
         // <Flex justifyContent={'space-between'}>
@@ -25,7 +80,7 @@ const PaymentOption = () => {
                 <Flex direction='column'>
                     <Flex mb={'12px'} justifyContent={'space-between'}>
                         <Text>SubTotal</Text>
-                        <Text>$432.2</Text>
+                        <Text>${subtotal}</Text>
                     </Flex>
                     <Divider mb={'12px'} />
                     <Flex mb={'12px'} justifyContent={'space-between'}>
@@ -35,12 +90,12 @@ const PaymentOption = () => {
                     <Divider mb={'12px'} />
                     <Flex mb={'12px'} justifyContent={'space-between'}>
                         <Text>Estimated Tax</Text>
-                        <Text>$43.2</Text>
+                        <Text>${tax}</Text>
                     </Flex>
                     <Divider mb={'12px'} />
                     <Flex mb={'12px'} justifyContent={'space-between'}>
                         <Text>Total</Text>
-                        <Text>$492.2</Text>
+                        <Text>${totalPrice}</Text>
                     </Flex>
                     <Divider mb={'12px'} />
                     <Button borderRadius='0px'
@@ -49,7 +104,9 @@ const PaymentOption = () => {
                         bgColor={'rgb(75,86,102)'}
                         color='white'
                         border="1px solid rgb(75,86,102)"
-                        _hover={{ bg: 'white', border: "1px solid rgb(75,86,102)", color: 'rgb(75,86,102)' }}>PROCEED TO CHECKOUT </Button>
+                        _hover={{ bg: 'white', border: "1px solid rgb(75,86,102)", color: 'rgb(75,86,102)' }}
+                        onClick={submit}
+                        >PROCEED TO CHECKOUT </Button>
                     <Button
                         borderRadius='5px'
                         fontWeight='normal'
@@ -79,9 +136,12 @@ const PaymentOption = () => {
 
                                     <AccordionPanel pb={4}>
                                         <HStack>
-                                            <Input placeholder='Enter Your Code' />
-                                            <Button>Apply</Button>
+                                            <Input value={promo} 
+                                            onChange={(e)=>{setpromo(e.target.value)}}
+                                            placeholder='Enter Your Code' />
+                                            <Button onClick={usePromo}>Apply</Button>
                                         </HStack>
+                                        <Box p={'8px'} pt='14px' fontSize='13px'>Use My Promo - sunglow</Box>
                                     </AccordionPanel>
                                 </>
                             )}
@@ -98,7 +158,7 @@ const PaymentOption = () => {
 
 const Cart = () => {
     const dispatch = useDispatch()
-    const cartData = useSelector((store) => store.cart)
+    const cartData = useSelector((store) => store.cartReducer)
     // console.log(cartData.cartData);
 
     useEffect(() => {
@@ -137,7 +197,7 @@ const Cart = () => {
                         })}
                     </Box>
                 </Box>
-                <PaymentOption />
+                <PaymentOption cartData = {cartData} />
 
             </Flex>
         </Box>
@@ -146,3 +206,81 @@ const Cart = () => {
 }
 
 export default Cart;
+
+
+
+const CartItem = ({cartItem}) => {
+    console.log(cartItem)
+    console.log('cartItem')
+    const [item, setitem ] = useState({...cartItem, qty:1});
+    const dispatch = useDispatch();
+    function changeTheData(qty){
+        let newdata = {
+            ...cartItem,
+            qty:+qty
+
+        }
+        delete newdata.id;
+        dispatch(updateCartData(cartItem.id, newdata)).then(()=>{
+            console.log('gdafdagda')
+            setitem(newdata)
+        })
+
+    }
+console.log(cartItem);
+    return (
+        <Box mb={'10px'}>
+            <Flex justifyContent={'space-between'}
+                borderTop={'1px solid lightgray'}
+                borderBottom={'1px solid lightgray'}
+                p='10px'>
+                <Box w='20%'>
+                    <Flex>
+                        <Image w={'100%'} src={cartItem.image.furl} alt={cartItem.title} ></Image>
+
+                    </Flex>
+                </Box>
+                <Box w={'35%'} >
+
+                    <Text fontWeight={500}>{cartItem.title }</Text>
+                    <Text>style: {cartItem.productdetails.styleno }</Text>
+                    <Text>Color : BLUE MOTIF</Text>
+                    <Text>Size Set of 4</Text>
+                </Box>
+                <Box>
+                    {/* <Text>Item Price</Text> */}
+                    <Text>{ cartItem.price}</Text>
+                </Box>
+                <Box>
+                    {/* <Text>Quanitity</Text> */}
+                    <Select placeholder={cartItem.qty} onChange={(e)=>{changeTheData(e.target.value)}}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </Select>
+                </Box>
+                <Box>
+                    {/* <Text>Total Price</Text> */}
+                    <Text>{parseInt(item.price)*(+item.qty) }</Text>  
+                </Box>
+            </Flex>
+        </Box>
+    )
+}

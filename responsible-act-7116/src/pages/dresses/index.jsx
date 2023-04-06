@@ -1,9 +1,10 @@
 
 // import ProductCard from '@/components/ProductCard'
-import Accordion1 from '@/components/Accordion1'
+import Accordion1 from '@/components/accordion1'
 import { Box, Divider, Flex, Grid, Heading, Select, Spacer, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useState } from 'react'
@@ -80,7 +81,8 @@ const Dresses = () => {
             {
               data.map((ele) => (
                 // console.log(ele)
-                <Flex flexDir={'column'} key={ele.id} position={"relative"} onClick={() => router.push(`/dresses/${ele.id}`)}>
+                <Link key={ele.id} href={`/dresses/${ele.id}`}>
+                <Flex flexDir={'column'} key={ele.id} position={"relative"} >
                   {/* <Flex flexDir={'column'}> */}
                   <Image id='hoverimg' onMouseOver={e => e.target.srcset = `${ele.image.furl + ele.image.version.v3 + ele.image.burl}`} onMouseOut={e => e.target.srcset = `${ele.image.furl + ele.image.version.v1 + ele.image.burl}`} src={ele.image.furl + ele.image.version.v1 + ele.image.burl} style={{ cursor: 'pointer', }} width={450} height={300} alt={'img1'} />
                   <Text fontSize={'small'} >{ele.title}</Text>
@@ -89,12 +91,13 @@ const Dresses = () => {
                   <Flex gap={'10px'} h={'20px'} alignItems={'center'} >
                     {
                       ele.color.map((ele) => (
-                        <Image style={{ borderRadius: '50%' }} width={20} height={20} src={ele.colorimg} alt={ele.alt} />
+                        <Image key={ele.id} style={{ borderRadius: '50%' }} width={20} height={20} src={ele.colorimg} alt={ele.alt} />
                       ))
                     }
                     <Text display={'flex'} gap={'5px'}>{ele.color.length} <Text>colors</Text></Text>
                   </Flex>
                 </Flex>
+                </Link>
               ))
             }
           </Grid>

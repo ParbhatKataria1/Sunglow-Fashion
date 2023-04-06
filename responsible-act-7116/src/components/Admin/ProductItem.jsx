@@ -23,10 +23,13 @@ import {
 } from "@chakra-ui/react";
 import { AiFillEdit, AiFillStar } from "react-icons/ai";
 import axios from "axios";
-import { convertor } from "../../Utils/function"
-import EditProduct from "./EditProduct";
+import { convertor } from "../../utils/function"
+import EditProduct from "./editProduct";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteNavItems } from "@/redux/nav/nav.action";
+import { deleteAllProductData } from "@/redux/allProduct/allProduct.action";
 
 // ---------------
 
@@ -38,6 +41,8 @@ const ProductItem = ({
   id,
   image, url,getData}) => {
     const router = useRouter()
+    const dispatch = useDispatch();
+    const store = useSelector(state=>state.navReducer)
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,8 +57,9 @@ const ProductItem = ({
     return axios.delete(`${url}/${id}`);
   };
 
-  const handleDelete = (id) => {
-    deleteProduct(id)
+  const handleDelete = () => {
+    console.log(id+"*******************************************************")
+    dispatch(deleteAllProductData(id))
       .then(() =>
         toast({
           position: "bottom-center",
@@ -72,15 +78,14 @@ const ProductItem = ({
           ),
         })
       )
-      .then(() => getData());
   };
-  console.log("el12",el)
+  // console.log("el12",el)
 
   return (
     <Box border={'0px solid red'} width={'100%'}>
     <Flex flexDir={'column'} key={  id} position={"relative"} onClick={() => router.push(`/dresses/${  id}`)}>
     {/* <Flex flexDir={'column'}> */}
-    <Image id='hoverimg' onMouseOver={e => e.target.srcset = `${image.furl + image.version.v3 +   image.burl}`} onMouseOut={e => e.target.srcset = `${  image.furl +   image.version.v1 +   image.burl}`} src={  image.furl +   image.version.v1 +   image.burl} style={{ cursor: 'pointer', }} width={450} height={300} alt={'img1'} />
+    <Image id='hoverimg' onMouseOver={e => e.target.srcset = `${image.furl + '3' +   image.burl}`} onMouseOut={e => e.target.srcset = `${  image.furl +      image.burl}`} src={  image.furl  +   image.burl} style={{ cursor: 'pointer', }} width={450} height={300} alt={'img1'} />
     <Text fontSize={'small'} >{  title}</Text>
     {/* </Flex> */}
     <Text>${  price}</Text>
@@ -88,6 +93,7 @@ const ProductItem = ({
         <Box display={"flex"} gap={3}>
           <Tooltip label="Delete">
             <Circle
+              onClick={handleDelete}
               as="button"
               bgColor="#f1f1f1"
               display="flex"
@@ -95,7 +101,6 @@ const ProductItem = ({
               alignItems="center"
               w="30px"
               p={["1", "1", "2"]}
-              onClick={() => handleDelete(id)}
             >
               <DeleteIcon
                 boxSize="1em"

@@ -1,8 +1,48 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Divider, Flex, HStack, Image, Input, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {CheckCircleIcon} from '@chakra-ui/icons'
+import { useSelector } from 'react-redux'
+import { Select } from 'antd'
+import { useRouter } from 'next/router'
+
+
+let userDummy = {
+    firstname:'',
+    lastname:"",
+    country:"",
+    street_address:"",
+    address:"",
+    city:"",
+    postCode:"",
+    mobile:"",
+    mode:"",
+}
 
 const Payment = () => {
+    const [orderData, setorderdata] = useState({});
+    let [userdata, setuserdata] = useState({...userDummy});
+    let cartData = useSelector((store) => store.cartReducer)
+    cartData = cartData.cartData;
+    const router = useRouter();
+
+
+
+    useEffect(()=>{
+        let temp1 = JSON.parse(sessionStorage.getItem('order-data'));
+        setorderdata(temp1);
+        let temp2 = JSON.parse(sessionStorage.getItem('user-details'));
+        setuserdata(temp2)
+    },[])
+
+    const {firstname, lastname, country, street_address, address, city, postCode, mobile, mode} = userdata || {};
+
+    const {subtotal, tax, totalPrice} = orderData || {};
+
+    function handle(){
+        router.push('/paymentOption')
+    }
+
+
   return (
     <Box pb={'80px'} pt={'20px'} w='90%' m='auto'>
         <Breadcrumb  mb={'30px'}>
@@ -24,11 +64,11 @@ const Payment = () => {
                 <Text>Shipping to parbhat kataria</Text>
             <Flex mt={'10px'} justifyContent={'space-between'}  bg='gray.200' p={'14px'} borderRadius='12px'>
                 <Box>
-                    <Text>parbhat kataira</Text>
-                    <Text>#534</Text>
-                    <Text>Amritsar, 148001 143001</Text>
-                    <Text>Country - IN</Text>
-                    <Text>6528-453-856</Text>
+                    <Text>{firstname+" "+lastname}</Text>
+                    <Text>{street_address}</Text>
+                    <Text>{city+" "+postCode}</Text>
+                    <Text>Country - {country}</Text>
+                    <Text>Mobile No. {mobile}</Text>
                 </Box>
                 <Flex >
                     <Flex alignItems={'center'}>
@@ -67,32 +107,63 @@ const Payment = () => {
 
 
 
-                <Flex justifyContent={'space-between'} border={'1px solid lightgray'} p='10px' borderRadius={'8px'}>
-                    <Box  w='20%'>
+                {
+            cartData.map((cartItem)=>{
+                return <Box key={cartItem.id} mb={'10px'}>
+                <Flex justifyContent={'space-between'}
+                    borderTop={'1px solid lightgray'}
+                    borderBottom={'1px solid lightgray'}
+                    p='10px'>
+                    <Box w='20%'>
                         <Flex>
-                            <Image w={'100%'} src='https://images.urbndata.com/is/image/Anthropologie/4130326950015_072_b4?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=360' ></Image>
-                            
+                            <Image w={'100%'} src={cartItem.image.furl} alt={cartItem.title} ></Image>
+    
                         </Flex>
                     </Box>
-                    <Box w={'40%'} >
-                                <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vero accusamus autem.</Text>
-                                <Text>#kd89sa9</Text>
-                                <Text>Color : BLUE MOTIF</Text>
-                                <Text>Size Set of 4</Text>
-                            </Box>
-                    <Box>
-                        <Text>Item Price</Text>
-                        <Text>$ 56.30</Text>
+                    <Box w={'35%'} >
+    
+                        <Text fontWeight={500}>{cartItem.title }</Text>
+                        <Text>style: {cartItem.productdetails.styleno }</Text>
+                        <Text>Color : BLUE MOTIF</Text>
+                        <Text>Size Set of 4</Text>
                     </Box>
                     <Box>
-                        <Text>Quanitity</Text>
-                        <Text>1</Text>
+                        {/* <Text>Item Price</Text> */}
+                        <Text>{ cartItem.price}</Text>
                     </Box>
                     <Box>
-                        <Text>Total Price</Text>
-                        <Text>$65.09</Text>
+                        {/* <Text>Quanitity</Text> */}
+                        <Select placeholder={cartItem.qty} onChange={(e)=>{changeTheData(e.target.value)}}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                        </Select>
+                    </Box>
+                    <Box>
+                        {/* <Text>Total Price</Text> */}
+                        <Text>{parseInt(cartItem.price)*(+cartItem.qty) }</Text>  
                     </Box>
                 </Flex>
+            </Box>
+            })
+        }
             </Box>
             </Box>
 
@@ -103,7 +174,7 @@ const Payment = () => {
                         <Flex direction='column'>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
                             <Text>SubTotal</Text>
-                            <Text>$432.2</Text>
+                            <Text>${subtotal}</Text>
                         </Flex>
                         <Divider mb={'15px'}/>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
@@ -113,15 +184,15 @@ const Payment = () => {
                         <Divider mb={'15px'}/>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
                             <Text>Estimated Tax</Text>
-                            <Text>$43.2</Text>
+                            <Text>${tax}</Text>
                         </Flex>
                         <Divider mb={'15px'}/>
                         <Flex mb={'15px'} justifyContent={'space-between'}>
                             <Text>Total</Text>
-                            <Text>$492.2</Text>
+                            <Text>${totalPrice}</Text>
                         </Flex>
                         <Divider mb={'15px'}/>
-                        <Button mb={'15px'}>Continue To Payment</Button>
+                        <Button onClick={handle} mb={'15px'}>Continue To Payment</Button>
                         {/* <Divider/> */}
                         <Accordion defaultIndex={[0]} allowMultiple>
                             <AccordionItem>

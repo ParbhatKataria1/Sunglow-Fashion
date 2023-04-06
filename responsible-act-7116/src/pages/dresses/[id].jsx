@@ -4,14 +4,13 @@ import Link from 'next/link'
 // import ReactImageMagnify from 'react-image-magnify';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ImageItem from '@/components/imageItem'
+import ImageItem from '../../components/imageItem'
 import { Component } from "react";
 import Slider from "react-slick";
-import { RecentlyViewed, youMayALsoLike } from '@/components/AnthrolivingHome'
-import SlindingCard from '@/components/SlindingCard'
+import { RecentlyViewed, youMayALsoLike } from '../../components/anthrolivingHome'
+import SlindingCard from '../../components/slindingCard'
 import {postCartData} from "../../redux/cart/cart.action"
 import { useDispatch} from 'react-redux';
-import Image from 'next/image';
 
 const ItemDetails = ({ data }) => {
     const dispatch = useDispatch();
@@ -19,8 +18,8 @@ const ItemDetails = ({ data }) => {
     // const [shopButton, setShopButton] = useState(false);
     const AddToBasket = () => {
         dispatch(postCartData(data))
-        // console.log(123);
-        // console.log(data);
+        console.log(123);
+        console.log(data);
     }
     return (
         <Box mb={'100px'}>
@@ -182,7 +181,7 @@ export class VerticalSwipeToSlide extends Component {
         // this.v2 = data.image.version.v2
         // this.v3 = data.image.version.v3
         // this.v4 = data.image.version.v4
-        // console.log(this.version[0]);
+        console.log(this.version[0]);
     }
     render() {
         const settings = {
@@ -205,31 +204,28 @@ export class VerticalSwipeToSlide extends Component {
         };
         return (
             <div height='400px'>
-                <Slider {...settings}>
+                {/* <Slider {...settings}>
                     {
                         Array(4).fill('').map((el, ind) => {
                             const v = this.version[ind];
                             return <div w={'200px'} zIndex='100' key={el.id}>
-                            <Box width={"40%"}  marginLeft={"280px"} height={"300px"}><Image  src={`${this.image.furl}${v}${this.image.burl}`}  width={200} height={200}/></Box>
-                               {/* <ReactImageMagnify {...{
+                                <ReactImageMagnify {...{
                                     smallImage: {
                                         alt: 'Wristwatch by Ted Baker London',
                                         width: 400,
                                         height: 600,
-                                        // src:this.image.price,
                                         src: `${this.image.furl}${v}${this.image.burl}`
                                     },
                                     largeImage: {
-                                        // src: this.image.price,
                                         src: `${this.image.furl}${v}${this.image.burl}`,
                                         width: 1200,
                                         height: 1500,
                                     },
-                                }} />*/}
+                                }} />
                             </div>
                         })
                     }
-                </Slider>
+                </Slider> */}
             </div>
         );
     }
@@ -417,7 +413,7 @@ export async function getStaticPaths() {
 // * ************> change     
 // // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-    // console.log(context)
+    console.log(context)
     const { params: { id } } = context;
     const res = await fetch(`https://apiserver-no4z.onrender.com/dresses/${id}`);
     const data = await res.json();

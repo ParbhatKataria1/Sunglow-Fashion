@@ -7,27 +7,27 @@ import {
 import { Card, Space, Statistic,  Typography } from "antd";
 import { useEffect, useState } from "react";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { TableContainer,Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Image, Heading } from "@chakra-ui/react";
-import { getAllProducts, getClothing, getProducts, getShoes } from "./API/data";
-import Piechart from "./Chart";
+// import {
+//   Chart as ChartJS,
+//   CategoryScale,
+//   LinearScale,
+//   BarElement,
+//   Title,
+//   Tooltip,
+//   Legend,
+// } from "chart.js";
+import { TableContainer,Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Image, Heading, Box, Flex, Text, Center } from "@chakra-ui/react";
+import { getAllProducts, getClothing, getProducts, getShoes } from "./api/data";
+import {Piechart } from "./chart";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// ChartJS.register(
+//   CategoryScale,
+//   LinearScale,
+//   BarElement,
+//   Title,
+//   Tooltip,
+//   Legend
+// );
 
 function Dashboard() {
   const [allproducts, setAllProducts] = useState(0);
@@ -66,7 +66,7 @@ function Dashboard() {
               }}
             />
           }
-          title={"All Products"}
+          title={"Other Products"}
           value={allproducts}
         />
         <DashboardCard
@@ -116,8 +116,15 @@ function Dashboard() {
           value={products}
         />
       </Space>
-      <Piechart/>
-        <RecentOrders />
+      <Box  position={'relative'} >
+        <Heading><Center>Products Stats</Center></Heading>
+      <Flex position={'absolute'} top='400px' w='100%' mt={'40px'} alignItems='end' justifyContent={'space-around'} >
+          <Text fontSize={'18px'} >Category of Products</Text>
+          <Text fontSize={'18px'}>Overall Price Graph</Text>
+      </Flex>
+      </Box>
+        {/* <RecentOrders /> */}
+          <Piechart/>
     </Space>
   );
 }
@@ -141,12 +148,12 @@ function RecentOrders() {
     setLoading(true);
     getAllProducts().then((res) => {
        data.push(res);
-      // console.log(res)
+      console.log(res)
       setDataSource(res);
       setLoading(false);
     });
   }, []);
-  // console.log("data",dataSource)
+  console.log("data",dataSource)
   return (
     <>
       <Typography.Text>Recent Orders</Typography.Text>
@@ -162,7 +169,7 @@ function RecentOrders() {
     </Thead>
      {dataSource.map((data)=>(
     
-    <Tbody>
+    <Tbody key={data.id}>
       <Tr>
       <Td>{data.id}</Td>
       <Td>{data.title}</Td>
