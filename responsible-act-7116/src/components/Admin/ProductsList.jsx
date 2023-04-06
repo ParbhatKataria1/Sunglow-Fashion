@@ -17,11 +17,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productListGenerator } from "../../utils/function";
 import { base_url } from "../../utils/url";
 import Accordion1 from "../accordion1";
+import Footer from "../footer";
 import ProductItem from "./productItem";
 
 // const categories = [
@@ -43,200 +45,194 @@ import ProductItem from "./productItem";
 const url = `${base_url}/allproduct`;
 
 const ProductsList = () => {
-  let temp = useSelector((state)=>state.productReducer);
-  temp = temp.allProductData;
-  const [data, setData] = useState([...temp]);
-  console.log('temp', data, temp);
-  
-  const [productList, setProductList] = useState([]);
-  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [type, settype] = useState("allproduct");
 
-useEffect(()=>{
-  if(data.length==0){
-    dispatch(getAllProductData()).then((res)=>{
-      setData([...res])
-    })
+  const [update, setupdate] = useState(false);
+
+  function justUpdate() {
+    setupdate((prev) => !prev);
   }
-},[])
 
+  // const update = useSelector(state=>state);
+  console.log("there is an update");
+  // const params = useSearchParams();
+  const router = useRouter();
+  let temp = router?.query?.page || 1;
+  // console.log(temp)
+  const [page, setpage] = useState(temp);
+  let totalPages = Math.ceil(data.length / 5);
+  // console.log(temp, 'this is ', router?.query?.page)
+  //
+  // router.query.page = "page"
+  // router.push(router)
 
+  // console.log(params,'tihsifidas')
+  const getData = async () => {
+    let res = await axios
+      .get(`https://apiserver-no4z.onrender.com/${type}`)
+      .then((res) => setData(res.data));
+    setpage(temp);
+  };
+  useEffect(() => {
+    getData();
+  }, [temp, type]);
 
+  function changePage(e) {
+    let temp = typeof e != "number" ? Number(e.target.innerText) : e;
+    // console.log(e.target.innerText)
+    router.query.page = temp;
+    router.push(router);
+    // console.log(router.query, 'dagdafda')
+    setpage(temp);
+  }
 
-  // const getData = async () => {
-  //   axios
-  //     .get(`${url}`)
-  //     .then((res) => {
-  //       setData(res.data);
-  //       setProductList(productListGenerator(res.data));
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
     let temp = [...data];
-    if(e.target.value==='lth'){
-      setData(temp.sort((a,b)=>(parseInt(a.price))-parseInt(b.price)))
-      console.log('sorting')
-    }else if(e.target.value==='htl'){
-      setData(temp.sort((a,b)=>(+b.price)-(+a.price)))
+    if (e.target.value === "lth") {
+      setData(temp.sort((a, b) => parseInt(a.price) - parseInt(b.price)));
+      // console.log('sorting')
+    } else if (e.target.value === "htl") {
+      setData(temp.sort((a, b) => +b.price - +a.price));
     }
-    console.log(data)
+    // console.log(data)
+  };
+
+  const handleItemType = (value) => {
+    console.log(value);
+    settype(value);
+  };
+  // console.log(data)
+
+  let newdata = data;
+  if (data.length > 0) {
+    // console.log(data, page)
+    newdata = data.filter((el, ind) => {
+      return 5 * (+page - 1) <= ind && ind < +page * 5;
+    });
   }
-
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-
-  // console.log("getData", getData);
-  // console.log("url", url);
+  console.log(newdata, data, "change");
+  useEffect(() => {}, [update]);
   return (
-    <Box pos={"relative"} border={"0px solid green"} marginLeft={"-90px"}>
-      <Flex gap={"10px"} justifyContent={"center"} textAlign={"center"}>
-        <Box
-          cursor={"pointer"}
-          pt={"5px"}
-          fontSize={"small"}
-          w={"40%"}
-          h={"50px"}
-          bgImg={
-            "url(https://images.ctfassets.net/5de70he6op10/54JigepSuZ2XyUc23wRjO3/b28c3fc1698914dd898dbe7ebcbd88c1/Dress_Toppers_Casual_Live_Text.jpg?w=630&q=80&fm=webp)"
-          }
-        >
-          WEDDING GUEST DRESSES
-        </Box>
-        <Box
-          cursor={"pointer"}
-          pt={"12px"}
-          fontSize={"small"}
-          w={"40%"}
-          h={"50px"}
-          bgImg={
-            "url(https://images.ctfassets.net/5de70he6op10/6IfiRiqCR8n6Qtx499wHhk/045c88beb8c368c4ea7fa3c40174b796/Dress_Toppers_Wedding_Live_Text.jpg?w=630&q=80&fm=webp)"
-          }
-        >
-          CASUAL DRESSES
-        </Box>
-        <Box
-          cursor={"pointer"}
-          pt={"12px"}
-          fontSize={"small"}
-          w={"40%"}
-          h={"50px"}
-          bgImg={
-            "url(https://images.ctfassets.net/5de70he6op10/4IFhnhWQZpy0mGYEQeDwyZ/7f5135fc723f65cebb8463a4a2d677b8/Dress_Toppers_Party_Live_Text.jpg?w=630&q=80&fm=webp)"
-          }
-        >
-          PARTY DRESSES
-        </Box>
-        <Box
-          cursor={"pointer"}
-          pt={"12px"}
-          fontSize={"small"}
-          w={"40%"}
-          h={"50px"}
-          bgImg={
-            "url(https://images.ctfassets.net/5de70he6op10/2ELHKaXeyUADzPjC50Pvwb/f2d5b7b073cbdadb782a81677da28c4f/Dress_Toppers_White_Live_Text.jpg?w=630&q=80&fm=webp)"
-          }
-        >
-          WORK DRESSES
-        </Box>
-        <Box
-          cursor={"pointer"}
-          pt={"12px"}
-          fontSize={"small"}
-          w={"40%"}
-          h={"50px"}
-          bgImg={
-            "url(https://images.ctfassets.net/5de70he6op10/3QIqqv5gyl0Fn7LnO3AOw3/89ea89e1fb2fbadf64fa35da2a0ecdd8/Dress_Toppers_Black_Live_Text.jpg?w=630&q=80&fm=webp)"
-          }
-        >
-          VACATION DRESSES
-        </Box>
-        <Box
-          cursor={"pointer"}
-          pt={"12px"}
-          fontSize={"small"}
-          w={"40%"}
-          h={"50px"}
-          bgImg={
-            "url(https://images.ctfassets.net/5de70he6op10/4djTq9S22vqPWjObvUHDCE/2d9f1cc9d091a32a665fc00f52b5ebd2/Dress_Toppers_Formal_Live_Text.jpg?w=630&q=80&fm=webp)"
-          }
-        >
-          FORMAL DRESSES
-        </Box>
-      </Flex>
-      <Flex w={"100%"} p='20px' m={"20px 0px 5px 150px"} justifyContent={"space-between"}>
-        <Heading
-          fontSize={"xl"}
-          display={"flex"}
-          gap={"10px"}
-          alignItems={"center"}
-        >
-          {" "}
-          Dresses:
-          <Text fontSize={"small"} fontWeight={"normal"}>
-            {data.length} products
-          </Text>{" "}
-        </Heading>
-        <Flex alignItems={"center"} gap={"7px"}>
-          <Text>Sort:</Text>
-          <Select placeholder='Featured' onChange={(e)=>handleChange(e)} >
-                            <option value={'lth'}>Price: Low to High</option>
-                            <option value={'htl'}>Price: High to Low</option>
-                        </Select>
-        </Flex>
-      </Flex>
-      <Flex
-        w={"100%"}
-        m={"auto"}
-        mt={"0px"}
-        justifyContent={"space-between"}
-        fontSize={"15px"}
-      >
-
-<Flex flexDir={'column'} w={'35%'} mt={'-60px'}>
-                  <Text fontSize={'small'} mb={'10px'} borderBottom={'1px solid grey'}>Browse by:</Text>
-                  
-                  <Flex flexDir={'column'}>
-                  <Text fontSize={'sm'} mb={'10px'}>Filter by:</Text>
-                  <Flex flexDir={'column'}>
-                      <Accordion1 data={data} setData={setData}/>
-                  </Flex>
-                  </Flex>
+    <>
+      <Box>
+        <Flex w={"98%"} m={"auto"}>
+          <Box w="100%">
+            <Flex
+              zIndex="10"
+              w={"100%"}
+              bg="white"
+              p="20px"
+              justifyContent={"space-between"}
+            >
+              <Heading
+                fontSize={"xl"}
+                display={"flex"}
+                gap={"30px"}
+                alignItems={"center"}
+              >
+                {" "}
+                Women&sbquo;s Dresses:
+                <Text fontSize={"small"} fontWeight={"normal"}>
+                  {data.length} products
+                </Text>{" "}
+              </Heading>
+              <Flex alignItems={"center"} gap={"7px"}>
+                <Text>Sort:</Text>
+                <Select
+                  placeholder="Featured"
+                  onChange={(e) => handleChange(e)}
+                >
+                  <option value={"lth"}>Price: Low to High</option>
+                  <option value={"htl"}>Price: High to Low</option>
+                </Select>
               </Flex>
+              <Flex w="24%" alignItems={"center"} gap={"7px"}>
+                <Text w="200px">Product Type:</Text>
+                <Select
+                  placeholder="Choose Type"
+                  onChange={(e) => handleItemType(e.target.value)}
+                >
+                  <option value={"allproduct"}>All Products</option>
+                  <option value={"dresses"}>Dresses</option>
+                  <option value={"clothing"}>Clothing</option>
+                  <option value={"shoes"}>Shoes</option>
+                </Select>
+              </Flex>
+            </Flex>
+            <Flex m={"auto"}>
+              <Flex>
+                <Grid
+                  w={"100%"}
+                  gridTemplateColumns={"repeat(4,1fr)"}
+                  gap={"30px"}
+                >
+                  {newdata.map((el) => {
+                    return (
+                      <ProductItem
+                        key={el.id}
+                        type={type}
+                        justUpdate={justUpdate}
+                        {...el}
+                        // getData={getData}
+                        // url={url}
+                      />
+                    );
+                  })}
+                </Grid>
+              </Flex>
+            </Flex>
+          </Box>
+        </Flex>
 
+        <Flex
+          alignItems={"center"}
+          w={"98%"}
+          justifyContent={"center"}
+          m={"auto"}
+        >
+          {
+            <Button
+              isDisabled={page !== 1 ? false : true}
+              className="prevBtn"
+              data-testid="prevBtn"
+              onClick={() => changePage(page - 1)}
+            >
+              Prev
+            </Button>
+          }
 
+          {/* render the buttons here, directly. Ensure, each button has the "data-testid='btn'" prop. Add the className, activeBtn, if the current button is the activePage*/}
 
-
-        
-
-        <GridItem p={{ base: 1, sm: 1, md: 1 }}>
-          <Flex justifyContent={"flex-end"} mb={59}></Flex>
-          <Grid
-            w={"100%"}
-            margin={"auto"}
-            gridTemplateColumns={"repeat(4,1fr)"}
-            gap={"5px"}
-            marginTop={"-60px"}
-          >
-            {data.map((el) => {
+          {Array(totalPages)
+            .fill(-1)
+            .map((el, ind) => {
               return (
-                <ProductItem
-                  key={el.id}
-                  {...el}
-                  // getData={getData}
-                  // url={url}
-                />
+                <Button
+                  isDisabled={ind + 1 == page ? true : false}
+                  m="9px"
+                  onClick={changePage}
+                  key={ind + 1}
+                >
+                  {ind + 1}
+                </Button>
               );
             })}
-          </Grid>
-        </GridItem>
-      </Flex>
-    </Box>
+
+          {
+            <Button
+              isDisabled={page != totalPages ? false : true}
+              className="nextBtn"
+              data-testid="nextBtn"
+              onClick={() => changePage(page + 1)}
+            >
+              Next
+            </Button>
+          }
+        </Flex>
+      </Box>
+    </>
   );
 };
 
 export default ProductsList;
-

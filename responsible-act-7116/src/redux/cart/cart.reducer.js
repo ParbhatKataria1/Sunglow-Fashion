@@ -10,7 +10,6 @@ const init = {
 
 export function reducer (state=init, action){
     const { type, payload } = action;
-    // console.log(payload);
     switch (type) {
         case types.CART_LOADING:
             return {...state, loading:true, error:false}
@@ -27,8 +26,10 @@ export function reducer (state=init, action){
                 })
             return {...state, loading:true, error:false, cartData:newdata1}
             
-                             case types.DELETE_CART_DATA:
-                let newdata2 = state.cartData.fiter((el)=>{
+            case types.DELETE_CART_DATA:
+                
+                // console.log(state.cartData, 'in reducer');
+                let newdata2 = state.cartData.filter((el)=>{
                     return el.id!=payload;
                 })
             return {...state, loading:true, error:false, cartData:newdata2}

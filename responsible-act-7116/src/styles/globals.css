@@ -1,0 +1,10 @@
+*{
+  font-family: sans-serif;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;    /* color of the scroll thumb */
+  border-radius: 20px; 
+}

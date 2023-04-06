@@ -13,7 +13,6 @@ export default function App({ Component, pageProps, session }) {
         <Navbar/>
         <Component {...pageProps} />
       </Provider>
-    <Footer/>
     </SessionProvider>
   </ChakraProvider>
   )

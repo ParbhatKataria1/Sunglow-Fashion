@@ -6,28 +6,10 @@ import {
 } from "@ant-design/icons";
 import { Card, Space, Statistic,  Typography } from "antd";
 import { useEffect, useState } from "react";
-
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from "chart.js";
 import { TableContainer,Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Image, Heading, Box, Flex, Text, Center } from "@chakra-ui/react";
 import { getAllProducts, getClothing, getProducts, getShoes } from "./api/data";
 import {Piechart } from "./chart";
 
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
 
 function Dashboard() {
   const [allproducts, setAllProducts] = useState(0);
@@ -51,10 +33,11 @@ function Dashboard() {
   }, []);
 
   return (
-    <Space size={30} direction="vertical">
-      <Heading >Dashboard</Heading>
+    <Box m='auto' w='78%' size={30} direction="vertical">
+      <Heading mb={'20px'}>Dashboard</Heading>
       <Space direction="horizontal">
       <DashboardCard
+      border='7px solid black'
           icon={
             <ShoppingCartOutlined
               style={{
@@ -116,16 +99,16 @@ function Dashboard() {
           value={products}
         />
       </Space>
-      <Box  position={'relative'} >
+      <Box m='30px'  position={'relative'} >
         <Heading><Center>Products Stats</Center></Heading>
-      <Flex position={'absolute'} top='400px' w='100%' mt={'40px'} alignItems='end' justifyContent={'space-around'} >
+      <Flex  position={'absolute'} top='400px' w='100%' mt={'40px'} left='-40px' alignItems='end' justifyContent={'space-around'} >
           <Text fontSize={'18px'} >Category of Products</Text>
           <Text fontSize={'18px'}>Overall Price Graph</Text>
       </Flex>
       </Box>
         {/* <RecentOrders /> */}
           <Piechart/>
-    </Space>
+    </Box>
   );
 }
 

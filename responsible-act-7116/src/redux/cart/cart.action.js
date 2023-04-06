@@ -43,7 +43,7 @@ export  const updateCartData =  (id , obj)=>async(dispatch)=>{
     }
 }
 
-export  const deleteCartData =  (id)=>async(dispatch)=>{
+export const deleteCartData =  (id)=>async(dispatch)=>{
     dispatch({type:types.DELETE_CART_DATA});
     try {
         let data = await fetchDeleteCartData(id);
