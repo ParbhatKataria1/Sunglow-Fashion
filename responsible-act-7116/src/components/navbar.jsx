@@ -190,7 +190,7 @@ const Navbar = () => {
   // console.log('searchBox', product)
   return (
     <>
-      <Box w="90%" h={{ lg: "200px", base: "280px", sm: "180px" }} border='1px solid red'></Box>
+      <Box w="90%" h={{ lg: "200px", base: "280px", sm: "180px" }}></Box>
       <Box
         zIndex={"1000"}
         h={{ lg: "200px", md: "200px", sm:'50px' }}
@@ -198,7 +198,6 @@ const Navbar = () => {
         top="0px"
         width={"100%"}
         bg="white"
-        border="1px solid black"
       >
         <Box>
           <SimpleSlider />
