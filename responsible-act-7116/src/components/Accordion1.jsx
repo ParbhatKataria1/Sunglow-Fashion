@@ -1,8 +1,9 @@
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
-import {Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Checkbox, CheckboxIcon, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react'
+import {Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Checkbox, CheckboxIcon, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, useMediaQuery } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 const Accordion1 = ({data,setData}) => {
+  const [isMobileView]=useMediaQuery("(max-width:600px)")
   const handle2Change=(e)=>{
     const val=e.target.value
     if(e.target.isChecked){
@@ -23,13 +24,13 @@ const Accordion1 = ({data,setData}) => {
       <>
         <h2>
           <AccordionButton display={'flex'} justifyContent={'space-between'}>
-            <Box as="span" flex='1' textAlign='left' fontSize={'md'} >
+            <Box as="span" flex='1' textAlign='left' fontSize={isMobileView?'xs':'md'} >
               Price
             </Box>
             {isExpanded ? (
-              <MinusIcon fontSize='12px' />
+              <MinusIcon fontSize={isMobileView?'5px':'12px'} />
             ) : (
-              <AddIcon fontSize='12px' />
+              <AddIcon fontSize={isMobileView?'5px':'12px'} />
             )}
           </AccordionButton>
         </h2>
@@ -47,13 +48,13 @@ const Accordion1 = ({data,setData}) => {
       <>
         <h2>
           <AccordionButton display={'flex'} justifyContent={'space-between'}>
-            <Box as="span" flex='1' textAlign='left' fontSize={'md'} >
+            <Box as="span" flex='1' textAlign='left' fontSize={isMobileView?'xs':'md'} >
               Color
             </Box>
             {isExpanded ? (
-              <MinusIcon fontSize='12px' />
+              <MinusIcon fontSize={isMobileView?'5px':'12px'} />
             ) : (
-              <AddIcon fontSize='12px' />
+              <AddIcon fontSize={isMobileView?'5px':'12px'} />
             )}
           </AccordionButton>
         </h2>

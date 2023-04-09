@@ -14,6 +14,8 @@ import {
   Stack,
   Image,
   Text,
+  useMediaQuery,
+  SimpleGrid
 } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
@@ -29,10 +31,11 @@ const Shoes = () => {
   // const params = useSearchParams();
   const router = useRouter();
   let temp = router?.query?.page || 1;
-  console.log(temp);
+  // console.log(temp);
   const [page, setpage] = useState(temp);
   let totalPages = Math.ceil(data.length / 5);
-
+  const [isMobileView]=useMediaQuery('(min-width:600px)')
+  console.log(isMobileView)
   //
   // router.query.page = "page"
   // router.push(router)
@@ -79,10 +82,11 @@ const Shoes = () => {
 
   return (
     <>
-      <Flex w={"98%"} m={"auto"}>
-        <Flex w={"25%"}>
+      <Flex w={"98%"} m={['100px auto auto auto','100px auto auto auto','100px auto auto auto','50px auto auto auto']}>
+      <Flex w={["0%",'25%','25%','25%']}>
           <Flex
             flexDir={"column"}
+            fontSize={['sm','md','xl','xl']}
             w="100%"
             m="10px"
             p={"29px"}
@@ -92,37 +96,37 @@ const Shoes = () => {
             h="600px"
             overflow={"auto"}
           >
-            <Text fontSize={"md"} mb={"10px"} borderBottom={"1px solid grey"}>
+            <Text fontSize={['sm','sm','md','md']} mb={"10px"} borderBottom={"1px solid grey"}>
               Browse by:
             </Text>
             <Flex flexDir={"column"} mb={"40px"}>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 New
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Top-Rated
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Boots & Booties
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Cold Weather Boots
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Flat
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Heels & Wedges
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Mules & Clogs
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Sandals & Sleepers
               </Text>
             </Flex>
             <Flex flexDir={"column"}>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Filter by:
               </Text>
               <Flex flexDir={"column"}>
@@ -140,13 +144,13 @@ const Shoes = () => {
             justifyContent={"space-between"}
           >
             <Heading
-              fontSize={"xl"}
+              fontSize={['sm','md','md','xl']}
               display={"flex"}
               gap={"30px"}
               alignItems={"center"}
             >
               {" "}
-              Women&sbquo;s Shoes:
+              Women's Shoes:
               <Text fontSize={"small"} fontWeight={"normal"}>
                 {data.length} products
               </Text>{" "}
@@ -159,17 +163,17 @@ const Shoes = () => {
               </Select>
             </Flex>
           </Flex>
-          <Flex m={"auto"}>
-            <Flex>
-              <Grid
+          <Flex alignItems='center' justifyContent={'center'}>
+            <Flex alignItems='center' justifyContent={'center'}>
+              <SimpleGrid
                 w={"100%"}
-                gridTemplateColumns={"repeat(4,1fr)"}
+                columns={[1,2,3,4]}
                 gap={"30px"}
               >
                 {newdata.map((ele) => (
                   // console.log(ele)
 
-                  <Card key={ele.id} maxW="sm">
+                  <Card key={ele.id} maxW="sm" textAlign="center" alignItems={'center'}>
                     <CardBody>
                       <Link href={`/shoes/${ele.id}`}>
                         <Image
@@ -246,7 +250,7 @@ const Shoes = () => {
                   //   </Flex>
                   //   </Link>
                 ))}
-              </Grid>
+              </SimpleGrid>
             </Flex>
           </Flex>
         </Box>
@@ -260,7 +264,7 @@ const Shoes = () => {
       >
         {
           <Button
-            isDisabled={page !== 1 ? false : true}
+            isDisabled={page===1}
             className="prevBtn"
             data-testid="prevBtn"
             onClick={() => changePage(page - 1)}

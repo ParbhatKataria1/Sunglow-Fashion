@@ -14,6 +14,8 @@ import {
   Stack,
   Image,
   Text,
+  SimpleGrid,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
@@ -26,10 +28,12 @@ import Footer from "@/components/footer";
 
 const Clothing = () => {
   const [data, setData] = useState([]);
+  const [isMobileView]=useMediaQuery("(max-width:600px)")
+  console.log(isMobileView?true:false)
   // const params = useSearchParams();
   const router = useRouter();
   let temp = router?.query?.page || 1;
-  console.log(temp);
+  // console.log(temp);
   const [page, setpage] = useState(temp);
   let totalPages = Math.ceil(data.length / 5);
 
@@ -50,10 +54,10 @@ const Clothing = () => {
 
   function changePage(e) {
     let temp = typeof e != "number" ? Number(e.target.innerText) : e;
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     router.query.page = temp;
     router.push(router);
-    console.log(router.query, "dagdafda");
+    // console.log(router.query, "dagdafda");
     setpage(temp);
   }
 
@@ -61,17 +65,17 @@ const Clothing = () => {
     let temp = [...data];
     if (e.target.value === "lth") {
       setData(temp.sort((a, b) => parseInt(a.price) - parseInt(b.price)));
-      console.log("sorting");
+      // console.log("sorting");
     } else if (e.target.value === "htl") {
       setData(temp.sort((a, b) => +b.price - +a.price));
     }
-    console.log(data);
+    // console.log(data);
   };
   // console.log(data)
 
   let newdata = data;
   if (data.length > 0) {
-    console.log(data, page);
+    // console.log(data, page);
     newdata = newdata.filter((el, ind) => {
       return 5 * (+page - 1) <= ind && ind < +page * 5;
     });
@@ -79,9 +83,10 @@ const Clothing = () => {
 
   return (
     <>
-      <Flex w={"98%"} m={"auto"}>
-        <Flex w={"25%"}>
+      <Flex w={"98%"} m={['100px auto auto auto','100px auto auto auto','100px auto auto auto','50px auto auto auto']}>
+        <Flex w={["0%",'25%','25%','25%']}>
           <Flex
+            fontSize={['sm','md','xl','xl']}
             flexDir={"column"}
             w="100%"
             m="10px"
@@ -92,37 +97,37 @@ const Clothing = () => {
             h="600px"
             overflow={"auto"}
           >
-            <Text fontSize={"md"} mb={"10px"} borderBottom={"1px solid grey"}>
+            <Text fontSize={['sm','sm','md','md']} fontWeight={'bold'} mb={"10px"} borderBottom={"1px solid grey"}>
               Browse by:
             </Text>
             <Flex flexDir={"column"} mb={"40px"}>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 New
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Top-Rated
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Boots & Booties
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Cold Weather Boots
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Flat
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Heels & Wedges
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Mules & Clogs
               </Text>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text fontSize={['sm','sm','md','md']} mb={"10px"}>
                 Sandals & Sleepers
               </Text>
             </Flex>
             <Flex flexDir={"column"}>
-              <Text fontSize={"md"} mb={"10px"}>
+              <Text mb={"10px"}>
                 Filter by:
               </Text>
               <Flex flexDir={"column"}>
@@ -140,13 +145,13 @@ const Clothing = () => {
             justifyContent={"space-between"}
           >
             <Heading
-              fontSize={"xl"}
+              fontSize={['sm','md','md','xl']}
               display={"flex"}
               gap={"30px"}
               alignItems={"center"}
             >
               {" "}
-              Women&sbquo;s Clothing:
+              Women's Clothing:
               <Text fontSize={"small"} fontWeight={"normal"}>
                 {data.length} products
               </Text>{" "}
@@ -161,15 +166,15 @@ const Clothing = () => {
           </Flex>
           <Flex m={"auto"}>
             <Flex>
-              <Grid
+              <SimpleGrid
                 w={"100%"}
-                gridTemplateColumns={"repeat(4,1fr)"}
+                columns={[1,2,3,4]}
                 gap={"30px"}
               >
                 {newdata.map((ele) => (
                   // console.log(ele)
 
-                  <Card key={ele.id} maxW="sm">
+                  <Card key={ele.id} maxW="sm" textAlign="center" alignItems={'center'} >
                     <CardBody>
                       <Link href={`/clothing/${ele.id}`}>
                         <Image
@@ -195,7 +200,7 @@ const Clothing = () => {
                           }
                           objectFit="scale-down"
                           style={{ cursor: "pointer" }}
-                          width={250}
+                          width={300}
                           height={"340px"}
                           alt={"img1"}
                         />
@@ -246,7 +251,7 @@ const Clothing = () => {
                   //   </Flex>
                   //   </Link>
                 ))}
-              </Grid>
+              </SimpleGrid>
             </Flex>
           </Flex>
         </Box>
@@ -261,7 +266,7 @@ const Clothing = () => {
       >
         {
           <Button
-            isDisabled={page !== 1 ? false : true}
+            isDisabled={page===1}
             className="prevBtn"
             data-testid="prevBtn"
             onClick={() => changePage(page - 1)}
@@ -304,3 +309,16 @@ const Clothing = () => {
 };
 
 export default Clothing;
+
+// import { Text, useMediaQuery } from "@chakra-ui/react"
+// function Clothing() {
+//   const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)')
+
+//   return (
+//     <Text>
+//       {isLargerThan1280 ? 'larger than 1280px' : 'smaller than 1280px'}
+//     </Text>
+//   )
+// }
+
+// export default Clothing
