@@ -24,14 +24,14 @@ const ItemDetails = ({ data }) => {
             ...data,
             [key]:value
         }
-        console.log(newdata, 1)
+        // console.log(newdata, 1)
 
     }
-    console.log(data)
+    // console.log(data)
     const AddToBasket = () => {
         
         dispatch(postCartData({...newdata}))
-        console.log(123);
+        // console.log(123);
         // console.log(ndata);
     }
     return (
@@ -211,7 +211,7 @@ export class VerticalSwipeToSlide extends Component {
         // this.v2 = data.image.version.v2
         // this.v3 = data.image.version.v3
         // this.v4 = data.image.version.v4
-        console.log(this.version[0]);
+        // console.log(this.version[0]);
     }
     render() {
         const settings = {
@@ -432,7 +432,7 @@ export class MultipleItems extends Component {
 export async function getStaticPaths() {
     const res = await fetch("https://apiserver-no4z.onrender.com/clothing")
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
 
     return {
         paths: data.map((item) => ({
@@ -445,7 +445,7 @@ export async function getStaticPaths() {
 // * ************> change     
 // // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-    console.log(context)
+    // console.log(context)
     const { params: { id } } = context;
     const res = await fetch(`https://apiserver-no4z.onrender.com/clothing/${id}`);
     const data = await res.json();

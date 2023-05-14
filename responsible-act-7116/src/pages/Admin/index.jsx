@@ -43,10 +43,10 @@ export default function SimpleSidebar({ children }) {
   const [num, setnum] = useState(1);
 
   function changePage(value) {
-    console.log(value);
+    // console.log(value);
     setnum(value);
   }
-  console.log(changePage, "main");
+  // console.log(changePage, "main");
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -80,7 +80,7 @@ export default function SimpleSidebar({ children }) {
 }
 
 const SidebarContent = ({ changePage, onClose, ...rest }) => {
-  console.log(changePage, "sidebar is not a fu");
+  // console.log(changePage, "sidebar is not a fu");
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -112,7 +112,7 @@ const SidebarContent = ({ changePage, onClose, ...rest }) => {
 };
 
 const NavItem = ({ changePage, num, icon, children, ...rest }) => {
-  console.log(changePage, "navitem");
+  // console.log(changePage, "navitem");
   return (
     <Link
       onClick={() => {

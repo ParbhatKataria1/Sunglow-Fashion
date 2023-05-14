@@ -7,7 +7,7 @@ import {
 import { Card, Space, Statistic,  Typography } from "antd";
 import { useEffect, useState } from "react";
 import { TableContainer,Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Image, Heading, Box, Flex, Text, Center } from "@chakra-ui/react";
-import { getAllProducts, getClothing, getProducts, getShoes } from "./api/data";
+import { getAllProducts, getClothing, getProducts, getShoes } from "./API/ApiData";
 import {Piechart } from "./chart";
 
 
@@ -131,12 +131,12 @@ function RecentOrders() {
     setLoading(true);
     getAllProducts().then((res) => {
        data.push(res);
-      console.log(res)
+      // console.log(res)
       setDataSource(res);
       setLoading(false);
     });
   }, []);
-  console.log("data",dataSource)
+  // console.log("data",dataSource)
   return (
     <>
       <Typography.Text>Recent Orders</Typography.Text>

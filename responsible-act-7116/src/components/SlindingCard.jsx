@@ -177,7 +177,7 @@ const SlindingCard = ({ something, prodVal = 5 }) => {
                       color={"black"}
                       border={"0.5px solid grey"}
                       cursor={"pointer"}
-                      font-size={"12px"}
+                      fontSize={"12px"}
                     >
                       Add Card
                     </Box>

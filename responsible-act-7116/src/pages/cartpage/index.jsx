@@ -35,7 +35,7 @@ const PaymentOption = ({ tem }) => {
   const router = useRouter();
   let cartData = useSelector((store) => store.cartReducer);
   cartData = cartData.cartData;
-  console.log(cartData);
+  // console.log(cartData);
 
   const [promo, setpromo] = useState("");
   const [coupen, setcoupen] = useState({ ...init });
@@ -51,7 +51,7 @@ const PaymentOption = ({ tem }) => {
   // console.log(coupen)
   // }
 
-  console.log("subtotal", subtotal);
+  // console.log("subtotal", subtotal);
 
   function submit() {
     sessionStorage.setItem(

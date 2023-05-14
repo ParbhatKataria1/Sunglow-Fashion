@@ -35,7 +35,7 @@ const Shoes = () => {
   const [page, setpage] = useState(temp);
   let totalPages = Math.ceil(data.length / 5);
   const [isMobileView]=useMediaQuery('(min-width:600px)')
-  console.log(isMobileView)
+  // console.log(isMobileView)
   //
   // router.query.page = "page"
   // router.push(router)
@@ -53,10 +53,10 @@ const Shoes = () => {
 
   function changePage(e) {
     let temp = typeof e != "number" ? Number(e.target.innerText) : e;
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     router.query.page = temp;
     router.push(router);
-    console.log(router.query, "dagdafda");
+    // console.log(router.query, "dagdafda");
     setpage(temp);
   }
 
@@ -64,17 +64,17 @@ const Shoes = () => {
     let temp = [...data];
     if (e.target.value === "lth") {
       setData(temp.sort((a, b) => parseInt(a.price) - parseInt(b.price)));
-      console.log("sorting");
+      // console.log("sorting");
     } else if (e.target.value === "htl") {
       setData(temp.sort((a, b) => +b.price - +a.price));
     }
-    console.log(data);
+    // console.log(data);
   };
   // console.log(data)
 
   let newdata = data;
   if (data.length > 0) {
-    console.log(data, page);
+    // console.log(data, page);
     newdata = newdata.filter((el, ind) => {
       return 5 * (+page - 1) <= ind && ind < +page * 5;
     });

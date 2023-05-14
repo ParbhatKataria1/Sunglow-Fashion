@@ -55,7 +55,7 @@ const ProductsList = () => {
   }
 
   // const update = useSelector(state=>state);
-  console.log("there is an update");
+  // console.log("there is an update");
   // const params = useSearchParams();
   const router = useRouter();
   let temp = router?.query?.page || 1;
@@ -99,7 +99,7 @@ const ProductsList = () => {
   };
 
   const handleItemType = (value) => {
-    console.log(value);
+    // console.log(value);
     settype(value);
   };
   // console.log(data)
@@ -111,7 +111,7 @@ const ProductsList = () => {
       return 5 * (+page - 1) <= ind && ind < +page * 5;
     });
   }
-  console.log(newdata, data, "change");
+  // console.log(newdata, data, "change");
   useEffect(() => {}, [update]);
   return (
     <>

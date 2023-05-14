@@ -49,16 +49,15 @@ const ItemDetails = ({ data }) => {
     };
     console.log(newdata, 1);
   }
-  console.log(data);
+  // console.log(data);
   const AddToBasket = () => {
     dispatch(postCartData({ ...newdata }));
-    console.log(123);
+    // console.log(123);
     // console.log(ndata);
   };
   return (
     <>
-      <Box mt={{ base: "330px", sm: "260px", md: "0px" }}></Box>
-      <Box mb={"100px"}>
+      <Box mb={"100px"} mt={["0px","","","",""]}>
         <Heading textAlign={"center"}>Product Details</Heading>
         <Flex
           w={"90%"}
@@ -182,7 +181,7 @@ const ItemDetails = ({ data }) => {
               </RadioGroup>
               <Box>
                 <Text m={"10px"}>Size**</Text>
-                <HStack ml={"10px"} mt={"18px"}>
+                <HStack w="70%" ml={"10px"} mt={"18px"}>
                   <Example
                     w="100%"
                     value={data.size.map((el) => {
@@ -288,10 +287,10 @@ const ItemDetails = ({ data }) => {
                   <svg
                     widht="10px"
                     height="10px"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="2"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="2"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -303,10 +302,10 @@ const ItemDetails = ({ data }) => {
                   <svg
                     widht="10px"
                     height="10px"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="2"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="2"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -318,10 +317,10 @@ const ItemDetails = ({ data }) => {
                   <svg
                     widht="10px"
                     height="10px"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="2"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="2"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -333,10 +332,10 @@ const ItemDetails = ({ data }) => {
                   <svg
                     widht="10px"
                     height="10px"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="2"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="2"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -348,10 +347,10 @@ const ItemDetails = ({ data }) => {
                   <svg
                     widht="10px"
                     height="10px"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="2"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="2"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -363,10 +362,10 @@ const ItemDetails = ({ data }) => {
                   <svg
                     widht="10px"
                     height="10px"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="2"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="2"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -415,7 +414,7 @@ export class VerticalSwipeToSlide extends Component {
     // this.v2 = data.image.version.v2
     // this.v3 = data.image.version.v3
     // this.v4 = data.image.version.v4
-    console.log(this.version[0]);
+    // console.log(this.version[0]);
   }
   render() {
     const settings = {
@@ -639,7 +638,7 @@ export class MultipleItems extends Component {
 export async function getStaticPaths() {
   const res = await fetch("https://apiserver-no4z.onrender.com/allproduct");
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
 
   return {
     paths: data.map((item) => ({
@@ -651,7 +650,7 @@ export async function getStaticPaths() {
 // * ************> change
 // // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-  console.log(context);
+  // console.log(context);
   const {
     params: { id },
   } = context;

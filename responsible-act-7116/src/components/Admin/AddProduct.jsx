@@ -161,7 +161,7 @@ export default function AddProduct() {
   const toast = useToast();
   const { title, image, price } = data;
   const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
+    // console.log(e.target.name, e.target.value);
     const { name, value } = e.target;
     const val = name === "price" ? Number(value) : value;
 
@@ -171,14 +171,14 @@ export default function AddProduct() {
     } else {
       obj = { ...data, [name]: val };
     }
-    console.log(data);
+    // console.log(data);
     setData(obj);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("we are in the ");
+    // console.log("we are in the ");
     toast({
       position: "top-left",
       render: () => (
@@ -198,23 +198,23 @@ export default function AddProduct() {
     if (type == "allproduct") {
       axios.post(`${base}/${type}`, data).then((res) => {
         setData({ ...intitialData });
-        console.log(res.data);
+        // console.log(res.data);
       });
       // dispatch(postALlProductData(data)).then((res)=>{setData(intitialData);console.log(res)});
     } else if (type == "dresses") {
       axios.post(`${base}/${type}`, data).then((res) => {
         setData({ ...intitialData });
-        console.log(res.data);
+        // console.log(res.data);
       });
     } else if (type == "clothing") {
       axios.post(`${base}/${type}`, data).then((res) => {
         setData({ ...intitialData });
-        console.log(res.data);
+        // console.log(res.data);
       });
     } else if (type == "shoes") {
       axios.post(`${base}/${type}`, data).then((res) => {
         setData({ ...intitialData });
-        console.log(res.data);
+        // console.log(res.data);
       });
     }
 

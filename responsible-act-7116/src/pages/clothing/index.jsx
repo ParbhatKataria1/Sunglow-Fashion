@@ -29,7 +29,7 @@ import Footer from "@/components/footer";
 const Clothing = () => {
   const [data, setData] = useState([]);
   const [isMobileView]=useMediaQuery("(max-width:600px)")
-  console.log(isMobileView?true:false)
+  // console.log(isMobileView?true:false)
   // const params = useSearchParams();
   const router = useRouter();
   let temp = router?.query?.page || 1;

@@ -67,7 +67,7 @@ export default function SimpleSidebar({ children }) {
     dispatch(getOrderData());
   }, []);
 
-  console.log(orders, "data");
+  // console.log(orders, "data");
 
   return (
     <Box w="100%" minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -263,10 +263,10 @@ export function SplitWithImage({ data }) {
             <Feature
               icon={
                 <svg
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="2"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
+                  strokeLinejoin="round"
+                  strokeMiterlimit="2"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
