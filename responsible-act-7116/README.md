@@ -1,38 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sunglow Fashion
 
-## Getting Started
+![image](https://www.linkpicture.com/q/logo_684.png)
 
-First, run the development server:
+# Overview
+ Sunglow Fashion is an e-commerce platform to buy clothes,beauty & Wellness,fashion,furniture and jewellery,etc.
+ 
+# Features
+<ul><li>Browsing and Buying different Products</li>
+<li>User and Admin Authentication</li>
+<li>User Side</li>
+<li>Admin Dashboard</li>
+<li>Cart Section</li>
+<li>Payment Page</li></ul>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Tech Stack :
+ <div align='center'>
+ <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"  align="center" alt="reactjs" />
+  <img src='https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white' align='center' alt='next' />
+   <img src = "https://img.shields.io/badge/chakra ui-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white" align="center" alt="chakra-ui"/>
+    <img src="https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white" align='center' />
+ </div>
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# Deployed Links : 
+<ul><li>User Side : </li>
+<li>Admin Dashboard : </li></ul>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![image](https://www.linkpicture.com/q/web-capture.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# Team :
+<ul>
+<li><a href='https://github.com/ParbhatKataria1'>Parbhat Kataria</a></li>
+<li><a href='https://github.com/harshal-kitukale'>Harshal Kitukale</a></li>
+<li><a href='https://github.com/AyushiVashisth'>AYushi Vashisth</a></li>
+<li><a href='https://github.com/skd0394'>Shivkant Dubey</a></li>
+</ul>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
