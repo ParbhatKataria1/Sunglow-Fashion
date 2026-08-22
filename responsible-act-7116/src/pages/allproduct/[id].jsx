@@ -79,6 +79,7 @@ const ItemDetails = ({ data }) => {
                   .map((el, ind) => {
                     return (
                       <Box
+                        key={ind}
                         m="5px"
                         boxSizing={"border-box"}
                         border={`${

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CheckCircleIcon, DeleteIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, DeleteIcon, WarningIcon } from "@chakra-ui/icons";
 import {
   Box,
   Circle,
@@ -282,7 +282,7 @@ export function UserProfileEdit({ img, titl, prc, type, id, justUpdate }) {
             <Center w="full">
               {/* <Button w="full">Change Image</Button> */}
               <InputGroup>
-                <InputLeftAddon children="https://" />
+                <InputLeftAddon>https://</InputLeftAddon>
                 <Input
                   type="text"
                   placeholder=""

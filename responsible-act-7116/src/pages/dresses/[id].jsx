@@ -46,7 +46,7 @@ const ItemDetails = ({ data }) => {
                             {/* <Heading>this is me</Heading> */}
                             {
                                 Array(4).fill(-1).map((el, ind)=>{
-                                    return <Box m='5px' boxSizing={'border-box'} border={`${(ind?String(ind+1):"")===version?'3px solid lightgray':'3px solid white'}`} cursor='pointer' onClick={()=>{setversion(ind?String(ind+1):"")}}> <Image width={100} height={100} src={`${data.image.furl}${ind?String(ind+1):""}${data.image.burl}`}></Image></Box>
+                                    return <Box key={ind} m='5px' boxSizing={'border-box'} border={`${(ind?String(ind+1):"")===version?'3px solid lightgray':'3px solid white'}`} cursor='pointer' onClick={()=>{setversion(ind?String(ind+1):"")}}> <Image width={100} height={100} src={`${data.image.furl}${ind?String(ind+1):""}${data.image.burl}`}></Image></Box>
                                 })
                             }
                         </Flex>

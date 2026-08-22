@@ -172,7 +172,7 @@ Open [http://localhost:3000](http://localhost:3000). The admin panel is at
 | Command | Description |
 |---|---|
 | `npm run dev` | Start the Next.js development server on port 3000. |
-| `npm run build` | Production build and static export to `out/`. |
+| `npm run build` | Production build and static export to `out/` (114 pages). |
 | `npm start` | Serve the production build. |
 | `npm run lint` | Run ESLint via `next lint`. |
 
@@ -346,17 +346,10 @@ its own `action`, `actionTypes`, `reducer` and (where applicable) `api` module.
 
 These are pre-existing and worth picking up if you are contributing:
 
-- **`npm run build` cannot complete the static export.** `next build` itself
-  succeeds and pre-renders every page, but the `next export` step then fails
-  with `Image Optimization using Next.js' default loader is not compatible
-  with next export`, because eight components use `next/image`. Setting
-  `images.unoptimized = true` in `next.config.js` resolves it — that is the
-  only valid setting for a static export, since there is no server to
-  optimize images at runtime.
-- **`npm run lint` fails to start.** `.eslintrc.json` extends `next/babel`,
-  which is a Babel preset rather than an ESLint config, so ESLint exits with
-  `Failed to load config "next/babel" to extend from`. Removing that entry
-  and keeping `next/core-web-vitals` fixes it.
+- **26 outstanding lint warnings.** `npm run lint` passes with no errors, but
+  still reports warnings — mostly `jsx-a11y/alt-text` on `next/image` elements
+  and `react-hooks/exhaustive-deps` on effects that intentionally run once.
+  Worth clearing, but none of them block the build.
 - **No committed lockfile.** `package-lock.json` is listed in `.gitignore`, so
   every fresh clone re-resolves the caret ranges in `package.json` and can end
   up on newer minors than the build that was deployed. This already bit the
