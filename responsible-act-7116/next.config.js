@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images:{
+    // `next export` produces a static site with no server to optimize
+    // images at runtime, so the default loader must be disabled.
+    unoptimized:true,
     remotePatterns:[
       {
         protocol:'https',

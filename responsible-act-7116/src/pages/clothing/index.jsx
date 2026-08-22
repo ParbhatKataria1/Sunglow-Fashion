@@ -151,7 +151,7 @@ const Clothing = () => {
               alignItems={"center"}
             >
               {" "}
-              Women's Clothing:
+              Women&apos;s Clothing:
               <Text fontSize={"small"} fontWeight={"normal"}>
                 {data.length} products
               </Text>{" "}

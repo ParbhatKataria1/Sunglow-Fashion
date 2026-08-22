@@ -98,7 +98,7 @@ export default function SimpleSidebar({ children }) {
       >
         {/* {children} */}
         {orders.map((el) => {
-          return <SplitWithImage data={el} />;
+          return <SplitWithImage key={el.id} data={el} />;
         })}
 
         {/* <Text>tisi s </Text> */}
@@ -221,6 +221,10 @@ export function SplitWithImage({ data }) {
   const orders = useSelector((state) => state.orderReducer.orderData);
   const dispatch = useDispatch();
   console.log(image);
+  // Hooks must run unconditionally on every render, so resolve both
+  // colours up front and pick between them below.
+  const statusBgActive = useColorModeValue("green.300", "green.900");
+  const statusBgInactive = useColorModeValue("red.300", "red.800");
 
   function handleStatus() {
     dispatch(updateOrderData(id, { ...data, status: !status }));
@@ -237,11 +241,7 @@ export function SplitWithImage({ data }) {
             color={"white"}
             fontWeight={600}
             fontSize={"sm"}
-            bg={
-              status
-                ? useColorModeValue("green.300", "green.900")
-                : useColorModeValue("red.300", "red.800")
-            }
+            bg={status ? statusBgActive : statusBgInactive}
             p={2}
             alignSelf={"flex-start"}
             rounded={"md"}

@@ -79,6 +79,7 @@ const ItemDetails = ({ data }) => {
                   .map((el, ind) => {
                     return (
                       <Box
+                        key={ind}
                         m="5px"
                         boxSizing={"border-box"}
                         border={`${
@@ -469,10 +470,10 @@ export class VerticalSwipeToSlide extends Component {
 // ******** size selector**************
 // 1. Create a component that consumes the `useRadio` hook
 function RadioCard(props) {
-  const { getInputProps, getCheckboxProps } = useRadio(props);
+  const { getInputProps, getRadioProps } = useRadio(props);
 
   const input = getInputProps();
-  const checkbox = getCheckboxProps();
+  const checkbox = getRadioProps();
 
   return (
     <Box as="label" alignItems={"center"}>
