@@ -225,10 +225,9 @@ const Navbar = () => {
               <Image
                 w={"140px"}
                 h="60px"
-                objectFit={"cover"}
-                layout="fill"
-                src="https://www.linkpicture.com/q/logo_684.png"
-                alt=""
+                objectFit={"contain"}
+                src="/logo.png"
+                alt="Sunglow Fashion"
               />
             </Link>
           </Flex>
