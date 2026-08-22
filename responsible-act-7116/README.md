@@ -1,39 +1,57 @@
-# Sunglow Fashion
+<div align="center">
 
-![image](https://www.linkpicture.com/q/logo_684.png)
+<img src="public/logo.png" alt="Sunglow Fashion" width="140" />
 
-# Overview
- Sunglow Fashion is an e-commerce platform to buy clothes,beauty & Wellness,fashion,furniture and jewellery,etc.
- 
-# Features
-<ul><li>Browsing and Buying different Products</li>
-<li>User and Admin Authentication</li>
-<li>User Side</li>
-<li>Admin Dashboard</li>
-<li>Cart Section</li>
-<li>Payment Page</li></ul>
+# Sunglow Fashion — application
 
+</div>
 
-# Tech Stack :
- <div align='center'>
- <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"  align="center" alt="reactjs" />
-  <img src='https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white' align='center' alt='next' />
-   <img src = "https://img.shields.io/badge/chakra ui-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white" align="center" alt="chakra-ui"/>
-    <img src="https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white" align='center' />
- </div>
+This folder holds the Next.js 13 application. **The full project
+documentation — features, screenshots, API reference, routes and known
+issues — lives in the [root README](../README.md).**
 
-# Deployed Links : 
-<ul><li>User Side : </li>
-<li>Admin Dashboard : </li></ul>
+## Quick start
 
-![image](https://www.linkpicture.com/q/web-capture.png)
+```bash
+npm install
+npm run dev
+```
 
-# Team :
-<ul>
-<li><a href='https://github.com/ParbhatKataria1'>Parbhat Kataria</a></li>
-<li><a href='https://github.com/harshal-kitukale'>Harshal Kitukale</a></li>
-<li><a href='https://github.com/AyushiVashisth'>AYushi Vashisth</a></li>
-<li><a href='https://github.com/skd0394'>Shivkant Dubey</a></li>
-</ul>
+Storefront: [http://localhost:3000](http://localhost:3000)
+Admin panel: [http://localhost:3000/Admin](http://localhost:3000/Admin)
 
+The app talks to a hosted `json-server` API on Render. Those instances sleep
+on the free tier, so the first request after idling can take up to a minute.
 
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Development server on port 3000. |
+| `npm run build` | Production build and static export to `out/`. |
+| `npm start` | Serve the production build. |
+| `npm run lint` | Run ESLint via `next lint`. |
+
+## Environment
+
+Google OAuth credentials are currently hardcoded in `next.config.js` and
+should be moved to an untracked `.env.local`:
+
+```bash
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+JWT_SECRET=a-long-random-string
+NEXTAUTH_URL=http://localhost:3000
+```
+
+## Local API (optional)
+
+`db.json` is the seed dataset. To serve it locally instead of using the hosted
+API:
+
+```bash
+npx json-server --watch db.json --port 8080
+```
+
+Then point `src/utils/url.js` and the `src/redux/**/**.api.js` files at
+`http://localhost:8080`.
